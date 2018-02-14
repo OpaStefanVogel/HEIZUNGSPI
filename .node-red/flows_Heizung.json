@@ -38,33 +38,14 @@
         "wires": [
             [
                 "e3afe0ef.4923f",
-                "d671fd42.3caae"
+                "d671fd42.3caae",
+                "2f7cfd7b.d33812"
             ],
             [
                 "e3afe0ef.4923f"
             ],
             [
                 "e3afe0ef.4923f"
-            ]
-        ]
-    },
-    {
-        "id": "f87bf7a3.bf8e58",
-        "type": "inject",
-        "z": "b4be1bf1.59bee8",
-        "name": "connect 00:1A:22:0B:F9:D1",
-        "topic": "",
-        "payload": "connect 00:1A:22:0B:F9:D1",
-        "payloadType": "str",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 500,
-        "y": 280,
-        "wires": [
-            [
-                "4993d777.8aa9e8"
             ]
         ]
     },
@@ -627,6 +608,39 @@
         "info": "",
         "x": 410,
         "y": 20,
+        "wires": []
+    },
+    {
+        "id": "f87bf7a3.bf8e58",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "connect 00:1A:22:0B:F9:D1",
+        "topic": "",
+        "payload": "connect 00:1A:22:0B:F9:D1",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 500,
+        "y": 280,
+        "wires": [
+            [
+                "4993d777.8aa9e8"
+            ]
+        ]
+    },
+    {
+        "id": "2f7cfd7b.d33812",
+        "type": "file",
+        "z": "b4be1bf1.59bee8",
+        "name": "logfile.txt",
+        "filename": "logfile.txt",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "false",
+        "x": 480,
+        "y": 600,
         "wires": []
     }
 ]

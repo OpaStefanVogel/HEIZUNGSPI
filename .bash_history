@@ -247,3 +247,15 @@ sudo reboot
 nano .xsessionrc 
 sudo reboot
 nano .xsessionrc 
+lgit remote add origin https://github.com/OpaStefanVogel/HEIZUNGSPI.git
+#git push -u origin master
+git remote add origin https://github.com/OpaStefanVogel/HEIZUNGSPI.git
+git push -u origin master
+fftdfzzffdstvcxfghhjkllüüü0ifaw
+git commit -a -m "bei Neustart im Desktop pairen und gleich wieder trennen"
+git commit -a -m "Solltemperatur 14,5°"
+gatttool
+gatttool -I
+cat logfile.txt
+nano .xsessionrc 
+sudo reboot
