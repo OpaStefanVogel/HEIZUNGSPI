@@ -208,3 +208,35 @@ gatttool -I+
 gatttool -I
 screen -x
 exit
+git init
+git add .bash_history 
+git add .node-red/flows_Heizung.json 
+git add .node-red/settings.js 
+git add .node-red/.config.json 
+git add .xsessionrc 
+nano .node-red/settings.js 
+git remove .node-red/flows_Heizung.json 
+git rm .node-red/flows_Heizung.json 
+git rm --cached .node-red/flows_Heizung.json 
+git help user
+git help
+git config --global user.name "Stefan_auf_dem_Heizungsraspberrypi"
+git config --global user.email backebackekuchen16@gmail.com
+git commit -a -m "los gehts"
+git add .node-red/flows_Heizung.json 
+nano .node-red/settings.js 
+nano .node-red/flows_Heizung.json 
+sudo reboot
+screen
+screen -r
+gatttool .I
+gatttool -I
+gatttool -I
+nano .node-red/flows_Heizung.json 
+git commit -a -m "flow_Heizung.json"
+gitk --all &
+sudo apt-get install gitk
+gitk --all &
+nano .xsessionrc 
+git commit -a -m "flow_Heizung.json" --amend
+sudo reboot

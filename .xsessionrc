@@ -1,2 +1,3 @@
 node-red &
-
+gitk &
+sleep 6; vivaldi & #wartet auf node-red

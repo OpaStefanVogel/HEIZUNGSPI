@@ -1,0 +1,622 @@
+[
+    {
+        "id": "b4be1bf1.59bee8",
+        "type": "tab",
+        "label": "Flow 1"
+    },
+    {
+        "id": "fd622c93.69a77",
+        "type": "websocket-listener",
+        "z": "",
+        "path": "/ws/gatttool",
+        "wholemsg": "false"
+    },
+    {
+        "id": "e3afe0ef.4923f",
+        "type": "debug",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 490,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "97d3725d.6888b",
+        "type": "daemon",
+        "z": "b4be1bf1.59bee8",
+        "command": "gatttool",
+        "args": "-I",
+        "cr": true,
+        "redo": true,
+        "op": "string",
+        "name": "gatttool -I",
+        "x": 240,
+        "y": 600,
+        "wires": [
+            [
+                "e3afe0ef.4923f",
+                "d671fd42.3caae"
+            ],
+            [
+                "e3afe0ef.4923f"
+            ],
+            [
+                "e3afe0ef.4923f"
+            ]
+        ]
+    },
+    {
+        "id": "f87bf7a3.bf8e58",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "connect 00:1A:22:0B:F9:D1",
+        "topic": "",
+        "payload": "connect 00:1A:22:0B:F9:D1",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 500,
+        "y": 220,
+        "wires": [
+            [
+                "4993d777.8aa9e8"
+            ]
+        ]
+    },
+    {
+        "id": "914f63c8.58cac",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "char-write-req 0411 03",
+        "topic": "",
+        "payload": "char-write-req 0411 03",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 480,
+        "y": 260,
+        "wires": [
+            [
+                "4993d777.8aa9e8"
+            ]
+        ]
+    },
+    {
+        "id": "7856e0e8.9a52f",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "disconnect 00:1A:22:0B:F9:D1",
+        "topic": "",
+        "payload": "disconnect 00:1A:22:0B:F9:D1",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 510,
+        "y": 460,
+        "wires": [
+            [
+                "4993d777.8aa9e8"
+            ]
+        ]
+    },
+    {
+        "id": "adc2c093.9bd9",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "char-write-req 0411 412d",
+        "topic": "",
+        "payload": "char-write-req 0411 412d",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 490,
+        "y": 340,
+        "wires": [
+            [
+                "4993d777.8aa9e8"
+            ]
+        ]
+    },
+    {
+        "id": "2c4034d8.fe76dc",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "char-write-req 0411 4040",
+        "topic": "",
+        "payload": "char-write-req 0411 4040",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 490,
+        "y": 380,
+        "wires": [
+            [
+                "4993d777.8aa9e8"
+            ]
+        ]
+    },
+    {
+        "id": "8ad1ede1.0167",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "char-write-req 0411 4000",
+        "topic": "",
+        "payload": "char-write-req 0411 4000",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 490,
+        "y": 420,
+        "wires": [
+            [
+                "4993d777.8aa9e8"
+            ]
+        ]
+    },
+    {
+        "id": "116759e4.aa4fa6",
+        "type": "e-mail in",
+        "z": "b4be1bf1.59bee8",
+        "name": "backebackekuchen16@gmail.com",
+        "protocol": "IMAP",
+        "server": "imap.gmail.com",
+        "useSSL": true,
+        "port": "993",
+        "box": "INBOX",
+        "disposition": "Read",
+        "repeat": "300",
+        "x": 240,
+        "y": 60,
+        "wires": [
+            [
+                "caa5e213.3605c",
+                "5efdc9ba.edab58"
+            ]
+        ]
+    },
+    {
+        "id": "9c3e623c.ddd2d",
+        "type": "template",
+        "z": "b4be1bf1.59bee8",
+        "name": "connect",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "connect 00:1A:22:0B:F9:D1",
+        "output": "str",
+        "x": 1180,
+        "y": 60,
+        "wires": [
+            [
+                "82ccc39.71c2a4",
+                "6b3b465.cf738b8"
+            ]
+        ]
+    },
+    {
+        "id": "a8f69b17.d49a28",
+        "type": "template",
+        "z": "b4be1bf1.59bee8",
+        "name": "auto mode",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "char-write-req 0411 4000",
+        "output": "str",
+        "x": 1570,
+        "y": 60,
+        "wires": [
+            [
+                "6ab53bd9.f82904"
+            ]
+        ]
+    },
+    {
+        "id": "82ccc39.71c2a4",
+        "type": "delay",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 1380,
+        "y": 60,
+        "wires": [
+            [
+                "a8f69b17.d49a28"
+            ]
+        ]
+    },
+    {
+        "id": "65fa44ca.cb1d5c",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "Test",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 1010,
+        "y": 100,
+        "wires": [
+            [
+                "9c3e623c.ddd2d"
+            ]
+        ]
+    },
+    {
+        "id": "de502380.c110b",
+        "type": "rbe",
+        "z": "b4be1bf1.59bee8",
+        "name": "nur einmal je Email",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 810,
+        "y": 60,
+        "wires": [
+            [
+                "9c3e623c.ddd2d"
+            ]
+        ]
+    },
+    {
+        "id": "caa5e213.3605c",
+        "type": "debug",
+        "z": "b4be1bf1.59bee8",
+        "name": "debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 470,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "5efdc9ba.edab58",
+        "type": "function",
+        "z": "b4be1bf1.59bee8",
+        "name": "nur \"Re: Heizungsraspberrypi.\"",
+        "func": "if (msg.topic==\"Re: Heizungsraspberrypi.\") {\n  return msg;\n  }\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 60,
+        "wires": [
+            [
+                "de502380.c110b"
+            ]
+        ]
+    },
+    {
+        "id": "1fd93aab.4ddaa5",
+        "type": "link in",
+        "z": "b4be1bf1.59bee8",
+        "name": "stdin zu gatttool -I",
+        "links": [
+            "2beb4749.77c788",
+            "4993d777.8aa9e8",
+            "6ab53bd9.f82904",
+            "6b3b465.cf738b8",
+            "8d8cb496.89cd18"
+        ],
+        "x": 95,
+        "y": 600,
+        "wires": [
+            [
+                "97d3725d.6888b"
+            ]
+        ]
+    },
+    {
+        "id": "6ab53bd9.f82904",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "links": [
+            "1fd93aab.4ddaa5"
+        ],
+        "x": 1695,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "6b3b465.cf738b8",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "zu gatttool schicken",
+        "links": [
+            "1fd93aab.4ddaa5"
+        ],
+        "x": 1335,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "2339cc64.a95904",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "Bei neuer Email mit Topic gleich \"Re: Heizungsraspberrypi.\" soll die Heizung auf Automatik zurückgestellt werden.",
+        "info": "",
+        "x": 390,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "9eefd5e2.1050d8",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "Testeingaben laut https://github.com/Heckie75/eQ-3-radiador-thermostat/blob/master/eQ-3-radiator-thermostat-api.m",
+        "info": "",
+        "x": 400,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "4993d777.8aa9e8",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "links": [
+            "1fd93aab.4ddaa5"
+        ],
+        "x": 788.333330154419,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "d7b4d598.fafbe8",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "gatttool -I",
+        "info": "",
+        "x": 60,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "ba59023e.68e04",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "verbinden (dauert ca. 1s)",
+        "info": "",
+        "x": 170,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "10e6ee2d.be4512",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "Status abfragen",
+        "info": "",
+        "x": 140,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "99011097.a5c79",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "Solltemperatur 22,5° einstellen",
+        "info": "",
+        "x": 190,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "d1596400.622258",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "Mode \"manu\"",
+        "info": "",
+        "x": 130,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "47ca6a41.7d0024",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "Mode \"auto\"",
+        "info": "",
+        "x": 130,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "4aef4604.3d0bb8",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "disconnect",
+        "info": "",
+        "x": 120,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "629391a8.61994",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "Programm von Dienstag",
+        "info": "",
+        "x": 170,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "abfd3af8.3ad0b8",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "char-write-req 0411 2002",
+        "topic": "",
+        "payload": "char-write-req 0411 2002",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 490,
+        "y": 300,
+        "wires": [
+            [
+                "4993d777.8aa9e8"
+            ]
+        ]
+    },
+    {
+        "id": "c115705c.00884",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "Restart gatttool",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 180,
+        "y": 660,
+        "wires": [
+            [
+                "4524fd24.ac28e4"
+            ]
+        ]
+    },
+    {
+        "id": "4524fd24.ac28e4",
+        "type": "function",
+        "z": "b4be1bf1.59bee8",
+        "name": "msg.kill=\"SIGQUIT\";",
+        "func": "delete msg.payload;\nmsg.kill=\"SIGQUIT\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 410,
+        "y": 660,
+        "wires": [
+            [
+                "2beb4749.77c788"
+            ]
+        ]
+    },
+    {
+        "id": "2beb4749.77c788",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "links": [
+            "1fd93aab.4ddaa5"
+        ],
+        "x": 575,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "c189ac54.27fde",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "alles über Websocket steuern",
+        "info": "",
+        "x": 120,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "88f6b998.ee7b38",
+        "type": "websocket in",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "server": "fd622c93.69a77",
+        "client": "",
+        "x": 160,
+        "y": 780,
+        "wires": [
+            [
+                "8d8cb496.89cd18"
+            ]
+        ]
+    },
+    {
+        "id": "9a346897.bb2248",
+        "type": "websocket out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "server": "fd622c93.69a77",
+        "client": "",
+        "x": 520,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "8d8cb496.89cd18",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "links": [
+            "1fd93aab.4ddaa5"
+        ],
+        "x": 295,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "13e47c28.8e6cc4",
+        "type": "link in",
+        "z": "b4be1bf1.59bee8",
+        "name": "output von gatttool",
+        "links": [
+            "d671fd42.3caae"
+        ],
+        "x": 375,
+        "y": 780,
+        "wires": [
+            [
+                "9a346897.bb2248"
+            ]
+        ]
+    },
+    {
+        "id": "d671fd42.3caae",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "stdout von gatttool -I",
+        "links": [
+            "13e47c28.8e6cc4"
+        ],
+        "x": 435,
+        "y": 580,
+        "wires": []
+    }
+]
