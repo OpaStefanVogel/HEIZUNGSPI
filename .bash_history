@@ -259,3 +259,6 @@ gatttool -I
 cat logfile.txt
 nano .xsessionrc 
 sudo reboot
+cat logfile.txt 
+git commit -a -m "logfile.txt"
+node-red-log
