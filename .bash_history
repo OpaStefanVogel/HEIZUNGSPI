@@ -240,3 +240,10 @@ gitk --all &
 nano .xsessionrc 
 git commit -a -m "flow_Heizung.json" --amend
 sudo reboot
+man sleep
+nano .xsessionrc 
+git commit -a -m "flow_Heizung.json" --amend
+sudo reboot
+nano .xsessionrc 
+sudo reboot
+nano .xsessionrc 

@@ -20,7 +20,7 @@
         "console": "false",
         "complete": "false",
         "x": 490,
-        "y": 620,
+        "y": 680,
         "wires": []
     },
     {
@@ -34,7 +34,7 @@
         "op": "string",
         "name": "gatttool -I",
         "x": 240,
-        "y": 600,
+        "y": 660,
         "wires": [
             [
                 "e3afe0ef.4923f",
@@ -61,7 +61,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 500,
-        "y": 220,
+        "y": 280,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -81,7 +81,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 480,
-        "y": 260,
+        "y": 320,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -101,7 +101,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 510,
-        "y": 460,
+        "y": 520,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -121,7 +121,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 340,
+        "y": 440,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -141,7 +141,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 380,
+        "y": 400,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -161,7 +161,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 420,
+        "y": 480,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -181,7 +181,7 @@
         "disposition": "Read",
         "repeat": "300",
         "x": 240,
-        "y": 60,
+        "y": 120,
         "wires": [
             [
                 "caa5e213.3605c",
@@ -201,7 +201,7 @@
         "template": "connect 00:1A:22:0B:F9:D1",
         "output": "str",
         "x": 1180,
-        "y": 60,
+        "y": 120,
         "wires": [
             [
                 "82ccc39.71c2a4",
@@ -221,7 +221,7 @@
         "template": "char-write-req 0411 4000",
         "output": "str",
         "x": 1570,
-        "y": 60,
+        "y": 120,
         "wires": [
             [
                 "6ab53bd9.f82904"
@@ -244,7 +244,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 1380,
-        "y": 60,
+        "y": 120,
         "wires": [
             [
                 "a8f69b17.d49a28"
@@ -264,7 +264,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 1010,
-        "y": 100,
+        "y": 160,
         "wires": [
             [
                 "9c3e623c.ddd2d"
@@ -282,7 +282,7 @@
         "inout": "out",
         "property": "payload",
         "x": 810,
-        "y": 60,
+        "y": 120,
         "wires": [
             [
                 "9c3e623c.ddd2d"
@@ -300,7 +300,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 470,
-        "y": 100,
+        "y": 160,
         "wires": []
     },
     {
@@ -312,7 +312,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 550,
-        "y": 60,
+        "y": 120,
         "wires": [
             [
                 "de502380.c110b"
@@ -332,7 +332,7 @@
             "8d8cb496.89cd18"
         ],
         "x": 95,
-        "y": 600,
+        "y": 660,
         "wires": [
             [
                 "97d3725d.6888b"
@@ -348,7 +348,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 1695,
-        "y": 60,
+        "y": 120,
         "wires": []
     },
     {
@@ -360,7 +360,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 1335,
-        "y": 100,
+        "y": 160,
         "wires": []
     },
     {
@@ -370,7 +370,7 @@
         "name": "Bei neuer Email mit Topic gleich \"Re: Heizungsraspberrypi.\" soll die Heizung auf Automatik zurückgestellt werden.",
         "info": "",
         "x": 390,
-        "y": 20,
+        "y": 80,
         "wires": []
     },
     {
@@ -380,7 +380,7 @@
         "name": "Testeingaben laut https://github.com/Heckie75/eQ-3-radiador-thermostat/blob/master/eQ-3-radiator-thermostat-api.m",
         "info": "",
         "x": 400,
-        "y": 180,
+        "y": 240,
         "wires": []
     },
     {
@@ -392,7 +392,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 788.333330154419,
-        "y": 320,
+        "y": 380,
         "wires": []
     },
     {
@@ -402,7 +402,7 @@
         "name": "gatttool -I",
         "info": "",
         "x": 60,
-        "y": 540,
+        "y": 600,
         "wires": []
     },
     {
@@ -412,7 +412,7 @@
         "name": "verbinden (dauert ca. 1s)",
         "info": "",
         "x": 170,
-        "y": 220,
+        "y": 280,
         "wires": []
     },
     {
@@ -422,7 +422,7 @@
         "name": "Status abfragen",
         "info": "",
         "x": 140,
-        "y": 260,
+        "y": 320,
         "wires": []
     },
     {
@@ -432,7 +432,7 @@
         "name": "Solltemperatur 22,5° einstellen",
         "info": "",
         "x": 190,
-        "y": 340,
+        "y": 440,
         "wires": []
     },
     {
@@ -442,17 +442,17 @@
         "name": "Mode \"manu\"",
         "info": "",
         "x": 130,
-        "y": 380,
+        "y": 400,
         "wires": []
     },
     {
         "id": "47ca6a41.7d0024",
         "type": "comment",
         "z": "b4be1bf1.59bee8",
-        "name": "Mode \"auto\"",
+        "name": "zurück zu Mode \"auto\"",
         "info": "",
-        "x": 130,
-        "y": 420,
+        "x": 160,
+        "y": 480,
         "wires": []
     },
     {
@@ -462,7 +462,7 @@
         "name": "disconnect",
         "info": "",
         "x": 120,
-        "y": 460,
+        "y": 520,
         "wires": []
     },
     {
@@ -472,7 +472,7 @@
         "name": "Programm von Dienstag",
         "info": "",
         "x": 170,
-        "y": 300,
+        "y": 360,
         "wires": []
     },
     {
@@ -488,7 +488,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 300,
+        "y": 360,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -508,7 +508,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 180,
-        "y": 660,
+        "y": 720,
         "wires": [
             [
                 "4524fd24.ac28e4"
@@ -524,7 +524,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 410,
-        "y": 660,
+        "y": 720,
         "wires": [
             [
                 "2beb4749.77c788"
@@ -540,7 +540,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 575,
-        "y": 660,
+        "y": 720,
         "wires": []
     },
     {
@@ -550,7 +550,7 @@
         "name": "alles über Websocket steuern",
         "info": "",
         "x": 120,
-        "y": 740,
+        "y": 800,
         "wires": []
     },
     {
@@ -561,7 +561,7 @@
         "server": "fd622c93.69a77",
         "client": "",
         "x": 160,
-        "y": 780,
+        "y": 840,
         "wires": [
             [
                 "8d8cb496.89cd18"
@@ -576,7 +576,7 @@
         "server": "fd622c93.69a77",
         "client": "",
         "x": 520,
-        "y": 780,
+        "y": 840,
         "wires": []
     },
     {
@@ -588,7 +588,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 295,
-        "y": 780,
+        "y": 840,
         "wires": []
     },
     {
@@ -600,7 +600,7 @@
             "d671fd42.3caae"
         ],
         "x": 375,
-        "y": 780,
+        "y": 840,
         "wires": [
             [
                 "9a346897.bb2248"
@@ -616,7 +616,17 @@
             "13e47c28.8e6cc4"
         ],
         "x": 435,
-        "y": 580,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "5c46f058.bc832",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "(nicht vergessen: nach Neustart des Raspberry PI im Desktop pairen und gleich wieder trennen)",
+        "info": "",
+        "x": 410,
+        "y": 20,
         "wires": []
     }
 ]
