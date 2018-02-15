@@ -144,7 +144,8 @@
             [
                 "e3afe0ef.4923f",
                 "d671fd42.3caae",
-                "2f7cfd7b.d33812"
+                "2f7cfd7b.d33812",
+                "af0a475.93dd9b8"
             ],
             [
                 "e3afe0ef.4923f"
@@ -838,7 +839,7 @@
         "wires": [
             [
                 "dd055b72.14ef58",
-                "cba64e78.021aa"
+                "daa383c5.5ede9"
             ]
         ]
     },
@@ -889,7 +890,7 @@
         "repair": false,
         "outputs": 2,
         "x": 450,
-        "y": 1160,
+        "y": 1180,
         "wires": [
             [
                 "9c3e623c.ddd2d",
@@ -1205,5 +1206,84 @@
                 "b6b98351.495a"
             ]
         ]
+    },
+    {
+        "id": "af0a475.93dd9b8",
+        "type": "join",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "mode": "custom",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "3",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 270,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "daa383c5.5ede9",
+        "type": "delay",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "40",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 320,
+        "y": 1140,
+        "wires": [
+            [
+                "cba64e78.021aa"
+            ]
+        ]
+    },
+    {
+        "id": "eef96013.256b",
+        "type": "debug",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 560,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "25c89d7c.633032",
+        "type": "ui_text",
+        "z": "b4be1bf1.59bee8",
+        "group": "dab61bb7.6132a8",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "(wird in 40-Sekunden-Intervallen weitergesendet, damit nichts durcheinanderkommt)",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 380,
+        "y": 1260,
+        "wires": []
     }
 ]
