@@ -262,3 +262,7 @@ sudo reboot
 cat logfile.txt 
 git commit -a -m "logfile.txt"
 node-red-log
+vivaldi &
+localhost:1880/ui/
+vivaldi &
+localhost:1880
