@@ -117,6 +117,13 @@
         }
     },
     {
+        "id": "94bc45e.4f5eeb8",
+        "type": "websocket-listener",
+        "z": "",
+        "path": "/ws/neue_Email_da",
+        "wholemsg": "false"
+    },
+    {
         "id": "e3afe0ef.4923f",
         "type": "debug",
         "z": "b4be1bf1.59bee8",
@@ -271,7 +278,8 @@
         "wires": [
             [
                 "caa5e213.3605c",
-                "5efdc9ba.edab58"
+                "5efdc9ba.edab58",
+                "b9bd0cc7.b140f"
             ]
         ]
     },
@@ -1428,7 +1436,7 @@
         "type": "debug",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1436,5 +1444,56 @@
         "x": 470,
         "y": 960,
         "wires": []
+    },
+    {
+        "id": "b9bd0cc7.b140f",
+        "type": "websocket out",
+        "z": "b4be1bf1.59bee8",
+        "name": "neue_Email_da",
+        "server": "94bc45e.4f5eeb8",
+        "client": "",
+        "x": 660,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "ca5d3e49.67dcc",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 1240,
+        "wires": [
+            [
+                "4acbaae3.13eda4"
+            ]
+        ]
+    },
+    {
+        "id": "2a543096.ee9cf",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 1280,
+        "wires": [
+            [
+                "4acbaae3.13eda4"
+            ]
+        ]
     }
 ]

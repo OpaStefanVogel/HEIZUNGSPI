@@ -266,3 +266,6 @@ vivaldi &
 localhost:1880/ui/
 vivaldi &
 localhost:1880
+vivaldi &
+exit
+ls
