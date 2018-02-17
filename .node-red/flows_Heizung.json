@@ -390,7 +390,7 @@
         "type": "debug",
         "z": "b4be1bf1.59bee8",
         "name": "debug",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1507,7 +1507,7 @@
         "secure": true,
         "name": "",
         "dname": "Re: Heizungsraspberrypi.",
-        "x": 610,
+        "x": 670,
         "y": 1520,
         "wires": []
     },
@@ -1560,7 +1560,7 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "func": "var msgneu={};\nmsgneu.to=msg.payload.from;\nmsgneu.topic=msg.payload.topic;\nmsgneu.payload=\"automatisch erzeugte Email vom Heizungsraspberrypi\\n\\n\";\nvar notifications=global.get(\"notifications\");\nfor (var i=0;i<notifications.length;i++) {\n  msgneu.payload+=notifications[i]+\"\\n\";\n  }\nmsgneu.payload+=\"\\n\"+\"Antwort auf Email \"+msg.payload.date;\nreturn msgneu;\n",
+        "func": "var msgneu={};\nmsgneu.to=msg.from;\nmsgneu.topic=msg.topic;\nmsgneu.payload=\"automatisch erzeugte Email vom Heizungsraspberrypi\\n\\n\";\nvar notifications=global.get(\"notifications\");\nfor (var i=0;i<notifications.length;i++) {\n  msgneu.payload+=notifications[i]+\"\\n\";\n  }\nmsgneu.payload+=\"\\n\"+\"Antwort auf Email \"+msg.date;\nreturn msgneu;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 270,
@@ -1569,7 +1569,7 @@
             [
                 "210e765f.6d6f3a",
                 "949c60d0.afd2a",
-                "31dbcae2.8db166"
+                "55a6f98b.1167a8"
             ]
         ]
     },
@@ -1668,7 +1668,30 @@
             "ac931b4.bf8dce8"
         ],
         "x": 1475,
-        "y": 160,
+        "y": 80,
         "wires": []
+    },
+    {
+        "id": "55a6f98b.1167a8",
+        "type": "delay",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "300",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 450,
+        "y": 1480,
+        "wires": [
+            [
+                "31dbcae2.8db166"
+            ]
+        ]
     }
 ]
