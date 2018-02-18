@@ -273,3 +273,33 @@ cat Testemail.txt
 cat Notifications.txt 
 rm Notifications.txt 
 cat Notifications.txt 
+leafpad &
+leafpad & Notifications.txt
+leafpad Notifications.txt &
+git commit -a -m "Notifications.txt"
+cat Notifications.txt 
+git push
+git commit -a -m "Limit 1 Email/min bei der Abfrage"
+cat Notifications.txt 
+nano Notifications.txt 
+cat Notifications.txt 
+git add Notifications.txt 
+git rm --cached Notifications.txt 
+cat Notifications.txt 
+cat /etc/hostname
+sudo reboot
+exit
+sudo nano /etc/hostname 
+sudo nano /etc/hosts
+sudo nano /hosts
+sudo nano /etc/hosts
+sudo nano /hostnames
+sudo nano /hostname
+ls /
+ls /etc
+cat /etxc/host.conf
+cat /etc/host.conf
+cat /etc/hosts.allow
+cat /etc/hosts.deny
+ls
+ls /

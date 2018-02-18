@@ -273,7 +273,7 @@
         "port": "993",
         "box": "INBOX",
         "disposition": "None",
-        "repeat": "300",
+        "repeat": "3000",
         "x": 140,
         "y": 120,
         "wires": [
@@ -716,16 +716,6 @@
         ],
         "x": 595,
         "y": 820,
-        "wires": []
-    },
-    {
-        "id": "5c46f058.bc832",
-        "type": "comment",
-        "z": "b4be1bf1.59bee8",
-        "name": "(nicht vergessen: nach Neustart des Raspberry PI im Desktop pairen und gleich wieder trennen)",
-        "info": "",
-        "x": 410,
-        "y": 20,
         "wires": []
     },
     {
