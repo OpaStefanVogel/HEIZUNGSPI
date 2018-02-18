@@ -303,3 +303,35 @@ cat /etc/hosts.allow
 cat /etc/hosts.deny
 ls
 ls /
+leafpad &
+leafpad Notifications.txt &
+git commit -a -m "pairing nach Neustart nicht nötig"
+nano .xsessionrc 
+sudo reboot
+nano .xsessionrc 
+sudo reboot
+screen -r
+nano .xsessionrc 
+update-nodejs-and-nodered
+sudo reboot
+screen -r
+sudo apt-get update
+sudo apt-get upgrade
+gtkterm &
+xterm &
+terminal &
+lxterminal &
+exit
+gatttool -I --listen
+cat Notifications.txt 
+gatttool -I --listen
+gatttool
+gatttool -I
+cat empfangeneEmail.txt 
+cat .node-red/flows_Heizung.json 
+exit
+leafpad empfangeneEmail.txt &
+leafpad .node-red/flows_Heizung.json &
+leafpad empfangeneEmail.txt &
+cat empfangeneEmail.txt
+leafpad empfangeneEmail.txt &
