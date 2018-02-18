@@ -375,7 +375,7 @@
         "start": "",
         "inout": "out",
         "property": "payload",
-        "x": 810,
+        "x": 930,
         "y": 120,
         "wires": [
             [
@@ -405,7 +405,7 @@
         "func": "if (msg.topic==\"Re: Heizungsraspberrypi.\") {\n  return msg;\n  }\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 550,
+        "x": 650,
         "y": 120,
         "wires": [
             [
@@ -757,8 +757,8 @@
         "appendNewline": false,
         "createDir": false,
         "overwriteFile": "false",
-        "x": 640,
-        "y": 780,
+        "x": 680,
+        "y": 800,
         "wires": []
     },
     {
@@ -1298,7 +1298,7 @@
         "links": [
             "6384e70d.a8f688"
         ],
-        "x": 1175,
+        "x": 1335,
         "y": 160,
         "wires": []
     },
@@ -1386,7 +1386,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 1040,
+        "x": 1160,
         "y": 120,
         "wires": [
             [
@@ -1505,8 +1505,8 @@
         "secure": true,
         "name": "",
         "dname": "Re: Heizungsraspberrypi.",
-        "x": 670,
-        "y": 1520,
+        "x": 2110,
+        "y": 120,
         "wires": []
     },
     {
@@ -1521,23 +1521,13 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 100,
-        "y": 1520,
+        "x": 1320,
+        "y": 40,
         "wires": [
             [
-                "3a9dad2c.52b062"
+                "738a67a0.e56a78"
             ]
         ]
-    },
-    {
-        "id": "cb384e68.e4a89",
-        "type": "comment",
-        "z": "b4be1bf1.59bee8",
-        "name": "Email beantworten",
-        "info": "",
-        "x": 120,
-        "y": 1480,
-        "wires": []
     },
     {
         "id": "210e765f.6d6f3a",
@@ -1549,8 +1539,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 470,
-        "y": 1560,
+        "x": 1850,
+        "y": 160,
         "wires": []
     },
     {
@@ -1561,8 +1551,8 @@
         "func": "var msgneu={};\nmsgneu.to=msg.from;\nmsgneu.topic=msg.topic;\nmsgneu.payload=\"automatisch erzeugte Email vom Heizungsraspberrypi\\n\\n\";\nvar notifications=global.get(\"notifications\");\nfor (var i=0;i<notifications.length;i++) {\n  msgneu.payload+=notifications[i]+\"\\n\";\n  }\nmsgneu.payload+=\"\\n\"+\"Antwort auf Email \"+msg.date;\nreturn msgneu;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 270,
-        "y": 1520,
+        "x": 1650,
+        "y": 120,
         "wires": [
             [
                 "210e765f.6d6f3a",
@@ -1576,13 +1566,15 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "func": "var t=msg.payload;\nvar notifications=global.get(\"notifications\")||[];\nvar d=new Date();\nvar ind=t.indexOf(\"Notification\");\nif (ind>-1) notifications.push(d.toString()+\"  \"+t.slice(ind,ind+53));\nwhile (notifications.length>8) notifications.shift(t);\nglobal.set(\"notifications\",notifications);\nreturn msg;",
+        "func": "var t=msg.payload;\nvar notifications=global.get(\"notifications\")||[];\nvar d=new Date();\nvar ind=t.indexOf(\"Notification\");\nvar tneu=d.toString()+\"  \"+t.slice(ind,ind+53);\nif (ind>-1) notifications.push(tneu);\nwhile (notifications.length>8) notifications.shift(t);\nglobal.set(\"notifications\",notifications);\nif (ind>-1) {\n  msg.payload=tneu;\n  return msg;\n  }",
         "outputs": 1,
         "noerr": 0,
         "x": 600,
         "y": 760,
         "wires": [
-            []
+            [
+                "1f10c6ac.a03779"
+            ]
         ]
     },
     {
@@ -1614,25 +1606,9 @@
         "appendNewline": true,
         "createDir": false,
         "overwriteFile": "true",
-        "x": 490,
-        "y": 1600,
+        "x": 1870,
+        "y": 200,
         "wires": []
-    },
-    {
-        "id": "ac931b4.bf8dce8",
-        "type": "link in",
-        "z": "b4be1bf1.59bee8",
-        "name": "Email automatisch beantworten",
-        "links": [
-            "b81bdeba.4a502"
-        ],
-        "x": 180,
-        "y": 1600,
-        "wires": [
-            [
-                "3a9dad2c.52b062"
-            ]
-        ]
     },
     {
         "id": "1b4d0fb0.2e75a",
@@ -1649,25 +1625,13 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 1330,
+        "x": 1430,
         "y": 120,
         "wires": [
             [
-                "b81bdeba.4a502"
+                "3a9dad2c.52b062"
             ]
         ]
-    },
-    {
-        "id": "b81bdeba.4a502",
-        "type": "link out",
-        "z": "b4be1bf1.59bee8",
-        "name": "",
-        "links": [
-            "ac931b4.bf8dce8"
-        ],
-        "x": 1475,
-        "y": 80,
-        "wires": []
     },
     {
         "id": "55a6f98b.1167a8",
@@ -1684,8 +1648,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 450,
-        "y": 1480,
+        "x": 1870,
+        "y": 120,
         "wires": [
             [
                 "31dbcae2.8db166"
@@ -1707,8 +1671,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": true,
-        "x": 300,
-        "y": 180,
+        "x": 400,
+        "y": 120,
         "wires": [
             [
                 "5efdc9ba.edab58",
@@ -1716,5 +1680,44 @@
                 "b9bd0cc7.b140f"
             ]
         ]
+    },
+    {
+        "id": "4e072f4c.d6b39",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "ab hier Email beantworten",
+        "info": "",
+        "x": 1390,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "738a67a0.e56a78",
+        "type": "function",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "func": "msg=msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1470,
+        "y": 40,
+        "wires": [
+            [
+                "3a9dad2c.52b062"
+            ]
+        ]
+    },
+    {
+        "id": "1f10c6ac.a03779",
+        "type": "file",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "filename": "Notifications.txt",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "x": 800,
+        "y": 760,
+        "wires": []
     }
 ]

@@ -269,3 +269,7 @@ localhost:1880
 vivaldi &
 exit
 ls
+cat Testemail.txt 
+cat Notifications.txt 
+rm Notifications.txt 
+cat Notifications.txt 
