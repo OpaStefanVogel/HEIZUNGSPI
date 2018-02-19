@@ -335,3 +335,4 @@ leafpad .node-red/flows_Heizung.json &
 leafpad empfangeneEmail.txt &
 cat empfangeneEmail.txt
 leafpad empfangeneEmail.txt &
+nano Schluessel.txt
