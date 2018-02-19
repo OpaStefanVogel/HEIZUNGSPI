@@ -1288,8 +1288,8 @@
         "links": [
             "6384e70d.a8f688"
         ],
-        "x": 1335,
-        "y": 160,
+        "x": 1515,
+        "y": 220,
         "wires": []
     },
     {
@@ -1380,8 +1380,8 @@
         "y": 120,
         "wires": [
             [
-                "4d2540eb.95b27",
-                "1b4d0fb0.2e75a"
+                "1b4d0fb0.2e75a",
+                "4a48a70b.1ac828"
             ]
         ]
     },
@@ -1621,9 +1621,7 @@
         "x": 1870,
         "y": 120,
         "wires": [
-            [
-                "31dbcae2.8db166"
-            ]
+            []
         ]
     },
     {
@@ -1774,7 +1772,7 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "func": "if (msg.payload2.indexOf(msg.payload.trim())==0) {\n  return msg;\n  }\n",
+        "func": "var schl=msg.payload.trim();\nif (msg.payload2.indexOf(schl)==0) {\n  msg.payload=msg.payload2.slice(schl.length);\n  return msg;\n  }\n",
         "outputs": 1,
         "noerr": 0,
         "x": 1190,
@@ -1838,5 +1836,45 @@
                 "4993d777.8aa9e8"
             ]
         ]
+    },
+    {
+        "id": "4a48a70b.1ac828",
+        "type": "function",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "func": "var p=msg.payload;\nvar msg1={}; if (p.slice(0,10)==\"Heizung an\") msg1.payload=\"Heizung an\";\nvar msg2={}; if (p.slice(0,10)==\"Heizung aus\") msg2.payload=\"Heizung aus\";\nvar msg3={}; if (p.slice(0,10)==\"Status\") msg3.payload=\"Status\";\nvar msg4={}; if (p.slice(0,10)==\"Reboot\") msg4.payload=\"Reboot\";\nreturn [msg1,msg2,msg3,msg4];\n",
+        "outputs": 4,
+        "noerr": 0,
+        "x": 1370,
+        "y": 180,
+        "wires": [
+            [
+                "4d2540eb.95b27",
+                "7ebaf6a8.95b2b8"
+            ],
+            [
+                "7ebaf6a8.95b2b8"
+            ],
+            [
+                "7ebaf6a8.95b2b8"
+            ],
+            [
+                "7ebaf6a8.95b2b8"
+            ]
+        ]
+    },
+    {
+        "id": "7ebaf6a8.95b2b8",
+        "type": "debug",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1540,
+        "y": 160,
+        "wires": []
     }
 ]

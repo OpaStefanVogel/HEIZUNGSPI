@@ -336,3 +336,12 @@ leafpad empfangeneEmail.txt &
 cat empfangeneEmail.txt
 leafpad empfangeneEmail.txt &
 nano Schluessel.txt
+git commit -a -m "hat funktioniert"
+git push
+ls
+sudo reboot
+cat screenlog.0 
+ls
+cat screenlog.0 
+ifconfig
+screen -r
