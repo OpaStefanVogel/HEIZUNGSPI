@@ -1621,7 +1621,9 @@
         "x": 1870,
         "y": 120,
         "wires": [
-            []
+            [
+                "31dbcae2.8db166"
+            ]
         ]
     },
     {
@@ -1816,5 +1818,25 @@
         "x": 1270,
         "y": 20,
         "wires": []
+    },
+    {
+        "id": "e97ae6b8.ccb8b8",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "char-write-req 0411 412b",
+        "topic": "",
+        "payload": "char-write-req 0411 412b",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 490,
+        "y": 640,
+        "wires": [
+            [
+                "4993d777.8aa9e8"
+            ]
+        ]
     }
 ]
