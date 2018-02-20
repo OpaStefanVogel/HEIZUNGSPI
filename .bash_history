@@ -345,3 +345,6 @@ ls
 cat screenlog.0 
 ifconfig
 screen -r
+git commit -a -m "Verzweigung geht mit Testmail"
+git push
+screen -r

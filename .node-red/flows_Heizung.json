@@ -131,8 +131,8 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 650,
-        "y": 860,
+        "x": 730,
+        "y": 1020,
         "wires": []
     },
     {
@@ -146,7 +146,7 @@
         "op": "string",
         "name": "gatttool -I",
         "x": 400,
-        "y": 840,
+        "y": 1000,
         "wires": [
             [
                 "e3afe0ef.4923f",
@@ -175,7 +175,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 480,
-        "y": 500,
+        "y": 660,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -195,7 +195,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 510,
-        "y": 700,
+        "y": 900,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -215,7 +215,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 620,
+        "y": 780,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -235,7 +235,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 580,
+        "y": 740,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -255,7 +255,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 510,
-        "y": 660,
+        "y": 860,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -274,11 +274,12 @@
         "box": "INBOX",
         "disposition": "None",
         "repeat": "300",
-        "x": 120,
-        "y": 120,
+        "x": 180,
+        "y": 100,
         "wires": [
             [
-                "44ecd0fb.0396b"
+                "44ecd0fb.0396b",
+                "5efdc9ba.edab58"
             ]
         ]
     },
@@ -294,7 +295,7 @@
         "template": "connect 00:1A:22:0B:F9:D1",
         "output": "str",
         "x": 440,
-        "y": 220,
+        "y": 300,
         "wires": [
             [
                 "82ccc39.71c2a4",
@@ -314,7 +315,7 @@
         "template": "char-write-req 0411 4000",
         "output": "str",
         "x": 830,
-        "y": 220,
+        "y": 300,
         "wires": [
             [
                 "6ab53bd9.f82904",
@@ -338,7 +339,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 640,
-        "y": 220,
+        "y": 300,
         "wires": [
             [
                 "a8f69b17.d49a28"
@@ -358,7 +359,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 270,
-        "y": 260,
+        "y": 340,
         "wires": [
             [
                 "9c3e623c.ddd2d"
@@ -375,27 +376,13 @@
         "start": "",
         "inout": "out",
         "property": "payload",
-        "x": 930,
-        "y": 120,
+        "x": 970,
+        "y": 100,
         "wires": [
             [
                 "4b46fce5.5091e4"
             ]
         ]
-    },
-    {
-        "id": "caa5e213.3605c",
-        "type": "debug",
-        "z": "b4be1bf1.59bee8",
-        "name": "debug",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 930,
-        "y": 160,
-        "wires": []
     },
     {
         "id": "5efdc9ba.edab58",
@@ -405,11 +392,11 @@
         "func": "if (msg.topic==\"Re: Heizungsraspberrypi.\") {\n  msg.payload=msg.payload+msg.date;\n  return msg;\n  }\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 650,
-        "y": 120,
+        "x": 490,
+        "y": 100,
         "wires": [
             [
-                "de502380.c110b"
+                "1d751aca.ad7f45"
             ]
         ]
     },
@@ -428,10 +415,13 @@
             "3a70e828.eb3488",
             "15f994de.d25bdb",
             "eca91c29.a07d3",
-            "617d12c.da3adec"
+            "617d12c.da3adec",
+            "be0b2506.caa358",
+            "91fb8ad9.f13f88",
+            "c8561e10.6c68"
         ],
-        "x": 135,
-        "y": 840,
+        "x": 255,
+        "y": 1000,
         "wires": [
             [
                 "97d3725d.6888b"
@@ -447,7 +437,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 975,
-        "y": 260,
+        "y": 340,
         "wires": []
     },
     {
@@ -459,7 +449,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 595,
-        "y": 260,
+        "y": 340,
         "wires": []
     },
     {
@@ -469,7 +459,7 @@
         "name": "Testeingaben laut https://github.com/Heckie75/eQ-3-radiador-thermostat/blob/master/eQ-3-radiator-thermostat-api.m",
         "info": "",
         "x": 400,
-        "y": 420,
+        "y": 580,
         "wires": []
     },
     {
@@ -481,7 +471,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 788.333330154419,
-        "y": 560,
+        "y": 720,
         "wires": []
     },
     {
@@ -491,7 +481,7 @@
         "name": "hier wird das \"gatttool -I\" ausgeführt",
         "info": "",
         "x": 140,
-        "y": 780,
+        "y": 940,
         "wires": []
     },
     {
@@ -501,7 +491,7 @@
         "name": "verbinden (dauert ca. 3s)",
         "info": "",
         "x": 170,
-        "y": 460,
+        "y": 620,
         "wires": []
     },
     {
@@ -511,7 +501,7 @@
         "name": "Status abfragen",
         "info": "",
         "x": 140,
-        "y": 500,
+        "y": 660,
         "wires": []
     },
     {
@@ -521,7 +511,7 @@
         "name": "Solltemperatur 14,5° einstellen",
         "info": "",
         "x": 190,
-        "y": 620,
+        "y": 780,
         "wires": []
     },
     {
@@ -531,7 +521,7 @@
         "name": "Mode \"manu\"",
         "info": "",
         "x": 130,
-        "y": 580,
+        "y": 740,
         "wires": []
     },
     {
@@ -541,7 +531,7 @@
         "name": "(zurück zu Mode \"auto\")",
         "info": "",
         "x": 190,
-        "y": 660,
+        "y": 860,
         "wires": []
     },
     {
@@ -551,7 +541,7 @@
         "name": "disconnect",
         "info": "",
         "x": 120,
-        "y": 700,
+        "y": 900,
         "wires": []
     },
     {
@@ -561,7 +551,7 @@
         "name": "Programm von Dienstag",
         "info": "",
         "x": 170,
-        "y": 540,
+        "y": 700,
         "wires": []
     },
     {
@@ -577,7 +567,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 540,
+        "y": 700,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -597,7 +587,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 180,
-        "y": 900,
+        "y": 1060,
         "wires": [
             [
                 "4524fd24.ac28e4"
@@ -613,7 +603,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 410,
-        "y": 900,
+        "y": 1060,
         "wires": [
             [
                 "2beb4749.77c788"
@@ -629,7 +619,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 575,
-        "y": 900,
+        "y": 1060,
         "wires": []
     },
     {
@@ -639,7 +629,7 @@
         "name": "Möglichkeit, alles über Websocket zu steuern",
         "info": "",
         "x": 170,
-        "y": 1000,
+        "y": 1160,
         "wires": []
     },
     {
@@ -650,7 +640,7 @@
         "server": "fd622c93.69a77",
         "client": "",
         "x": 160,
-        "y": 1040,
+        "y": 1200,
         "wires": [
             [
                 "8d8cb496.89cd18"
@@ -665,7 +655,7 @@
         "server": "fd622c93.69a77",
         "client": "",
         "x": 520,
-        "y": 1040,
+        "y": 1200,
         "wires": []
     },
     {
@@ -677,7 +667,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 295,
-        "y": 1040,
+        "y": 1200,
         "wires": []
     },
     {
@@ -689,7 +679,7 @@
             "d671fd42.3caae"
         ],
         "x": 375,
-        "y": 1040,
+        "y": 1200,
         "wires": [
             [
                 "9a346897.bb2248"
@@ -704,8 +694,8 @@
         "links": [
             "13e47c28.8e6cc4"
         ],
-        "x": 595,
-        "y": 820,
+        "x": 635,
+        "y": 1000,
         "wires": []
     },
     {
@@ -721,7 +711,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 500,
-        "y": 460,
+        "y": 620,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -737,8 +727,8 @@
         "appendNewline": false,
         "createDir": false,
         "overwriteFile": "false",
-        "x": 680,
-        "y": 800,
+        "x": 720,
+        "y": 980,
         "wires": []
     },
     {
@@ -746,8 +736,8 @@
         "type": "eq3-bluetooth",
         "z": "b4be1bf1.59bee8",
         "eq3device": "00:1A:22:0B:F9:D1 geht nicht",
-        "x": 390,
-        "y": 1120,
+        "x": 410,
+        "y": 1300,
         "wires": [
             [
                 "491e4354.a6951c"
@@ -766,8 +756,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 140,
-        "y": 1120,
+        "x": 160,
+        "y": 1300,
         "wires": [
             [
                 "5194d21d.eeebfc"
@@ -784,18 +774,18 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 630,
-        "y": 1120,
+        "x": 670,
+        "y": 1300,
         "wires": []
     },
     {
         "id": "24b8d2f0.19013e",
         "type": "comment",
         "z": "b4be1bf1.59bee8",
-        "name": "es gibt auch einen fertigen EQ3-Node, aber der geht nicht",
+        "name": "es gibt auch einen fertigen EQ3-Node, habe ich nicht zum Laufen gebracht",
         "info": "",
-        "x": 210,
-        "y": 1080,
+        "x": 270,
+        "y": 1260,
         "wires": []
     },
     {
@@ -820,8 +810,8 @@
         "offvalueType": "bool",
         "officon": "",
         "offcolor": "",
-        "x": 210,
-        "y": 1240,
+        "x": 290,
+        "y": 1400,
         "wires": [
             [
                 "dd055b72.14ef58",
@@ -839,8 +829,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 420,
-        "y": 1240,
+        "x": 500,
+        "y": 1400,
         "wires": []
     },
     {
@@ -850,7 +840,7 @@
         "name": "dashboard-Grafik-Oberfläche, aufzurufen als http://....:1880/ui/",
         "info": "",
         "x": 220,
-        "y": 1200,
+        "y": 1360,
         "wires": []
     },
     {
@@ -875,8 +865,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 440,
-        "y": 1320,
+        "x": 520,
+        "y": 1480,
         "wires": [
             [
                 "c829009c.aa7f9",
@@ -905,7 +895,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 1020,
-        "y": 220,
+        "y": 300,
         "wires": [
             [
                 "8f396262.ca3c4"
@@ -924,7 +914,7 @@
         "template": "disconnect 00:1A:22:0B:F9:D1",
         "output": "str",
         "x": 1190,
-        "y": 220,
+        "y": 300,
         "wires": [
             [
                 "8bfd293.995bfd8"
@@ -940,7 +930,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 1315,
-        "y": 260,
+        "y": 340,
         "wires": []
     },
     {
@@ -953,8 +943,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 680,
-        "y": 1320,
+        "x": 760,
+        "y": 1480,
         "wires": []
     },
     {
@@ -969,8 +959,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 220,
-        "y": 1320,
+        "x": 300,
+        "y": 1480,
         "wires": [
             [
                 "cba64e78.021aa"
@@ -989,8 +979,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 220,
-        "y": 1360,
+        "x": 300,
+        "y": 1520,
         "wires": [
             [
                 "cba64e78.021aa"
@@ -1009,7 +999,7 @@
         "template": "connect 00:1A:22:0B:F9:D1",
         "output": "str",
         "x": 440,
-        "y": 320,
+        "y": 400,
         "wires": [
             [
                 "df1f6a8.b81a898",
@@ -1033,7 +1023,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 640,
-        "y": 320,
+        "y": 400,
         "wires": [
             [
                 "ec48e44a.11e598"
@@ -1052,7 +1042,7 @@
         "template": "char-write-req 0411 4040",
         "output": "str",
         "x": 830,
-        "y": 320,
+        "y": 400,
         "wires": [
             [
                 "15f994de.d25bdb",
@@ -1076,7 +1066,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 1020,
-        "y": 320,
+        "y": 400,
         "wires": [
             [
                 "308587a7.c629d8"
@@ -1095,7 +1085,7 @@
         "template": "disconnect 00:1A:22:0B:F9:D1",
         "output": "str",
         "x": 1530,
-        "y": 320,
+        "y": 400,
         "wires": [
             [
                 "3a70e828.eb3488"
@@ -1111,7 +1101,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 1675,
-        "y": 360,
+        "y": 440,
         "wires": []
     },
     {
@@ -1123,7 +1113,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 975,
-        "y": 360,
+        "y": 440,
         "wires": []
     },
     {
@@ -1135,7 +1125,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 595,
-        "y": 360,
+        "y": 440,
         "wires": []
     },
     {
@@ -1150,7 +1140,7 @@
         "template": "char-write-req 0411 411d",
         "output": "str",
         "x": 1170,
-        "y": 320,
+        "y": 400,
         "wires": [
             [
                 "617d12c.da3adec",
@@ -1167,7 +1157,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 1315,
-        "y": 360,
+        "y": 440,
         "wires": []
     },
     {
@@ -1186,7 +1176,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 1360,
-        "y": 320,
+        "y": 400,
         "wires": [
             [
                 "b6b98351.495a"
@@ -1208,8 +1198,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 310,
-        "y": 1280,
+        "x": 390,
+        "y": 1440,
         "wires": [
             [
                 "cba64e78.021aa"
@@ -1228,8 +1218,8 @@
         "label": "(mehrere aufeinanderfolgende switch werden in 40-Sekunden-Intervallen weitergesendet, damit nichts durcheinanderkommt)",
         "format": "{{msg.payload}}",
         "layout": "row-left",
-        "x": 580,
-        "y": 1400,
+        "x": 510,
+        "y": 1560,
         "wires": []
     },
     {
@@ -1242,7 +1232,7 @@
             "541fd22c.97427c"
         ],
         "x": 315,
-        "y": 320,
+        "y": 400,
         "wires": [
             [
                 "99cbd66.56d1628"
@@ -1257,8 +1247,8 @@
         "links": [
             "99bf6a33.675b68"
         ],
-        "x": 585,
-        "y": 1340,
+        "x": 665,
+        "y": 1500,
         "wires": []
     },
     {
@@ -1268,7 +1258,7 @@
         "name": "Schaltprogramm \"Heizung aus\"",
         "info": "",
         "x": 130,
-        "y": 320,
+        "y": 400,
         "wires": []
     },
     {
@@ -1280,8 +1270,8 @@
             "6384e70d.a8f688",
             "84ff3fc9.6fe5f"
         ],
-        "x": 1515,
-        "y": 220,
+        "x": 2235,
+        "y": 260,
         "wires": []
     },
     {
@@ -1294,7 +1284,7 @@
             "7c0b40fb.3bb4d"
         ],
         "x": 315,
-        "y": 220,
+        "y": 300,
         "wires": [
             [
                 "9c3e623c.ddd2d"
@@ -1310,8 +1300,8 @@
             "6384e70d.a8f688",
             "84ff3fc9.6fe5f"
         ],
-        "x": 585,
-        "y": 1300,
+        "x": 665,
+        "y": 1460,
         "wires": []
     },
     {
@@ -1321,7 +1311,7 @@
         "name": "Schaltprogramm \"Heizung an\"",
         "info": "",
         "x": 130,
-        "y": 220,
+        "y": 300,
         "wires": []
     },
     {
@@ -1337,7 +1327,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 270,
-        "y": 360,
+        "y": 440,
         "wires": [
             [
                 "99cbd66.56d1628"
@@ -1351,7 +1341,7 @@
         "name": "https://github.com/OpaStefanVogel/HEIZUNGSPI.git",
         "info": "",
         "x": 190,
-        "y": 1720,
+        "y": 1880,
         "wires": []
     },
     {
@@ -1369,8 +1359,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 1160,
-        "y": 120,
+        "x": 1800,
+        "y": 100,
         "wires": [
             [
                 "1b4d0fb0.2e75a",
@@ -1385,7 +1375,7 @@
         "name": "Restart wenn gatttool sich verheddert hat",
         "info": "",
         "x": 780,
-        "y": 900,
+        "y": 1060,
         "wires": []
     },
     {
@@ -1395,7 +1385,7 @@
         "name": "← diese oder irgendeine andere Eingabe verhunzt das Datum am Thermostat",
         "info": "",
         "x": 880,
-        "y": 500,
+        "y": 660,
         "wires": []
     },
     {
@@ -1407,7 +1397,7 @@
         "split": true,
         "filename": "logfile.txt",
         "x": 250,
-        "y": 960,
+        "y": 1120,
         "wires": [
             [
                 "124ab371.d2378d"
@@ -1425,7 +1415,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 470,
-        "y": 960,
+        "y": 1120,
         "wires": []
     },
     {
@@ -1435,7 +1425,7 @@
         "name": "zum Lautsprecher: \"neue_Email_da\"",
         "server": "94bc45e.4f5eeb8",
         "client": "",
-        "x": 690,
+        "x": 730,
         "y": 160,
         "wires": []
     },
@@ -1451,8 +1441,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 70,
-        "y": 1240,
+        "x": 150,
+        "y": 1400,
         "wires": [
             [
                 "4acbaae3.13eda4"
@@ -1471,8 +1461,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 70,
-        "y": 1280,
+        "x": 150,
+        "y": 1440,
         "wires": [
             [
                 "4acbaae3.13eda4"
@@ -1488,8 +1478,8 @@
         "secure": true,
         "name": "",
         "dname": "Re: Heizungsraspberrypi.",
-        "x": 2110,
-        "y": 120,
+        "x": 2670,
+        "y": 100,
         "wires": []
     },
     {
@@ -1502,8 +1492,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 1850,
-        "y": 160,
+        "x": 2410,
+        "y": 40,
         "wires": []
     },
     {
@@ -1514,8 +1504,8 @@
         "func": "var msgneu={};\nmsgneu.to=msg.from;\nmsgneu.topic=msg.topic;\nmsgneu.payload=\"automatisch erzeugte Email vom Heizungsraspberrypi\\n\\n\";\nvar notifications=global.get(\"notifications\");\nfor (var i=0;i<notifications.length;i++) {\n  msgneu.payload+=notifications[i]+\"\\n\";\n  }\nmsgneu.payload+=\"\\n\"+\"Antwort auf Email \"+msg.date;\nreturn msgneu;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 1650,
-        "y": 120,
+        "x": 2210,
+        "y": 100,
         "wires": [
             [
                 "210e765f.6d6f3a",
@@ -1532,8 +1522,8 @@
         "func": "var t=msg.payload;\nvar notifications=global.get(\"notifications\")||[];\nvar d=new Date();\nvar ind=t.indexOf(\"Notification\");\nvar tneu=d.toString()+\"  \"+t.slice(ind,ind+53);\nif (ind>-1) notifications.push(tneu);\nwhile (notifications.length>8) notifications.shift(t);\nglobal.set(\"notifications\",notifications);\nif (ind>-1) {\n  msg.payload=tneu;\n  return msg;\n  }",
         "outputs": 1,
         "noerr": 0,
-        "x": 600,
-        "y": 760,
+        "x": 590,
+        "y": 940,
         "wires": [
             [
                 "1f10c6ac.a03779"
@@ -1544,7 +1534,7 @@
         "id": "505caeb6.af31a",
         "type": "inject",
         "z": "b4be1bf1.59bee8",
-        "name": "",
+        "name": "Test Notifications.txt",
         "topic": "",
         "payload": " Notification Test 14,5 °C",
         "payloadType": "str",
@@ -1552,8 +1542,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 390,
-        "y": 760,
+        "x": 410,
+        "y": 940,
         "wires": [
             [
                 "ade4342e.019f58"
@@ -1569,8 +1559,8 @@
         "appendNewline": true,
         "createDir": false,
         "overwriteFile": "true",
-        "x": 1870,
-        "y": 200,
+        "x": 2430,
+        "y": 160,
         "wires": []
     },
     {
@@ -1588,8 +1578,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 1430,
-        "y": 120,
+        "x": 2050,
+        "y": 100,
         "wires": [
             [
                 "3a9dad2c.52b062"
@@ -1611,8 +1601,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 1850,
-        "y": 120,
+        "x": 2430,
+        "y": 100,
         "wires": [
             [
                 "31dbcae2.8db166"
@@ -1634,12 +1624,10 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": true,
-        "x": 400,
-        "y": 120,
+        "x": 440,
+        "y": 160,
         "wires": [
             [
-                "5efdc9ba.edab58",
-                "caa5e213.3605c",
                 "b9bd0cc7.b140f"
             ]
         ]
@@ -1650,8 +1638,8 @@
         "z": "b4be1bf1.59bee8",
         "name": "ab hier Email beantworten",
         "info": "",
-        "x": 1390,
-        "y": 80,
+        "x": 2090,
+        "y": 40,
         "wires": []
     },
     {
@@ -1662,8 +1650,8 @@
         "func": "msg=msg.payload;\nvar t=new Date();\nmsg.date=t.toString();\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 790,
-        "y": 20,
+        "x": 890,
+        "y": 60,
         "wires": [
             [
                 "4b46fce5.5091e4"
@@ -1679,8 +1667,8 @@
         "appendNewline": true,
         "createDir": false,
         "overwriteFile": "false",
-        "x": 800,
-        "y": 760,
+        "x": 740,
+        "y": 940,
         "wires": []
     },
     {
@@ -1692,8 +1680,8 @@
         "appendNewline": true,
         "createDir": false,
         "overwriteFile": "false",
-        "x": 380,
-        "y": 180,
+        "x": 960,
+        "y": 220,
         "wires": []
     },
     {
@@ -1704,8 +1692,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 390,
-        "y": 160,
+        "x": 750,
+        "y": 220,
         "wires": [
             [
                 "a7411384.8dcc1"
@@ -1716,12 +1704,12 @@
         "id": "9306fda7.f656e",
         "type": "function",
         "z": "b4be1bf1.59bee8",
-        "name": "Bei Fehlersuche speichern",
+        "name": "Bei Fehlersuche Email  speichern",
         "func": "var ret={};\nret.payload=msg;\nreturn ret;",
         "outputs": 1,
         "noerr": 0,
-        "x": 160,
-        "y": 160,
+        "x": 500,
+        "y": 220,
         "wires": [
             [
                 "34c15fc4.ae246"
@@ -1737,8 +1725,8 @@
         "format": "utf8",
         "chunk": false,
         "sendError": false,
-        "x": 1020,
-        "y": 20,
+        "x": 1380,
+        "y": 100,
         "wires": [
             [
                 "3d7654a9.8f369c",
@@ -1754,8 +1742,8 @@
         "func": "msg.payload2=msg.payload;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 950,
-        "y": 60,
+        "x": 1210,
+        "y": 100,
         "wires": [
             [
                 "c7d35f03.4c7f7"
@@ -1770,8 +1758,8 @@
         "func": "var schl=msg.payload.trim();\nif (msg.payload2.indexOf(schl)==0) {\n  msg.payload=msg.payload2.slice(schl.length).trim().toLowerCase();\n  return msg;\n  }\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 1190,
-        "y": 60,
+        "x": 1610,
+        "y": 100,
         "wires": [
             [
                 "4997ff11.783a8",
@@ -1789,8 +1777,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 1270,
-        "y": 20,
+        "x": 1610,
+        "y": 40,
         "wires": []
     },
     {
@@ -1806,7 +1794,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 640,
+        "y": 820,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -1821,8 +1809,8 @@
         "func": "var p=msg.payload;\nvar msg1=null; if (p.slice(0,10)==\"heizung an\") {msg1={}; msg1.payload=\"Heizung an\"};\nvar msg2=null; if (p.slice(0,11)==\"heizung aus\") {msg2={}; msg2.payload=\"Heizung aus\"};\nvar msg3=null; if (p.slice(0,6)==\"status\") {msg3={}; msg3.payload=\"Status\"};\nvar msg4=null; if (p.slice(0,6)==\"reboot\") {msg4={}; msg4.payload=\"Reboot\"};\nreturn [msg1,msg2,msg3,msg4];\n",
         "outputs": 4,
         "noerr": 0,
-        "x": 1350,
-        "y": 180,
+        "x": 2010,
+        "y": 200,
         "wires": [
             [
                 "4d2540eb.95b27",
@@ -1852,8 +1840,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 1540,
-        "y": 160,
+        "x": 2290,
+        "y": 200,
         "wires": []
     },
     {
@@ -1866,8 +1854,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 1380,
-        "y": 60,
+        "x": 1830,
+        "y": 40,
         "wires": []
     },
     {
@@ -1876,8 +1864,8 @@
         "z": "b4be1bf1.59bee8",
         "name": "Bei neuer Email mit Topic \"Re: Heizungsraspberrypi.\" soll das Schaltprogramm \"Heizung an\" gestartet werden.",
         "info": "",
-        "x": 450,
-        "y": 60,
+        "x": 380,
+        "y": 20,
         "wires": []
     },
     {
@@ -1892,8 +1880,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 480,
-        "y": 20,
+        "x": 380,
+        "y": 60,
         "wires": [
             [
                 "738a67a0.e56a78"
@@ -1908,8 +1896,8 @@
         "links": [
             "99bf6a33.675b68"
         ],
-        "x": 1520,
-        "y": 260,
+        "x": 2235,
+        "y": 300,
         "wires": []
     },
     {
@@ -1923,8 +1911,8 @@
         "timer": "",
         "oldrc": false,
         "name": "sudo reboot",
-        "x": 1610,
-        "y": 200,
+        "x": 2290,
+        "y": 400,
         "wires": [
             [],
             [],
@@ -1942,12 +1930,12 @@
         "syntax": "mustache",
         "template": "connect 00:1A:22:0B:F9:D1",
         "output": "str",
-        "x": 449,
-        "y": 261,
+        "x": 440,
+        "y": 500,
         "wires": [
             [
                 "b3b29b59.858da8",
-                "6b3b465.cf738b8"
+                "be0b2506.caa358"
             ]
         ]
     },
@@ -1963,8 +1951,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 290,
-        "y": 292,
+        "x": 270,
+        "y": 540,
         "wires": [
             [
                 "b8196261.d45b1"
@@ -1986,8 +1974,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 659,
-        "y": 271,
+        "x": 640,
+        "y": 500,
         "wires": [
             [
                 "b5a46bdc.57e0f8"
@@ -2006,11 +1994,11 @@
         "template": "char-write-req 0411 8000",
         "output": "str",
         "x": 810,
-        "y": 260,
+        "y": 500,
         "wires": [
             [
                 "9d1f7fcd.53d0f",
-                "6ab53bd9.f82904"
+                "91fb8ad9.f13f88"
             ]
         ]
     },
@@ -2029,8 +2017,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 1045,
-        "y": 268,
+        "x": 1020,
+        "y": 500,
         "wires": [
             [
                 "407ee94c.6a6368"
@@ -2048,11 +2036,11 @@
         "syntax": "mustache",
         "template": "disconnect 00:1A:22:0B:F9:D1",
         "output": "str",
-        "x": 1205,
-        "y": 265,
+        "x": 1190,
+        "y": 500,
         "wires": [
             [
-                "8bfd293.995bfd8"
+                "c8561e10.6c68"
             ]
         ]
     },
@@ -2065,7 +2053,7 @@
             "c15d35b3.ab5b58"
         ],
         "x": 315,
-        "y": 240,
+        "y": 500,
         "wires": [
             [
                 "b8196261.d45b1"
@@ -2080,8 +2068,107 @@
         "links": [
             "c5008e81.a5d15"
         ],
-        "x": 1455,
-        "y": 260,
+        "x": 2235,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "1d751aca.ad7f45",
+        "type": "delay",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "x": 740,
+        "y": 100,
+        "wires": [
+            [
+                "de502380.c110b"
+            ]
+        ]
+    },
+    {
+        "id": "f5e2d918.351d38",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 2020,
+        "y": 400,
+        "wires": [
+            [
+                "8bbc7a28.c85628"
+            ]
+        ]
+    },
+    {
+        "id": "be0b2506.caa358",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "zu gatttool schicken",
+        "links": [
+            "1fd93aab.4ddaa5"
+        ],
+        "x": 595,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "91fb8ad9.f13f88",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "zu gatttool schicken",
+        "links": [
+            "1fd93aab.4ddaa5"
+        ],
+        "x": 975,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "c8561e10.6c68",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "zu gatttool schicken",
+        "links": [
+            "1fd93aab.4ddaa5"
+        ],
+        "x": 1315,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "d917e84c.b6c9f8",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "Schaltprogramm \"Status lesen\"",
+        "info": "",
+        "x": 130,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "92245a34.f3b908",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "Solltemperatur 22,5° einstellen",
+        "info": "",
+        "x": 190,
+        "y": 820,
         "wires": []
     }
 ]
