@@ -1252,7 +1252,7 @@
             "6384e70d.a8f688",
             "84ff3fc9.6fe5f"
         ],
-        "x": 2535,
+        "x": 3535,
         "y": 260,
         "wires": []
     },
@@ -1341,7 +1341,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 2060,
+        "x": 3060,
         "y": 100,
         "wires": [
             [
@@ -1461,7 +1461,7 @@
         "secure": true,
         "name": "",
         "dname": "Re: Heizungsraspberrypi.",
-        "x": 3030,
+        "x": 4030,
         "y": 100,
         "wires": []
     },
@@ -1475,7 +1475,7 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 2790,
+        "x": 3790,
         "y": 40,
         "wires": []
     },
@@ -1484,10 +1484,10 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "msg.to=msg.from ...",
-        "func": "var msgneu={};\nmsgneu.to=msg.from;\nmsgneu.topic=msg.topic;\nmsgneu.payload=\"automatisch erzeugte Email vom Heizungsraspberrypi\\n\\n\";\nvar notifications=global.get(\"notifications\");\nfor (var i=0;i<notifications.length;i++) {\n  var nt=notifications[i];\n  msgneu.payload+=nt+\" (\";\n  if (nt.slice(-8,-6)==\"00\") msgneu.payload+=\"auto \";\n  if (nt.slice(-8,-6)==\"01\") msgneu.payload+=\"manu \";\n  msgneu.payload+=eval(\"0x\"+nt.slice(-2))/2+\" °C)\\n\";\n  }\nmsgneu.payload+=\"\\n\"+\"Antwort auf Email \"+msg.date;\nreturn msgneu;\n",
+        "func": "var msgneu={};\nmsgneu.to=msg.from;\nmsgneu.topic=msg.topic;\nmsgneu.payload=\"automatisch erzeugte Email vom Heizungsraspberrypi\\n\\n\";\nvar notifications=global.get(\"notifications\");\nfor (var i=0;i<notifications.length;i++) {\n  var nt=notifications[i];\n  msgneu.payload+=nt+\" (\";\n  if (nt.slice(-10,-9)==\"0\") msgneu.payload+=\"auto \";\n  if (nt.slice(-10,-9)==\"1\") msgneu.payload+=\"manu \";\n  msgneu.payload+=eval(\"0x\"+nt.slice(-2))/2+\" °C)\\n\";\n  }\nmsgneu.payload+=\"\\n\"+\"Antwort auf Email \"+msg.date;\nreturn msgneu;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 2560,
+        "x": 3560,
         "y": 100,
         "wires": [
             [
@@ -1542,7 +1542,7 @@
         "appendNewline": true,
         "createDir": false,
         "overwriteFile": "true",
-        "x": 2810,
+        "x": 3810,
         "y": 160,
         "wires": []
     },
@@ -1561,7 +1561,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 2340,
+        "x": 3340,
         "y": 100,
         "wires": [
             [
@@ -1584,7 +1584,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 2800,
+        "x": 3800,
         "y": 100,
         "wires": [
             [
@@ -1621,8 +1621,8 @@
         "z": "b4be1bf1.59bee8",
         "name": "ab hier Email beantworten",
         "info": "",
-        "x": 2390,
-        "y": 40,
+        "x": 3390,
+        "y": 60,
         "wires": []
     },
     {
@@ -1633,7 +1633,7 @@
         "func": "msg=msg.payload;\nvar t=new Date();\nmsg.date=t.toString();\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 930,
+        "x": 810,
         "y": 60,
         "wires": [
             [
@@ -1704,11 +1704,11 @@
         "type": "file in",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "filename": "Schluessel.txt",
+        "filename": "aus Schluessel.txt Schluessel holen",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
-        "x": 1100,
+        "x": 1390,
         "y": 100,
         "wires": [
             [
@@ -1721,11 +1721,11 @@
         "id": "4b46fce5.5091e4",
         "type": "function",
         "z": "b4be1bf1.59bee8",
-        "name": "msg.payload2=msg.payload;",
+        "name": "msg.payload merken",
         "func": "msg.payload2=msg.payload;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 840,
+        "x": 1040,
         "y": 100,
         "wires": [
             [
@@ -1737,17 +1737,16 @@
         "id": "3d7654a9.8f369c",
         "type": "function",
         "z": "b4be1bf1.59bee8",
-        "name": "msg=msg2...ohne dem Schlüssel",
-        "func": "var schl=msg.payload.trim();\nif (msg.payload2.indexOf(schl)==0) {\n  msg.payload=msg.payload2.slice(schl.length).trim().toLowerCase()+\" Status wenn nichts anderes angegeben ist.\";\n  return msg;\n  }\n",
+        "name": "msg.payload ohne dem Schlüssel",
+        "func": "var schl=msg.payload.trim();\nvar schl_length=schl.length;\nif (msg.payload2.indexOf(schl)==0) {\n  msg.payload=msg.payload2.slice(schl_length,schl_length+80).trim().toLowerCase()+\" Status wenn nichts anderes angegeben ist.\";\n  return msg;\n  }\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 1460,
+        "x": 1780,
         "y": 100,
         "wires": [
             [
                 "7d3bd291.5d758c",
-                "e912908f.b6c66",
-                "9b7a0e48.15698"
+                "e912908f.b6c66"
             ]
         ]
     },
@@ -1761,7 +1760,7 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 1330,
+        "x": 1690,
         "y": 40,
         "wires": []
     },
@@ -1793,7 +1792,7 @@
         "func": "var p=msg.payload;\nvar msg1=null; if (p.slice(0,10)==\"heizung an\") {msg1={}; msg1.payload=\"Heizung an\"};\nvar msg2=null; if (p.slice(0,11)==\"heizung aus\") {msg2={}; msg2.payload=\"Heizung aus\"};\nvar msg3=null; if (p.slice(0,6)==\"status\") {msg3={}; msg3.payload=\"Status\"};\nvar msg3=null; if (p.slice(0,5)==\"viele\") {msg3={}; msg3.payload=\"Status\"};\nvar msg4=null; if (p.slice(0,6)==\"reboot\") {msg4={}; msg4.payload=\"Reboot\"};\nreturn [msg1,msg2,msg3,msg4];\n",
         "outputs": 4,
         "noerr": 0,
-        "x": 2330,
+        "x": 3330,
         "y": 220,
         "wires": [
             [
@@ -1824,7 +1823,7 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 2590,
+        "x": 3590,
         "y": 200,
         "wires": []
     },
@@ -1838,7 +1837,7 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 1750,
+        "x": 2070,
         "y": 40,
         "wires": []
     },
@@ -1858,7 +1857,7 @@
         "z": "b4be1bf1.59bee8",
         "name": "Test Email (aktueller Schlüssel muss vor Verwendung noch eingefügt werden)",
         "topic": "",
-        "payload": "{\"payload\":\"Birnbaum Heizung an Also bitte nochmal Heizung anschalten.\\n\\nViele Grüße\\n\\nBeate\\n\\nAm 17.02.2018 um 13:45 schrieb Stefan Vogel:\\n> Ach nee, das kann man einstellen, ob die abgerufene Email als gelesen > markiert werden soll. Beim Heizungsraspberrypi habe ich das neu > angelegt und da ist das Anfangseinstellung. Habe ich jetzt sçhnell > umgestellt, bitte bei Gelegenheit noch ein Test, dann müsste im > debug-Tab einmalig die Heizung auf \\\"Heizung ein\\\" gestellt werden, im > Lautsprecher soll aber alle 5 min \\\"Email da\\\" zu hören sein, falls ich > zwischendurch weg bin.\\n>\\n> Am 17.02.2018 13:39 schrieb \\\"Stefan Vogel\\\" > <backebackekuchen16@gmail.com <mailto:backebackekuchen16@gmail.com>>:\\n>\\n>     Heizung ist an und Lautsprecher geht auch. Was mir im Moment noch\\n>     nicht klar ist, warum danach die Email als gelesen markiert ist.\\n>     Früher war es mal so, daß die Email trotz Abfrage ungelesen bleibt\\n>     und deshalb die Durchsage solange wiederholt wird, bis die Email\\n>     im Emailprogramm gelesen ist. Da war es ...\",\"topic\":\"Re: Heizungsraspberrypi.\",\"date\":\"2018-02-17T12:48:35.000Z\",\"Test-Email\":\"true\",\"header\":{\"delivered-to\":\"backebackekuchen16@gmail.com\",\"received\":[\"by 10.12.129.241 with SMTP id 46csp1709545qve; Sat, 17 Feb 2018 04:48:40 -0800 (PST)\",\"from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41]) by mx.google.com with SMTPS id 44sor7384314wrv.36.2018.02.17.04.48.39 for <backebackekuchen16@gmail.com> (Google Transport Security); Sat, 17 Feb 2018 04:48:40 -0800 (PST)\",\"from [192.168.1.58] (p578c5fe3.dip0.t-ipconnect.de. [87.140.95.227]) by smtp.gmail.com with ESMTPSA id 10sm13889551wmj.19.2018.02.17.04.48.37 for <backebackekuchen16@gmail.com> (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128); Sat, 17 Feb 2018 04:48:38 -0800 (PST)\"],\"x-received\":[\"by 10.28.194.2 with SMTP id s2mr6901721wmf.55.1518871720261; Sat, 17 Feb 2018 04:48:40 -0800 (PST)\",\"by 10.223.196.129 with SMTP id m1mr7967315wrf.213.1518871719414; Sat, 17 Feb 2018 04:48:39 -0800 (PST)\"],\"arc-seal\":\"i=1; a=rsa-sha256; t=1518871720; cv=none; d=google.com; s=arc-20160816; b=fP2nc5cFceRE6kfO7WWMQW8M5DM1SWR8AZrcwra1TufHuZGvmdyCYVuClyo2fuOw2i cTSpyqFuoi5MjYfCfSPVX+8F1pLs+GDLYQVhlcxOpX6atRY8TUCRWNQ67Yg3h2advZn1 xBhVkEYIJO+hZ1YMFln/BALhbq+T9vvIDYy5oCs2Ssw4zeyVl5UPJGFkgFaLTwqQZ8Zh WSoxelhzj3tmPC7WgKH2kn9AqwZTqfOHau9k/LaHX7/Cx5ON9e6NtsQbe7nOlBFmLzCX IQNzU9NjTJiIcV95HCY0Y7wf/t5HbvhNlLCZr1Iw6PN3YxmUQc2Rj3xt7hTSkIf8oZng SE5A==\",\"arc-message-signature\":\"i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816; h=content-language:in-reply-to:mime-version:user-agent:date :message-id:from:references:to:subject:dkim-signature :arc-authentication-results; bh=KZeMUnIfi7r7Oe4ya9Ybe05qhBvH81IPssRj+RLCW4A=; b=S6Q5+hz8l/nVDBZu18BV+MDfA3WJVv8+pFtLn+9Qg+l/8+WGaulJq2m8x4+rmjOUAr TS0tpWybEYm3CJSZQXvsMSM/U9PvlA8m4YvvHKR/cpLtpF10HEzVW/APAhAj6WpG5bDc ch0BED/8tESukkB2+q+NgNQArEgaOCoYagW9rbVLb16EeOUMf6BSRJ0qjDUKZmLIPOBC 5QyGZthag79bCojOorzZDrNp4c/kFdD6sE7EzSBnPRRukFMElBqYoGY+NeMh8DknA2py wbrV1fLP2lzNznlLD8qIVMPAvuqUxtwWEW/KKPj9X0Bu2qtuAAIe10fJ+Q9XJ+NoMSRb V7Zw==\",\"arc-authentication-results\":\"i=1; mx.google.com; dkim=pass header.i=@gmail.com header.s=20161025 header.b=ktMs+j5e; spf=pass (google.com: domain of alb6116@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=alb6116@gmail.com; dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com\",\"return-path\":[\"<alb6116@gmail.com>\",\"<alb6116@gmail.com>\"],\"received-spf\":\"pass (google.com: domain of alb6116@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;\",\"authentication-results\":\"mx.google.com; dkim=pass header.i=@gmail.com header.s=20161025 header.b=ktMs+j5e; spf=pass (google.com: domain of alb6116@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=alb6116@gmail.com; dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com\",\"dkim-signature\":\"v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025; h=subject:to:references:from:message-id:date:user-agent:mime-version :in-reply-to:content-language; bh=KZeMUnIfi7r7Oe4ya9Ybe05qhBvH81IPssRj+RLCW4A=; b=ktMs+j5e6/y0r6hW8ofq0EXmDCdFRdbRSbqIFbfWUuswml/YHHFTZyjMRG5dPFeMGE JvC9mOUdbgwpRJlDnH4CvRhU0u27KgNMCpqsNs+0zCwu55TZxfWbcdZITUOZ3YTzEQdC hXCDXu7eR+uYSRfG8Jms+MvWGgBv9cHKf7F0YbfEuHkpyZFbNsfHIGbminUANvi6oNbt HczrHe6XA+XxKk18iq/DEfsEC8auFUceOhQvq3dxji26UTgWdQAsG4OQedgD6TIXlJ83 31jSo9cwEG47DL1mHlAjuYECgmNJn5Khp9gLVj78X1mFYknyGptahYGFtEf9qD8FfgPf vH1Q==\",\"x-google-dkim-signature\":\"v=1; a=rsa-sha256; c=relaxed/relaxed; d=1e100.net; s=20161025; h=x-gm-message-state:subject:to:references:from:message-id:date :user-agent:mime-version:in-reply-to:content-language; bh=KZeMUnIfi7r7Oe4ya9Ybe05qhBvH81IPssRj+RLCW4A=; b=ON43764z75Yh9h8mY3VxVog5GZ1GB68WDR2ZYPgsihQljPBNg3mvYO5yUnUHXXm+r1 TZnhGX9rKw2EyMoCOxOL97gvVsA2BshYMumB4Qj/19Fat/gn427+txLIkS01RET3nsWh SMzumTq7GE0LJPF1pQzKhUYA/oRe7xvx3XpLRB2eZIr+FeY6SB0fr2Ne/XmD9oOhQ0v+ 5B5f8rTgHoTtOJjdhNEV03Ox49O9tlDJHP7f2wjrzc5pG5M2bdfDVDY/nELcvSzQoZdF 1wv6Oq7NJ7EKzip6mVpMAJLeffxdAOyRtVWWK4KlmMt0gX11gMeNVpLmZSWlh513x88P TRgA==\",\"x-gm-message-state\":\"APf1xPB4Gydn5iuraL6EIPOeWBD9HHaDFblIu9EHZnXgv0Q2/btBGTDh CtJzXZfNNGMiCKWiUxYRdJ5q/+9f\",\"x-google-smtp-source\":\"AH8x224ZfVgq2kzGX+OoI7+81/PHN8edhr8tGCG0V64fbuO+Hx6d8Psy5k4PAjiw8D5Pxo2uzQtYww==\",\"subject\":\"Re: Heizungsraspberrypi.\",\"to\":\"Stefan Vogel <backebackekuchen16@gmail.com>\",\"references\":\"<CAOVUi5ac9-irwWNohYKTq+MOFzziuvbCDVpvy9oqWa3Q-PSAcg@mail.gmail.com> <CAOVUi5a0i1OhbPkVWS075QPOR20o3D_1oSV2JgX=x69oDeTr-Q@mail.gmail.com> <CAOVUi5ZZ=PD=vkMcd3WwDztykK5phozR9++C8A_FsfSqfz2w2A@mail.gmail.com> <CAOVUi5b-r5_Mamg8uc1ELj-gphdA1d6CaveKv1a7PTQvWyARiQ@mail.gmail.com> <45d67f86-8d1e-07b1-d10a-c01a8754f726@gmail.com> <CAOVUi5bu2_ThhZgTa15sLo0ZnvAKaOYCVTLfP2+6ajBDkQ9z9Q@mail.gmail.com> <5129d2cd-23b5-8a45-f96d-651cd481a259@gmail.com> <CAOVUi5YzU+1P07U4JUQFCRRm1hbSp8qw3iDiRSRS8+qDF_unvA@mail.gmail.com> <CAOVUi5Z1zskgjNNBGXBsBD0QDycYViqZty6RbPAgXUnRxDZp2A@mail.gmail.com> <CAOVUi5YStRDzcj9GgOiKjhO-LRav=6iS-PM9JobWXqTM6-JFow@mail.gmail.com> <62518eb2-7a8f-f593-0a39-1856607c8405@gmail.com> <CAOVUi5bWZNcuMmsANYfXfF8XhooKK+OcGuaeuXDcY7QmFi5yrA@mail.gmail.com> <040f5a29-53e9-3242-2528-9f79d2170e26@gmail.com> <CAOVUi5Ya2D4GdOnW9BjFbi3-2=D_vB7k1ZRCbDdUOj4SmKyEFQ@mail.gmail.com> <CAOVUi5bN=uwS00XibcP0e0GRqod-4ZDCuVb8_NQy8fqQsob0Pw@mail.gmail.com>\",\"from\":\"Beate Lang <alb6116@gmail.com>\",\"message-id\":\"<646e27ce-bb11-db0e-ca93-21f1728c46fe@gmail.com>\",\"date\":\"Sat, 17 Feb 2018 13:48:35 +0100\",\"user-agent\":\"Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Thunderbird/52.6.0\",\"mime-version\":\"1.0\",\"in-reply-to\":\"<CAOVUi5bN=uwS00XibcP0e0GRqod-4ZDCuVb8_NQy8fqQsob0Pw@mail.gmail.com>\",\"content-type\":\"multipart/alternative; boundary=\\\"------------D3C1AA8471C00039CE49E5E2\\\"\",\"content-language\":\"en-US\"},\"html\":\"<html>\\n  <head>\\n    <meta http-equiv=\\\"content-type\\\" content=\\\"text/html; charset=utf-8\\\" />\\n  </head>\\n  <body text=\\\"#000000\\\" bgcolor=\\\"#FFFFFF\\\">\\n    <div class=\\\"moz-cite-prefix\\\">Also bitte nochmal Heizung anschalten.<br>\\n      <br>\\n      Viele Grüße<br>\\n      <br>\\n      Beate<br>\\n      <br>\\n      Am 17.02.2018 um 13:45 schrieb Stefan Vogel:<br>\\n    </div>\\n    <blockquote type=\\\"cite\\\"\\ncite=\\\"mid:CAOVUi5bN=uwS00XibcP0e0GRqod-4ZDCuVb8_NQy8fqQsob0Pw@mail.gmail.com\\\">\\n      <div dir=\\\"auto\\\">Ach nee, das kann man einstellen, ob die\\n        abgerufene Email als gelesen markiert werden soll. Beim\\n        Heizungsraspberrypi habe ich das neu angelegt und da ist das\\n        Anfangseinstellung. Habe ich jetzt sçhnell umgestellt, bitte bei\\n        Gelegenheit noch ein Test, dann müsste im debug-Tab einmalig die\\n        Heizung auf \\\"Heizung ein\\\" gestellt werden, im Lautsprecher soll\\n        aber alle 5 min \\\"Email da\\\" zu hören sein, falls ich\\n        zwischendurch weg bin. </div>\\n      <div class=\\\"gmail_ex...\",\"from\":\"alb6116@gmail.com\",\"attachments\":[],\"_msgid\":\"b925388f.3f2e18\"}",
+        "payload": "{\"payload\":\"Schluessel Heizung an Also bitte nochmal Heizung anschalten.\\n\\nViele Grüße\\n\\nBeate\\n\\nAm 17.02.2018 um 13:45 schrieb Stefan Vogel:\\n> Ach nee, das kann man einstellen, ob die abgerufene Email als gelesen > markiert werden soll. Beim Heizungsraspberrypi habe ich das neu > angelegt und da ist das Anfangseinstellung. Habe ich jetzt sçhnell > umgestellt, bitte bei Gelegenheit noch ein Test, dann müsste im > debug-Tab einmalig die Heizung auf \\\"Heizung ein\\\" gestellt werden, im > Lautsprecher soll aber alle 5 min \\\"Email da\\\" zu hören sein, falls ich > zwischendurch weg bin.\\n>\\n> Am 17.02.2018 13:39 schrieb \\\"Stefan Vogel\\\" > <backebackekuchen16@gmail.com <mailto:backebackekuchen16@gmail.com>>:\\n>\\n>     Heizung ist an und Lautsprecher geht auch. Was mir im Moment noch\\n>     nicht klar ist, warum danach die Email als gelesen markiert ist.\\n>     Früher war es mal so, daß die Email trotz Abfrage ungelesen bleibt\\n>     und deshalb die Durchsage solange wiederholt wird, bis die Email\\n>     im Emailprogramm gelesen ist. Da war es ...\",\"topic\":\"Re: Heizungsraspberrypi.\",\"date\":\"2018-02-17T12:48:35.000Z\",\"Test-Email\":\"true\",\"header\":{\"delivered-to\":\"backebackekuchen16@gmail.com\",\"received\":[\"by 10.12.129.241 with SMTP id 46csp1709545qve; Sat, 17 Feb 2018 04:48:40 -0800 (PST)\",\"from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41]) by mx.google.com with SMTPS id 44sor7384314wrv.36.2018.02.17.04.48.39 for <backebackekuchen16@gmail.com> (Google Transport Security); Sat, 17 Feb 2018 04:48:40 -0800 (PST)\",\"from [192.168.1.58] (p578c5fe3.dip0.t-ipconnect.de. [87.140.95.227]) by smtp.gmail.com with ESMTPSA id 10sm13889551wmj.19.2018.02.17.04.48.37 for <backebackekuchen16@gmail.com> (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128); Sat, 17 Feb 2018 04:48:38 -0800 (PST)\"],\"x-received\":[\"by 10.28.194.2 with SMTP id s2mr6901721wmf.55.1518871720261; Sat, 17 Feb 2018 04:48:40 -0800 (PST)\",\"by 10.223.196.129 with SMTP id m1mr7967315wrf.213.1518871719414; Sat, 17 Feb 2018 04:48:39 -0800 (PST)\"],\"arc-seal\":\"i=1; a=rsa-sha256; t=1518871720; cv=none; d=google.com; s=arc-20160816; b=fP2nc5cFceRE6kfO7WWMQW8M5DM1SWR8AZrcwra1TufHuZGvmdyCYVuClyo2fuOw2i cTSpyqFuoi5MjYfCfSPVX+8F1pLs+GDLYQVhlcxOpX6atRY8TUCRWNQ67Yg3h2advZn1 xBhVkEYIJO+hZ1YMFln/BALhbq+T9vvIDYy5oCs2Ssw4zeyVl5UPJGFkgFaLTwqQZ8Zh WSoxelhzj3tmPC7WgKH2kn9AqwZTqfOHau9k/LaHX7/Cx5ON9e6NtsQbe7nOlBFmLzCX IQNzU9NjTJiIcV95HCY0Y7wf/t5HbvhNlLCZr1Iw6PN3YxmUQc2Rj3xt7hTSkIf8oZng SE5A==\",\"arc-message-signature\":\"i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816; h=content-language:in-reply-to:mime-version:user-agent:date :message-id:from:references:to:subject:dkim-signature :arc-authentication-results; bh=KZeMUnIfi7r7Oe4ya9Ybe05qhBvH81IPssRj+RLCW4A=; b=S6Q5+hz8l/nVDBZu18BV+MDfA3WJVv8+pFtLn+9Qg+l/8+WGaulJq2m8x4+rmjOUAr TS0tpWybEYm3CJSZQXvsMSM/U9PvlA8m4YvvHKR/cpLtpF10HEzVW/APAhAj6WpG5bDc ch0BED/8tESukkB2+q+NgNQArEgaOCoYagW9rbVLb16EeOUMf6BSRJ0qjDUKZmLIPOBC 5QyGZthag79bCojOorzZDrNp4c/kFdD6sE7EzSBnPRRukFMElBqYoGY+NeMh8DknA2py wbrV1fLP2lzNznlLD8qIVMPAvuqUxtwWEW/KKPj9X0Bu2qtuAAIe10fJ+Q9XJ+NoMSRb V7Zw==\",\"arc-authentication-results\":\"i=1; mx.google.com; dkim=pass header.i=@gmail.com header.s=20161025 header.b=ktMs+j5e; spf=pass (google.com: domain of alb6116@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=alb6116@gmail.com; dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com\",\"return-path\":[\"<alb6116@gmail.com>\",\"<alb6116@gmail.com>\"],\"received-spf\":\"pass (google.com: domain of alb6116@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;\",\"authentication-results\":\"mx.google.com; dkim=pass header.i=@gmail.com header.s=20161025 header.b=ktMs+j5e; spf=pass (google.com: domain of alb6116@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=alb6116@gmail.com; dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com\",\"dkim-signature\":\"v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025; h=subject:to:references:from:message-id:date:user-agent:mime-version :in-reply-to:content-language; bh=KZeMUnIfi7r7Oe4ya9Ybe05qhBvH81IPssRj+RLCW4A=; b=ktMs+j5e6/y0r6hW8ofq0EXmDCdFRdbRSbqIFbfWUuswml/YHHFTZyjMRG5dPFeMGE JvC9mOUdbgwpRJlDnH4CvRhU0u27KgNMCpqsNs+0zCwu55TZxfWbcdZITUOZ3YTzEQdC hXCDXu7eR+uYSRfG8Jms+MvWGgBv9cHKf7F0YbfEuHkpyZFbNsfHIGbminUANvi6oNbt HczrHe6XA+XxKk18iq/DEfsEC8auFUceOhQvq3dxji26UTgWdQAsG4OQedgD6TIXlJ83 31jSo9cwEG47DL1mHlAjuYECgmNJn5Khp9gLVj78X1mFYknyGptahYGFtEf9qD8FfgPf vH1Q==\",\"x-google-dkim-signature\":\"v=1; a=rsa-sha256; c=relaxed/relaxed; d=1e100.net; s=20161025; h=x-gm-message-state:subject:to:references:from:message-id:date :user-agent:mime-version:in-reply-to:content-language; bh=KZeMUnIfi7r7Oe4ya9Ybe05qhBvH81IPssRj+RLCW4A=; b=ON43764z75Yh9h8mY3VxVog5GZ1GB68WDR2ZYPgsihQljPBNg3mvYO5yUnUHXXm+r1 TZnhGX9rKw2EyMoCOxOL97gvVsA2BshYMumB4Qj/19Fat/gn427+txLIkS01RET3nsWh SMzumTq7GE0LJPF1pQzKhUYA/oRe7xvx3XpLRB2eZIr+FeY6SB0fr2Ne/XmD9oOhQ0v+ 5B5f8rTgHoTtOJjdhNEV03Ox49O9tlDJHP7f2wjrzc5pG5M2bdfDVDY/nELcvSzQoZdF 1wv6Oq7NJ7EKzip6mVpMAJLeffxdAOyRtVWWK4KlmMt0gX11gMeNVpLmZSWlh513x88P TRgA==\",\"x-gm-message-state\":\"APf1xPB4Gydn5iuraL6EIPOeWBD9HHaDFblIu9EHZnXgv0Q2/btBGTDh CtJzXZfNNGMiCKWiUxYRdJ5q/+9f\",\"x-google-smtp-source\":\"AH8x224ZfVgq2kzGX+OoI7+81/PHN8edhr8tGCG0V64fbuO+Hx6d8Psy5k4PAjiw8D5Pxo2uzQtYww==\",\"subject\":\"Re: Heizungsraspberrypi.\",\"to\":\"Stefan Vogel <backebackekuchen16@gmail.com>\",\"references\":\"<CAOVUi5ac9-irwWNohYKTq+MOFzziuvbCDVpvy9oqWa3Q-PSAcg@mail.gmail.com> <CAOVUi5a0i1OhbPkVWS075QPOR20o3D_1oSV2JgX=x69oDeTr-Q@mail.gmail.com> <CAOVUi5ZZ=PD=vkMcd3WwDztykK5phozR9++C8A_FsfSqfz2w2A@mail.gmail.com> <CAOVUi5b-r5_Mamg8uc1ELj-gphdA1d6CaveKv1a7PTQvWyARiQ@mail.gmail.com> <45d67f86-8d1e-07b1-d10a-c01a8754f726@gmail.com> <CAOVUi5bu2_ThhZgTa15sLo0ZnvAKaOYCVTLfP2+6ajBDkQ9z9Q@mail.gmail.com> <5129d2cd-23b5-8a45-f96d-651cd481a259@gmail.com> <CAOVUi5YzU+1P07U4JUQFCRRm1hbSp8qw3iDiRSRS8+qDF_unvA@mail.gmail.com> <CAOVUi5Z1zskgjNNBGXBsBD0QDycYViqZty6RbPAgXUnRxDZp2A@mail.gmail.com> <CAOVUi5YStRDzcj9GgOiKjhO-LRav=6iS-PM9JobWXqTM6-JFow@mail.gmail.com> <62518eb2-7a8f-f593-0a39-1856607c8405@gmail.com> <CAOVUi5bWZNcuMmsANYfXfF8XhooKK+OcGuaeuXDcY7QmFi5yrA@mail.gmail.com> <040f5a29-53e9-3242-2528-9f79d2170e26@gmail.com> <CAOVUi5Ya2D4GdOnW9BjFbi3-2=D_vB7k1ZRCbDdUOj4SmKyEFQ@mail.gmail.com> <CAOVUi5bN=uwS00XibcP0e0GRqod-4ZDCuVb8_NQy8fqQsob0Pw@mail.gmail.com>\",\"from\":\"Beate Lang <alb6116@gmail.com>\",\"message-id\":\"<646e27ce-bb11-db0e-ca93-21f1728c46fe@gmail.com>\",\"date\":\"Sat, 17 Feb 2018 13:48:35 +0100\",\"user-agent\":\"Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Thunderbird/52.6.0\",\"mime-version\":\"1.0\",\"in-reply-to\":\"<CAOVUi5bN=uwS00XibcP0e0GRqod-4ZDCuVb8_NQy8fqQsob0Pw@mail.gmail.com>\",\"content-type\":\"multipart/alternative; boundary=\\\"------------D3C1AA8471C00039CE49E5E2\\\"\",\"content-language\":\"en-US\"},\"html\":\"<html>\\n  <head>\\n    <meta http-equiv=\\\"content-type\\\" content=\\\"text/html; charset=utf-8\\\" />\\n  </head>\\n  <body text=\\\"#000000\\\" bgcolor=\\\"#FFFFFF\\\">\\n    <div class=\\\"moz-cite-prefix\\\">Also bitte nochmal Heizung anschalten.<br>\\n      <br>\\n      Viele Grüße<br>\\n      <br>\\n      Beate<br>\\n      <br>\\n      Am 17.02.2018 um 13:45 schrieb Stefan Vogel:<br>\\n    </div>\\n    <blockquote type=\\\"cite\\\"\\ncite=\\\"mid:CAOVUi5bN=uwS00XibcP0e0GRqod-4ZDCuVb8_NQy8fqQsob0Pw@mail.gmail.com\\\">\\n      <div dir=\\\"auto\\\">Ach nee, das kann man einstellen, ob die\\n        abgerufene Email als gelesen markiert werden soll. Beim\\n        Heizungsraspberrypi habe ich das neu angelegt und da ist das\\n        Anfangseinstellung. Habe ich jetzt sçhnell umgestellt, bitte bei\\n        Gelegenheit noch ein Test, dann müsste im debug-Tab einmalig die\\n        Heizung auf \\\"Heizung ein\\\" gestellt werden, im Lautsprecher soll\\n        aber alle 5 min \\\"Email da\\\" zu hören sein, falls ich\\n        zwischendurch weg bin. </div>\\n      <div class=\\\"gmail_ex...\",\"from\":\"alb6116@gmail.com\",\"attachments\":[],\"_msgid\":\"b925388f.3f2e18\"}",
         "payloadType": "json",
         "repeat": "",
         "crontab": "",
@@ -1880,7 +1879,7 @@
         "links": [
             "99bf6a33.675b68"
         ],
-        "x": 2535,
+        "x": 3535,
         "y": 300,
         "wires": []
     },
@@ -1895,7 +1894,7 @@
         "timer": "",
         "oldrc": false,
         "name": "sudo reboot",
-        "x": 2590,
+        "x": 3590,
         "y": 400,
         "wires": [
             [],
@@ -2052,7 +2051,7 @@
         "links": [
             "c5008e81.a5d15"
         ],
-        "x": 2535,
+        "x": 3535,
         "y": 340,
         "wires": []
     },
@@ -2068,7 +2067,7 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 2310,
+        "x": 3310,
         "y": 400,
         "wires": [
             [
@@ -2144,7 +2143,7 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 2360,
+        "x": 3360,
         "y": 140,
         "wires": [
             [
@@ -2167,7 +2166,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 2080,
+        "x": 3080,
         "y": 160,
         "wires": [
             [
@@ -2191,7 +2190,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 2080,
+        "x": 3080,
         "y": 220,
         "wires": [
             [
@@ -2205,7 +2204,7 @@
         "z": "b4be1bf1.59bee8",
         "name": "Heizung an",
         "info": "",
-        "x": 2650,
+        "x": 3650,
         "y": 260,
         "wires": []
     },
@@ -2215,7 +2214,7 @@
         "z": "b4be1bf1.59bee8",
         "name": "Heizung aus",
         "info": "",
-        "x": 2650,
+        "x": 3650,
         "y": 300,
         "wires": []
     },
@@ -2225,30 +2224,9 @@
         "z": "b4be1bf1.59bee8",
         "name": "Status",
         "info": "",
-        "x": 2630,
+        "x": 3630,
         "y": 340,
         "wires": []
-    },
-    {
-        "id": "e0514660.16fe58",
-        "type": "delay",
-        "z": "b4be1bf1.59bee8",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "minute",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": true,
-        "x": 1180,
-        "y": 20,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "eb0790dd.a58",
@@ -2259,9 +2237,9 @@
         "gap": "",
         "start": "",
         "inout": "out",
-        "property": "payload",
-        "x": 1970,
-        "y": 40,
+        "property": "date",
+        "x": 2850,
+        "y": 100,
         "wires": [
             [
                 "4997ff11.783a8"
@@ -2274,7 +2252,8 @@
         "z": "b4be1bf1.59bee8",
         "name": "zur Fehlersuche Email speichern",
         "links": [
-            "b405bf65.95768"
+            "b405bf65.95768",
+            "6a4464a6.ba70ac"
         ],
         "x": 260,
         "y": 220,
@@ -2285,29 +2264,19 @@
         ]
     },
     {
-        "id": "b405bf65.95768",
-        "type": "link out",
-        "z": "b4be1bf1.59bee8",
-        "name": "",
-        "links": [
-            "2eb6f940.8676f6"
-        ],
-        "x": 1875,
-        "y": 160,
-        "wires": []
-    },
-    {
         "id": "e912908f.b6c66",
         "type": "function",
         "z": "b4be1bf1.59bee8",
-        "name": "",
-        "func": "global.set(\"letzte_Email\",msg);\nreturn msg;",
+        "name": "aktuellste Email merken",
+        "func": "var letzte_Email=global.get(\"letzte_Email\")||{\"date\":\"\"};\nif (msg.date>letzte_Email.date) global.set(\"letzte_Email\",msg);\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 1710,
+        "x": 2090,
         "y": 100,
         "wires": [
-            []
+            [
+                "9b7a0e48.15698"
+            ]
         ]
     },
     {
@@ -2325,8 +2294,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 1720,
-        "y": 220,
+        "x": 2340,
+        "y": 100,
         "wires": [
             [
                 "7774d889.1bf8e8"
@@ -2337,15 +2306,14 @@
         "id": "7774d889.1bf8e8",
         "type": "function",
         "z": "b4be1bf1.59bee8",
-        "name": "",
+        "name": "aktuellste Email ausführen",
         "func": "msg=global.get(\"letzte_Email\");\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1850,
+        "x": 2580,
         "y": 100,
         "wires": [
             [
-                "b405bf65.95768",
                 "83b2a42b.a3e5e8",
                 "eb0790dd.a58"
             ]
@@ -2361,8 +2329,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 2000,
-        "y": 80,
+        "x": 2810,
+        "y": 140,
         "wires": []
     },
     {
@@ -2377,7 +2345,7 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 1560,
+        "x": 2320,
         "y": 40,
         "wires": [
             [
@@ -2397,7 +2365,7 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 1780,
+        "x": 2500,
         "y": 20,
         "wires": [
             [
@@ -2410,15 +2378,25 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "Reset be",
-        "func": "msg.reset=\"\";\nreturn msg;",
+        "func": "global.set(\"letzte_Email\",{\"date\":\"\"});\nmsg.reset=\"\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1930,
+        "x": 2650,
         "y": 20,
         "wires": [
             [
                 "eb0790dd.a58"
             ]
         ]
+    },
+    {
+        "id": "e40f444b.d40428",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "im Minutenabstand dreimal ausführen",
+        "info": "",
+        "x": 3170,
+        "y": 280,
+        "wires": []
     }
 ]
