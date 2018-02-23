@@ -353,3 +353,48 @@ git commit -a -m "flow umsortiert"
 git commit -a -m "bei Notifications auto und °C ergänzt"
 git pull
 git push
+cat Notifications.txt 
+screen -r
+cat Testemail.txt 
+git commit -a -m "bei mehreren ungelesenen Emails nur eine"
+cat Testemail.txt 
+git commit -a -m "bei mehreren ungelesenen Emails die aktuellste" --amend
+git push
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+rm empfangeneEmail.txt 
+cat empfangeneEmail.txt 
+cat Notifications.txt 
+node-red-log
+gatttool -I

@@ -1345,9 +1345,9 @@
         "y": 100,
         "wires": [
             [
-                "1b4d0fb0.2e75a",
                 "4a48a70b.1ac828",
-                "294efba9.9c6544"
+                "294efba9.9c6544",
+                "1b4d0fb0.2e75a"
             ]
         ]
     },
@@ -1703,8 +1703,8 @@
         "id": "c7d35f03.4c7f7",
         "type": "file in",
         "z": "b4be1bf1.59bee8",
-        "name": "",
-        "filename": "aus Schluessel.txt Schluessel holen",
+        "name": "aus Schluessel.txt Schluessel holen",
+        "filename": "Schluessel.txt",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
@@ -1738,7 +1738,7 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "msg.payload ohne dem Schlüssel",
-        "func": "var schl=msg.payload.trim();\nvar schl_length=schl.length;\nif (msg.payload2.indexOf(schl)==0) {\n  msg.payload=msg.payload2.slice(schl_length,schl_length+80).trim().toLowerCase()+\" Status wenn nichts anderes angegeben ist.\";\n  return msg;\n  }\n",
+        "func": "var schl=msg.payload.trim();\nvar schl_length=schl.length;\nif (msg.payload2.indexOf(schl)==0) {\n  msg.payload=msg.payload2.slice(schl_length,schl_length+80).trim().toLowerCase()+\" Status wenn nichts anderes angegeben ist. \"+msg.date;\n  return msg;\n  }\n",
         "outputs": 1,
         "noerr": 0,
         "x": 1780,
@@ -2229,24 +2229,6 @@
         "wires": []
     },
     {
-        "id": "eb0790dd.a58",
-        "type": "rbe",
-        "z": "b4be1bf1.59bee8",
-        "name": "nur einmal je Email",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "property": "date",
-        "x": 2850,
-        "y": 100,
-        "wires": [
-            [
-                "4997ff11.783a8"
-            ]
-        ]
-    },
-    {
         "id": "2eb6f940.8676f6",
         "type": "link in",
         "z": "b4be1bf1.59bee8",
@@ -2307,7 +2289,7 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "aktuellste Email ausführen",
-        "func": "msg=global.get(\"letzte_Email\");\nreturn msg;",
+        "func": "msg=global.get(\"letzte_Email\");\nnode.status({text:msg.date+\" \"});\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 2580,
@@ -2315,7 +2297,7 @@
         "wires": [
             [
                 "83b2a42b.a3e5e8",
-                "eb0790dd.a58"
+                "5f3a1b46.707914"
             ]
         ]
     },
@@ -2324,7 +2306,7 @@
         "type": "debug",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2345,8 +2327,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 2320,
-        "y": 40,
+        "x": 2340,
+        "y": 60,
         "wires": [
             [
                 "7774d889.1bf8e8"
@@ -2365,7 +2347,7 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 2500,
+        "x": 2340,
         "y": 20,
         "wires": [
             [
@@ -2377,15 +2359,15 @@
         "id": "dae16f37.2f5ac",
         "type": "function",
         "z": "b4be1bf1.59bee8",
-        "name": "Reset be",
-        "func": "global.set(\"letzte_Email\",{\"date\":\"\"});\nmsg.reset=\"\";\nreturn msg;",
+        "name": "aktuellste Email löschen",
+        "func": "global.set(\"letzte_Email\",{\"date\":\"\"});\nmsg.reset=true;\nmsg.date=\"\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 2650,
+        "x": 2570,
         "y": 20,
         "wires": [
             [
-                "eb0790dd.a58"
+                "5f3a1b46.707914"
             ]
         ]
     },
@@ -2398,5 +2380,38 @@
         "x": 3170,
         "y": 280,
         "wires": []
+    },
+    {
+        "id": "8bb4f97a.839158",
+        "type": "debug",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 3060,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "5f3a1b46.707914",
+        "type": "rbe",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 2830,
+        "y": 80,
+        "wires": [
+            [
+                "4997ff11.783a8",
+                "8bb4f97a.839158"
+            ]
+        ]
     }
 ]
