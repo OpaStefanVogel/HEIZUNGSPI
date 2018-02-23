@@ -348,3 +348,8 @@ screen -r
 git commit -a -m "Verzweigung geht mit Testmail"
 git push
 screen -r
+ls
+git commit -a -m "flow umsortiert"
+git commit -a -m "bei Notifications auto und °C ergänzt"
+git pull
+git push
