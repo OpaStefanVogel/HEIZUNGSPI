@@ -398,3 +398,12 @@ cat empfangeneEmail.txt
 cat Notifications.txt 
 node-red-log
 gatttool -I
+screen -r
+git commit -a -m "node rbe wieder mit msg.payload statt msg.date"
+git push
+cat Testemail.txt 
+cat empfangeneEmail.txt 
+cat Testemail.txt 
+git commit -a -m "hat funktioniert"
+git commit -a -m "so hat es funktioniert" --amend
+git push
