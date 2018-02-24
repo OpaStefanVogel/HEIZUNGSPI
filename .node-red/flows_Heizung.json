@@ -12,21 +12,21 @@
         "in": [
             {
                 "x": 100,
-                "y": 120,
+                "y": 60,
                 "wires": [
                     {
-                        "id": "9c3e623c.ddd2d"
+                        "id": "2687bd98.c1a642"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 560,
-                "y": 280,
+                "x": 540,
+                "y": 380,
                 "wires": [
                     {
-                        "id": "82bfe7de.620778",
+                        "id": "b403269.d6cb8d8",
                         "port": 0
                     }
                 ]
@@ -174,12 +174,14 @@
         "id": "e3afe0ef.4923f",
         "type": "debug",
         "z": "b4be1bf1.59bee8",
-        "name": "",
+        "name": "stdout gatttool",
         "active": true,
-        "console": "false",
-        "complete": "false",
-        "x": 730,
-        "y": 1020,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1100,
+        "y": 1180,
         "wires": []
     },
     {
@@ -193,13 +195,12 @@
         "op": "string",
         "name": "gatttool -I",
         "x": 400,
-        "y": 1000,
+        "y": 1180,
         "wires": [
             [
-                "e3afe0ef.4923f",
-                "d671fd42.3caae",
                 "2f7cfd7b.d33812",
-                "ade4342e.019f58"
+                "ade4342e.019f58",
+                "2fe96195.2ebc5e"
             ],
             [
                 "e3afe0ef.4923f"
@@ -222,7 +223,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 480,
-        "y": 660,
+        "y": 840,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -242,7 +243,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 510,
-        "y": 900,
+        "y": 1080,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -262,7 +263,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 780,
+        "y": 960,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -282,7 +283,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 740,
+        "y": 920,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -302,7 +303,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 510,
-        "y": 860,
+        "y": 1040,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -340,13 +341,13 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "connect 00:1A:22:0B:F9:D1",
+        "template": "connect 00:1A:22:0B:F9:D1 #erster Versuch",
         "output": "str",
         "x": 220,
         "y": 120,
         "wires": [
             [
-                "82ccc39.71c2a4"
+                "2716e79b.30a238"
             ]
         ]
     },
@@ -367,29 +368,6 @@
             [
                 "6ab53bd9.f82904",
                 "62b4067a.ee3208"
-            ]
-        ]
-    },
-    {
-        "id": "82ccc39.71c2a4",
-        "type": "delay",
-        "z": "f4669750.411278",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "x": 440,
-        "y": 120,
-        "wires": [
-            [
-                "6486ab8a.fd2a94"
             ]
         ]
     },
@@ -447,13 +425,16 @@
             "be0b2506.caa358",
             "91fb8ad9.f13f88",
             "c8561e10.6c68",
-            "e96c87d8.d17c58"
+            "e96c87d8.d17c58",
+            "ee399061.c5dc9",
+            "15048293.c5635d",
+            "dfab2eeb.b0ad3"
         ],
-        "x": 255,
-        "y": 1000,
+        "x": 115,
+        "y": 1180,
         "wires": [
             [
-                "97d3725d.6888b"
+                "279c854f.2ba20a"
             ]
         ]
     },
@@ -476,7 +457,7 @@
         "name": "Testeingaben laut https://github.com/Heckie75/eQ-3-radiador-thermostat/blob/master/eQ-3-radiator-thermostat-api.m",
         "info": "",
         "x": 400,
-        "y": 580,
+        "y": 760,
         "wires": []
     },
     {
@@ -488,7 +469,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 788.333330154419,
-        "y": 720,
+        "y": 900,
         "wires": []
     },
     {
@@ -498,7 +479,7 @@
         "name": "hier wird das \"gatttool -I\" ausgeführt",
         "info": "",
         "x": 140,
-        "y": 940,
+        "y": 1120,
         "wires": []
     },
     {
@@ -508,7 +489,7 @@
         "name": "verbinden (dauert ca. 3s)",
         "info": "",
         "x": 170,
-        "y": 620,
+        "y": 800,
         "wires": []
     },
     {
@@ -518,7 +499,7 @@
         "name": "Status abfragen",
         "info": "",
         "x": 140,
-        "y": 660,
+        "y": 840,
         "wires": []
     },
     {
@@ -528,7 +509,7 @@
         "name": "Solltemperatur 14,5° einstellen",
         "info": "",
         "x": 190,
-        "y": 780,
+        "y": 960,
         "wires": []
     },
     {
@@ -538,7 +519,7 @@
         "name": "Mode \"manu\"",
         "info": "",
         "x": 130,
-        "y": 740,
+        "y": 920,
         "wires": []
     },
     {
@@ -548,7 +529,7 @@
         "name": "(zurück zu Mode \"auto\")",
         "info": "",
         "x": 190,
-        "y": 860,
+        "y": 1040,
         "wires": []
     },
     {
@@ -558,7 +539,7 @@
         "name": "disconnect",
         "info": "",
         "x": 120,
-        "y": 900,
+        "y": 1080,
         "wires": []
     },
     {
@@ -568,7 +549,7 @@
         "name": "Programm von Dienstag",
         "info": "",
         "x": 170,
-        "y": 700,
+        "y": 880,
         "wires": []
     },
     {
@@ -584,7 +565,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 700,
+        "y": 880,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -604,7 +585,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 180,
-        "y": 1060,
+        "y": 1240,
         "wires": [
             [
                 "4524fd24.ac28e4"
@@ -620,7 +601,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 410,
-        "y": 1060,
+        "y": 1240,
         "wires": [
             [
                 "2beb4749.77c788"
@@ -636,7 +617,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 575,
-        "y": 1060,
+        "y": 1240,
         "wires": []
     },
     {
@@ -646,7 +627,7 @@
         "name": "Möglichkeit, alles über Websocket zu steuern",
         "info": "",
         "x": 170,
-        "y": 1160,
+        "y": 1340,
         "wires": []
     },
     {
@@ -657,7 +638,7 @@
         "server": "fd622c93.69a77",
         "client": "",
         "x": 160,
-        "y": 1200,
+        "y": 1380,
         "wires": [
             [
                 "8d8cb496.89cd18"
@@ -672,7 +653,7 @@
         "server": "fd622c93.69a77",
         "client": "",
         "x": 520,
-        "y": 1200,
+        "y": 1380,
         "wires": []
     },
     {
@@ -684,7 +665,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 295,
-        "y": 1200,
+        "y": 1380,
         "wires": []
     },
     {
@@ -696,7 +677,7 @@
             "d671fd42.3caae"
         ],
         "x": 375,
-        "y": 1200,
+        "y": 1380,
         "wires": [
             [
                 "9a346897.bb2248"
@@ -711,8 +692,8 @@
         "links": [
             "13e47c28.8e6cc4"
         ],
-        "x": 635,
-        "y": 1000,
+        "x": 1035,
+        "y": 1120,
         "wires": []
     },
     {
@@ -728,7 +709,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 500,
-        "y": 620,
+        "y": 800,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -745,7 +726,7 @@
         "createDir": false,
         "overwriteFile": "false",
         "x": 720,
-        "y": 980,
+        "y": 1160,
         "wires": []
     },
     {
@@ -754,7 +735,7 @@
         "z": "b4be1bf1.59bee8",
         "eq3device": "00:1A:22:0B:F9:D1 geht nicht",
         "x": 410,
-        "y": 1300,
+        "y": 1480,
         "wires": [
             [
                 "491e4354.a6951c"
@@ -774,7 +755,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 160,
-        "y": 1300,
+        "y": 1480,
         "wires": [
             [
                 "5194d21d.eeebfc"
@@ -792,7 +773,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 670,
-        "y": 1300,
+        "y": 1480,
         "wires": []
     },
     {
@@ -802,7 +783,7 @@
         "name": "es gibt auch einen fertigen EQ3-Node, habe ich nicht zum Laufen gebracht",
         "info": "",
         "x": 270,
-        "y": 1260,
+        "y": 1440,
         "wires": []
     },
     {
@@ -828,7 +809,7 @@
         "officon": "",
         "offcolor": "",
         "x": 290,
-        "y": 1400,
+        "y": 1580,
         "wires": [
             [
                 "dd055b72.14ef58",
@@ -847,7 +828,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 500,
-        "y": 1400,
+        "y": 1580,
         "wires": []
     },
     {
@@ -857,7 +838,7 @@
         "name": "dashboard-Grafik-Oberfläche, aufzurufen als http://....:1880/ui/",
         "info": "",
         "x": 220,
-        "y": 1360,
+        "y": 1540,
         "wires": []
     },
     {
@@ -883,7 +864,7 @@
         "repair": false,
         "outputs": 2,
         "x": 520,
-        "y": 1480,
+        "y": 1660,
         "wires": [
             [
                 "c829009c.aa7f9",
@@ -961,7 +942,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 760,
-        "y": 1480,
+        "y": 1660,
         "wires": []
     },
     {
@@ -977,7 +958,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 300,
-        "y": 1480,
+        "y": 1660,
         "wires": [
             [
                 "cba64e78.021aa"
@@ -997,7 +978,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 300,
-        "y": 1520,
+        "y": 1700,
         "wires": [
             [
                 "cba64e78.021aa"
@@ -1173,7 +1154,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 390,
-        "y": 1440,
+        "y": 1620,
         "wires": [
             [
                 "cba64e78.021aa"
@@ -1193,7 +1174,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-left",
         "x": 510,
-        "y": 1560,
+        "y": 1740,
         "wires": []
     },
     {
@@ -1222,7 +1203,7 @@
             "99bf6a33.675b68"
         ],
         "x": 665,
-        "y": 1500,
+        "y": 1680,
         "wires": []
     },
     {
@@ -1275,7 +1256,7 @@
             "84ff3fc9.6fe5f"
         ],
         "x": 665,
-        "y": 1460,
+        "y": 1640,
         "wires": []
     },
     {
@@ -1315,7 +1296,7 @@
         "name": "https://github.com/OpaStefanVogel/HEIZUNGSPI.git",
         "info": "",
         "x": 190,
-        "y": 1880,
+        "y": 2060,
         "wires": []
     },
     {
@@ -1349,7 +1330,7 @@
         "name": "Restart wenn gatttool sich verheddert hat",
         "info": "",
         "x": 780,
-        "y": 1060,
+        "y": 1240,
         "wires": []
     },
     {
@@ -1359,7 +1340,7 @@
         "name": "← diese oder irgendeine andere Eingabe verhunzt das Datum am Thermostat",
         "info": "",
         "x": 880,
-        "y": 660,
+        "y": 840,
         "wires": []
     },
     {
@@ -1371,7 +1352,7 @@
         "split": true,
         "filename": "logfile.txt",
         "x": 250,
-        "y": 1120,
+        "y": 1300,
         "wires": [
             [
                 "124ab371.d2378d"
@@ -1389,7 +1370,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 470,
-        "y": 1120,
+        "y": 1300,
         "wires": []
     },
     {
@@ -1416,7 +1397,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 150,
-        "y": 1400,
+        "y": 1580,
         "wires": [
             [
                 "4acbaae3.13eda4"
@@ -1436,7 +1417,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 150,
-        "y": 1440,
+        "y": 1620,
         "wires": [
             [
                 "4acbaae3.13eda4"
@@ -1497,7 +1478,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 590,
-        "y": 940,
+        "y": 1120,
         "wires": [
             [
                 "1f10c6ac.a03779"
@@ -1517,7 +1498,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 410,
-        "y": 940,
+        "y": 1120,
         "wires": [
             [
                 "ade4342e.019f58"
@@ -1642,7 +1623,7 @@
         "createDir": false,
         "overwriteFile": "false",
         "x": 740,
-        "y": 940,
+        "y": 1120,
         "wires": []
     },
     {
@@ -1768,7 +1749,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 820,
+        "y": 1000,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -1780,8 +1761,8 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "func": "var p=msg.payload;\nvar msg1=null; if (p.slice(0,10)==\"heizung an\") {msg1={}; msg1.payload=\"Heizung an\"};\nvar msg2=null; if (p.slice(0,11)==\"heizung aus\") {msg2={}; msg2.payload=\"Heizung aus\"};\nvar msg3=null; if (p.slice(0,6)==\"status\") {msg3={}; msg3.payload=\"Status\"};\nvar msg3=null; if (p.slice(0,5)==\"viele\") {msg3={}; msg3.payload=\"Status\"};\nvar msg4=null; if (p.slice(0,6)==\"reboot\") {msg4={}; msg4.payload=\"Reboot\"};\nreturn [msg1,msg2,msg3,msg4];\n",
-        "outputs": 4,
+        "func": "var p=msg.payload.trim()+\" \";\nvar msg1=null; if (p.slice(0,10)==\"heizung an\") {msg1={}; msg1.payload=\"Heizung an\"};\nvar msg2=null; if (p.slice(0,11)==\"heizung aus\") {msg2={}; msg2.payload=\"Heizung aus\"};\nvar msg3=null; if (p.slice(0,6)==\"status\") {msg3={}; msg3.payload=\"Status\"};\nvar msg3=null; if (p.slice(0,5)==\"viele\") {msg3={}; msg3.payload=\"Status\"};\nvar msg4=null; if (p.slice(0,6)==\"reboot\") {msg4={}; msg4.payload=\"Reboot\"};\nvar msg5=null; if (p.slice(0,18)==\"Heizung Temperatur\") {msg5={}; msg5.payload=p.slice(19,p.indexOf(\" \",19)).replace(\",\",\".\")*1.0};\nreturn [msg1,msg2,msg3,msg4,msg5];\n",
+        "outputs": 5,
         "noerr": 0,
         "x": 3330,
         "y": 220,
@@ -1801,6 +1782,10 @@
             [
                 "7ebaf6a8.95b2b8",
                 "8bbc7a28.c85628"
+            ],
+            [
+                "1d72db97.79b7f4",
+                "7ebaf6a8.95b2b8"
             ]
         ]
     },
@@ -2076,7 +2061,7 @@
         "name": "Solltemperatur 22,5° einstellen",
         "info": "",
         "x": 190,
-        "y": 820,
+        "y": 1000,
         "wires": []
     },
     {
@@ -2374,36 +2359,13 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "connect 00:1A:22:0B:F9:D1",
+        "template": "connect 00:1A:22:0B:F9:D1 #zweiter Versuch",
         "output": "str",
         "x": 220,
         "y": 200,
         "wires": [
             [
-                "169a7910.1404c7"
-            ]
-        ]
-    },
-    {
-        "id": "169a7910.1404c7",
-        "type": "delay",
-        "z": "f4669750.411278",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "x": 440,
-        "y": 200,
-        "wires": [
-            [
-                "db6d3d3.96e9bc"
+                "220d500a.ed429"
             ]
         ]
     },
@@ -2416,35 +2378,14 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "connect 00:1A:22:0B:F9:D1",
+        "template": "connect 00:1A:22:0B:F9:D1 #dritter Versuch",
         "output": "str",
         "x": 220,
         "y": 280,
         "wires": [
             [
-                "82bfe7de.620778"
+                "90991353.335a9"
             ]
-        ]
-    },
-    {
-        "id": "82bfe7de.620778",
-        "type": "delay",
-        "z": "f4669750.411278",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "x": 440,
-        "y": 280,
-        "wires": [
-            []
         ]
     },
     {
@@ -2490,5 +2431,473 @@
         "x": 595,
         "y": 340,
         "wires": []
+    },
+    {
+        "id": "279c854f.2ba20a",
+        "type": "delay",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "8",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 240,
+        "y": 1180,
+        "wires": [
+            [
+                "97d3725d.6888b",
+                "e0e65fc1.d1819"
+            ]
+        ]
+    },
+    {
+        "id": "2fe96195.2ebc5e",
+        "type": "join",
+        "z": "b4be1bf1.59bee8",
+        "name": "join",
+        "mode": "custom",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "5",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 900,
+        "y": 1140,
+        "wires": [
+            [
+                "d671fd42.3caae",
+                "e3afe0ef.4923f"
+            ]
+        ]
+    },
+    {
+        "id": "e0e65fc1.d1819",
+        "type": "debug",
+        "z": "b4be1bf1.59bee8",
+        "name": "stdin gatttool",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 410,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "129f64c1.0f179b",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "21.5",
+        "topic": "",
+        "payload": "21.5",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 270,
+        "y": 640,
+        "wires": [
+            [
+                "951fa6c6.350698"
+            ]
+        ]
+    },
+    {
+        "id": "951fa6c6.350698",
+        "type": "subflow:f4669750.411278",
+        "z": "b4be1bf1.59bee8",
+        "name": "connect",
+        "x": 440,
+        "y": 600,
+        "wires": [
+            [
+                "7e2786eb.e2b6a8"
+            ],
+            [
+                "ee399061.c5dc9"
+            ]
+        ]
+    },
+    {
+        "id": "c9fbf2ae.7bf44",
+        "type": "link in",
+        "z": "b4be1bf1.59bee8",
+        "name": "Schaltprogramm \"Temperatur einstellen\"",
+        "links": [
+            "1d72db97.79b7f4"
+        ],
+        "x": 315,
+        "y": 600,
+        "wires": [
+            [
+                "951fa6c6.350698"
+            ]
+        ]
+    },
+    {
+        "id": "ee399061.c5dc9",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "zu gatttool schicken",
+        "links": [
+            "1fd93aab.4ddaa5"
+        ],
+        "x": 595,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "dd375c83.484b8",
+        "type": "template",
+        "z": "b4be1bf1.59bee8",
+        "name": "Temperatur",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "char-write-req 0411 41{{payload}}",
+        "output": "str",
+        "x": 850,
+        "y": 600,
+        "wires": [
+            [
+                "15048293.c5635d",
+                "5de910a6.d6382"
+            ]
+        ]
+    },
+    {
+        "id": "15048293.c5635d",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "zu gatttool schicken",
+        "links": [
+            "1fd93aab.4ddaa5"
+        ],
+        "x": 995,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "a78cd4a1.eafa58",
+        "type": "template",
+        "z": "b4be1bf1.59bee8",
+        "name": "disconnect",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "disconnect 00:1A:22:0B:F9:D1",
+        "output": "str",
+        "x": 1270,
+        "y": 600,
+        "wires": [
+            [
+                "dfab2eeb.b0ad3"
+            ]
+        ]
+    },
+    {
+        "id": "dfab2eeb.b0ad3",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "zu gatttool schicken",
+        "links": [
+            "1fd93aab.4ddaa5"
+        ],
+        "x": 1215,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "39d753fd.d012bc",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "\"Temperatur einstellen\"",
+        "info": "",
+        "x": 100,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "5daa914a.51477",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "22",
+        "topic": "",
+        "payload": "22",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 270,
+        "y": 680,
+        "wires": [
+            [
+                "951fa6c6.350698"
+            ]
+        ]
+    },
+    {
+        "id": "7e2786eb.e2b6a8",
+        "type": "function",
+        "z": "b4be1bf1.59bee8",
+        "name": "hex",
+        "func": "msg.payload=Math.floor(0.5+msg.payload*2).toString(16);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 630,
+        "y": 600,
+        "wires": [
+            [
+                "dd375c83.484b8",
+                "556d0b8a.6e0204"
+            ]
+        ]
+    },
+    {
+        "id": "3de59933.ed5f46",
+        "type": "debug",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1030,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "2687bd98.c1a642",
+        "type": "function",
+        "z": "f4669750.411278",
+        "name": "value=payload",
+        "func": "msg.value=msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 240,
+        "y": 60,
+        "wires": [
+            [
+                "9c3e623c.ddd2d"
+            ]
+        ]
+    },
+    {
+        "id": "b403269.d6cb8d8",
+        "type": "function",
+        "z": "f4669750.411278",
+        "name": "payload=value",
+        "func": "msg.payload=msg.value;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 240,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "556d0b8a.6e0204",
+        "type": "template",
+        "z": "b4be1bf1.59bee8",
+        "name": "umgerechnet in",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Input {{value}} umgerechnet in {{payload}} !",
+        "output": "str",
+        "x": 860,
+        "y": 660,
+        "wires": [
+            [
+                "3de59933.ed5f46"
+            ]
+        ]
+    },
+    {
+        "id": "2716e79b.30a238",
+        "type": "delay",
+        "z": "f4669750.411278",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 440,
+        "y": 120,
+        "wires": [
+            [
+                "6486ab8a.fd2a94"
+            ]
+        ]
+    },
+    {
+        "id": "220d500a.ed429",
+        "type": "delay",
+        "z": "f4669750.411278",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 440,
+        "y": 200,
+        "wires": [
+            [
+                "db6d3d3.96e9bc"
+            ]
+        ]
+    },
+    {
+        "id": "90991353.335a9",
+        "type": "delay",
+        "z": "f4669750.411278",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 440,
+        "y": 280,
+        "wires": [
+            [
+                "b403269.d6cb8d8"
+            ]
+        ]
+    },
+    {
+        "id": "5de910a6.d6382",
+        "type": "delay",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 1060,
+        "y": 600,
+        "wires": [
+            [
+                "a78cd4a1.eafa58"
+            ]
+        ]
+    },
+    {
+        "id": "1d72db97.79b7f4",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "links": [
+            "c9fbf2ae.7bf44"
+        ],
+        "x": 3535,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "38c93ed5.6d76c2",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "Heizung Temperatur 21,5 °C",
+        "topic": "",
+        "payload": "Heizung Temperatur 21,5 °C",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 3140,
+        "y": 340,
+        "wires": [
+            [
+                "4a48a70b.1ac828"
+            ]
+        ]
+    },
+    {
+        "id": "f4613e02.00cfa",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "Heizung Temperatur 22 °C",
+        "topic": "",
+        "payload": "Heizung Temperatur 22 °C",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 3130,
+        "y": 380,
+        "wires": [
+            [
+                "4a48a70b.1ac828"
+            ]
+        ]
+    },
+    {
+        "id": "41cba36.f5cec5c",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "Heizung Status",
+        "topic": "",
+        "payload": "Heizung Status",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 3100,
+        "y": 300,
+        "wires": [
+            [
+                "4a48a70b.1ac828"
+            ]
+        ]
     }
 ]
