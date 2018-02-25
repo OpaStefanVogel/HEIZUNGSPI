@@ -219,6 +219,26 @@
         "collapse": false
     },
     {
+        "id": "9d73d1c.48f273",
+        "type": "ui_group",
+        "z": "",
+        "name": "Antwort vom RPI3 (braucht ca.30s):",
+        "tab": "e7e54e49.20fde",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "bbdcfa68.d14d48",
+        "type": "ui_group",
+        "z": "",
+        "name": "Status",
+        "tab": "e7e54e49.20fde",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
         "id": "e3afe0ef.4923f",
         "type": "debug",
         "z": "b4be1bf1.59bee8",
@@ -861,7 +881,8 @@
         "wires": [
             [
                 "dd055b72.14ef58",
-                "daa383c5.5ede9"
+                "daa383c5.5ede9",
+                "3fc8cd07.7472c2"
             ]
         ]
     },
@@ -963,7 +984,8 @@
         "y": 300,
         "wires": [
             [
-                "8bfd293.995bfd8"
+                "8bfd293.995bfd8",
+                "2e9739ea.0e3ea6"
             ]
         ]
     },
@@ -1091,7 +1113,8 @@
         "y": 400,
         "wires": [
             [
-                "3a70e828.eb3488"
+                "3a70e828.eb3488",
+                "2e9739ea.0e3ea6"
             ]
         ]
     },
@@ -1940,7 +1963,8 @@
         "y": 500,
         "wires": [
             [
-                "c8561e10.6c68"
+                "c8561e10.6c68",
+                "2e9739ea.0e3ea6"
             ]
         ]
     },
@@ -1950,7 +1974,8 @@
         "z": "b4be1bf1.59bee8",
         "name": "Schaltprogramm \"Status abfragen\"",
         "links": [
-            "c15d35b3.ab5b58"
+            "c15d35b3.ab5b58",
+            "1dde554c.17b38b"
         ],
         "x": 315,
         "y": 500,
@@ -2575,7 +2600,8 @@
         "y": 600,
         "wires": [
             [
-                "dfab2eeb.b0ad3"
+                "dfab2eeb.b0ad3",
+                "2e9739ea.0e3ea6"
             ]
         ]
     },
@@ -3124,7 +3150,8 @@
         "y": 1880,
         "wires": [
             [
-                "5a00b9ea.27a338"
+                "5a00b9ea.27a338",
+                "313e4163.56513e"
             ]
         ]
     },
@@ -3232,5 +3259,196 @@
                 "db6d3d3.96e9bc"
             ]
         ]
+    },
+    {
+        "id": "46bed413.0dc89c",
+        "type": "function",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "func": "msg.payload=\"<div style='font-size:50%; font-color:green; border:solid'>\";\nvar notifications=global.get(\"notifications\");\nfor (var i=0;i<notifications.length;i++) {\n  var nt=notifications[i];\n  msg.payload+=\" um \"+nt.slice(15,21)+\" Uhr \";\n  msg.payload+=eval(\"0x\"+nt.slice(-2))/2+\" °C \";\n  if (nt.slice(-10,-9)==\"0\") msg.payload+=\"Automatik\";\n  if (nt.slice(-10,-9)==\"1\") msg.payload+=\"manuell\";\n  msg.payload+=\"<br/>\";\n  }\nmsg.payload+=\"</div>\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1450,
+        "y": 720,
+        "wires": [
+            [
+                "3cac68e3.931798",
+                "4c724491.fc64ec"
+            ]
+        ]
+    },
+    {
+        "id": "3cac68e3.931798",
+        "type": "debug",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1620,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "2e9739ea.0e3ea6",
+        "type": "delay",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "15",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 1420,
+        "y": 520,
+        "wires": [
+            [
+                "46bed413.0dc89c"
+            ]
+        ]
+    },
+    {
+        "id": "4c724491.fc64ec",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "links": [
+            "8febab8d.794748",
+            "420a1715.181768"
+        ],
+        "x": 1660,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "420a1715.181768",
+        "type": "link in",
+        "z": "b4be1bf1.59bee8",
+        "name": "zum Dashboard",
+        "links": [
+            "4c724491.fc64ec"
+        ],
+        "x": 355,
+        "y": 1780,
+        "wires": [
+            [
+                "c8454594.ee0748"
+            ]
+        ]
+    },
+    {
+        "id": "c8454594.ee0748",
+        "type": "ui_text",
+        "z": "b4be1bf1.59bee8",
+        "group": "9d73d1c.48f273",
+        "order": 0,
+        "width": "6",
+        "height": "3",
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 470,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "313e4163.56513e",
+        "type": "template",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Die Temperatur soll auf {{payload}} °C gestellt werden.",
+        "output": "str",
+        "x": 380,
+        "y": 1840,
+        "wires": [
+            [
+                "c8454594.ee0748"
+            ]
+        ]
+    },
+    {
+        "id": "3fc8cd07.7472c2",
+        "type": "function",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "func": "if (msg.payload===true) {\n  msg.payload=\"Heizung soll EIN geschaltet werden.\";\n  } else {\n  msg.payload=\"Heizung soll AUS geschaltet werden.\";\n  }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 330,
+        "y": 1800,
+        "wires": [
+            [
+                "c8454594.ee0748"
+            ]
+        ]
+    },
+    {
+        "id": "7c1a10a5.1605f",
+        "type": "ui_button",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "group": "bbdcfa68.d14d48",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "nur aktuelle Temperatur lesen",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 160,
+        "y": 1940,
+        "wires": [
+            [
+                "ea2a2823.231728",
+                "1dde554c.17b38b"
+            ]
+        ]
+    },
+    {
+        "id": "ea2a2823.231728",
+        "type": "template",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Nur die aktuelle Temperatur auslesen.",
+        "output": "str",
+        "x": 250,
+        "y": 1960,
+        "wires": [
+            [
+                "c8454594.ee0748"
+            ]
+        ]
+    },
+    {
+        "id": "1dde554c.17b38b",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "links": [
+            "c5008e81.a5d15"
+        ],
+        "x": 400,
+        "y": 1980,
+        "wires": []
     }
 ]
