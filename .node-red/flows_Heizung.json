@@ -22,8 +22,8 @@
         ],
         "out": [
             {
-                "x": 540,
-                "y": 380,
+                "x": 580,
+                "y": 340,
                 "wires": [
                     {
                         "id": "b403269.d6cb8d8",
@@ -32,7 +32,7 @@
                 ]
             },
             {
-                "x": 420,
+                "x": 400,
                 "y": 340,
                 "wires": [
                     {
@@ -207,6 +207,16 @@
         "z": "",
         "path": "/ws/neue_Email_da",
         "wholemsg": "true"
+    },
+    {
+        "id": "119260fb.7518ef",
+        "type": "ui_group",
+        "z": "",
+        "name": "Temperatur einstellen",
+        "tab": "e7e54e49.20fde",
+        "disp": true,
+        "width": "6",
+        "collapse": false
     },
     {
         "id": "e3afe0ef.4923f",
@@ -730,7 +740,7 @@
         "links": [
             "13e47c28.8e6cc4"
         ],
-        "x": 1035,
+        "x": 1315,
         "y": 1120,
         "wires": []
     },
@@ -831,7 +841,7 @@
         "name": "",
         "label": "switch",
         "group": "dab61bb7.6132a8",
-        "order": 0,
+        "order": 3,
         "width": 0,
         "height": 0,
         "passthru": true,
@@ -1185,7 +1195,7 @@
         "timeout": "5",
         "timeoutUnits": "seconds",
         "rate": "1",
-        "nbRateUnits": "40",
+        "nbRateUnits": "60",
         "rateUnits": "second",
         "randomFirst": "1",
         "randomLast": "5",
@@ -1204,14 +1214,14 @@
         "type": "ui_text",
         "z": "b4be1bf1.59bee8",
         "group": "dab61bb7.6132a8",
-        "order": 0,
+        "order": 4,
         "width": 0,
         "height": 0,
         "name": "",
-        "label": "(mehrere aufeinanderfolgende switch werden in 40-Sekunden-Intervallen weitergesendet, damit nichts durcheinanderkommt)",
+        "label": "(mehrere aufeinanderfolgende Schaltvorgänge werden in 60-Sekunden-Intervallen weitergesendet, damit nichts durcheinanderkommt)",
         "format": "{{msg.payload}}",
         "layout": "row-left",
-        "x": 510,
+        "x": 540,
         "y": 1740,
         "wires": []
     },
@@ -2434,8 +2444,8 @@
         "y": 1140,
         "wires": [
             [
-                "d671fd42.3caae",
-                "e3afe0ef.4923f"
+                "e3afe0ef.4923f",
+                "f9558695.451b48"
             ]
         ]
     },
@@ -2459,8 +2469,8 @@
         "z": "b4be1bf1.59bee8",
         "name": "21.5",
         "topic": "",
-        "payload": "21.5",
-        "payloadType": "num",
+        "payload": "21,5",
+        "payloadType": "str",
         "repeat": "",
         "crontab": "",
         "once": false,
@@ -2495,7 +2505,8 @@
         "z": "b4be1bf1.59bee8",
         "name": "Schaltprogramm \"Temperatur einstellen\"",
         "links": [
-            "1d72db97.79b7f4"
+            "1d72db97.79b7f4",
+            "678922d4.759b8c"
         ],
         "x": 315,
         "y": 600,
@@ -2597,7 +2608,7 @@
         "name": "22",
         "topic": "",
         "payload": "22",
-        "payloadType": "num",
+        "payloadType": "str",
         "repeat": "",
         "crontab": "",
         "once": false,
@@ -2615,7 +2626,7 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "hex",
-        "func": "msg.payload=Math.floor(0.5+msg.payload*2).toString(16);\nreturn msg;",
+        "func": "msg.payload=Math.floor(0.5+msg.payload.replace(\",\",\".\")*2).toString(16);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 630,
@@ -2665,8 +2676,8 @@
         "func": "msg.payload=msg.value;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 240,
-        "y": 380,
+        "x": 640,
+        "y": 280,
         "wires": [
             []
         ]
@@ -2696,7 +2707,7 @@
         "z": "f4669750.411278",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1",
+        "timeout": "10",
         "timeoutUnits": "seconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -2705,11 +2716,11 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 440,
+        "x": 420,
         "y": 120,
         "wires": [
             [
-                "6486ab8a.fd2a94"
+                "e3720df0.27f1a"
             ]
         ]
     },
@@ -2719,7 +2730,7 @@
         "z": "f4669750.411278",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1",
+        "timeout": "10",
         "timeoutUnits": "seconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -2728,11 +2739,11 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 440,
+        "x": 420,
         "y": 200,
         "wires": [
             [
-                "db6d3d3.96e9bc"
+                "7988d092.db498"
             ]
         ]
     },
@@ -2742,7 +2753,7 @@
         "z": "f4669750.411278",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1",
+        "timeout": "10",
         "timeoutUnits": "seconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -2751,7 +2762,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 440,
+        "x": 420,
         "y": 280,
         "wires": [
             [
@@ -3044,5 +3055,182 @@
         "x": 940,
         "y": 40,
         "wires": []
+    },
+    {
+        "id": "2bf31a20.9c4f66",
+        "type": "ui_button",
+        "z": "b4be1bf1.59bee8",
+        "name": "Heizung ein",
+        "group": "dab61bb7.6132a8",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Heizung ein",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "",
+        "x": 170,
+        "y": 1780,
+        "wires": [
+            [
+                "4acbaae3.13eda4"
+            ]
+        ]
+    },
+    {
+        "id": "aa556e87.0f297",
+        "type": "ui_button",
+        "z": "b4be1bf1.59bee8",
+        "name": "Heizung aus",
+        "group": "dab61bb7.6132a8",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Heizung aus",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "topic": "",
+        "x": 170,
+        "y": 1820,
+        "wires": [
+            [
+                "4acbaae3.13eda4"
+            ]
+        ]
+    },
+    {
+        "id": "b3060ecd.90b9c",
+        "type": "ui_text_input",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "label": "Temperatur eingeben:",
+        "group": "119260fb.7518ef",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 220,
+        "y": 1880,
+        "wires": [
+            [
+                "5a00b9ea.27a338"
+            ]
+        ]
+    },
+    {
+        "id": "678922d4.759b8c",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "links": [
+            "c9fbf2ae.7bf44"
+        ],
+        "x": 635,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "166c61ce.1bbace",
+        "type": "ui_text",
+        "z": "b4be1bf1.59bee8",
+        "group": "119260fb.7518ef",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "und mit Enter abschicken (auch hier Weitergabe in 60-Sekunden-Intervallen)",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 610,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "5a00b9ea.27a338",
+        "type": "delay",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "60",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 460,
+        "y": 1880,
+        "wires": [
+            [
+                "678922d4.759b8c"
+            ]
+        ]
+    },
+    {
+        "id": "f9558695.451b48",
+        "type": "function",
+        "z": "b4be1bf1.59bee8",
+        "name": "als global stdout speichern",
+        "func": "global.set(\"stdout\",msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1140,
+        "y": 1120,
+        "wires": [
+            [
+                "d671fd42.3caae"
+            ]
+        ]
+    },
+    {
+        "id": "e3720df0.27f1a",
+        "type": "function",
+        "z": "f4669750.411278",
+        "name": "Error?",
+        "func": "var stdout=global.get(\"stdout\");\nif (stdout.indexOf(\"[0;94m[\")>-1) {\n  return [msg,null] \n  } else { \n    return [null,msg]\n    }\n  ",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 570,
+        "y": 120,
+        "wires": [
+            [
+                "b403269.d6cb8d8"
+            ],
+            [
+                "6486ab8a.fd2a94"
+            ]
+        ]
+    },
+    {
+        "id": "7988d092.db498",
+        "type": "function",
+        "z": "f4669750.411278",
+        "name": "Error?",
+        "func": "var stdout=global.get(\"stdout\");\nif (stdout.indexOf(\"[0;94m[\")>-1) {\n  return [msg,null] \n  } else { \n    return [null,msg]\n    }\n  ",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 570,
+        "y": 200,
+        "wires": [
+            [
+                "b403269.d6cb8d8"
+            ],
+            [
+                "db6d3d3.96e9bc"
+            ]
+        ]
     }
 ]

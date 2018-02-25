@@ -410,3 +410,6 @@ git push
 git commit -a -m "erster Subflow für connect mit 3 Versuchen"
 git push
 screen -r
+git commit -a -m "aktuellen Schluessel holen als Subflow für Test-Email"
+git push
+screen -r
