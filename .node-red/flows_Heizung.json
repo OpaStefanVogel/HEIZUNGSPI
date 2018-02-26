@@ -1768,7 +1768,7 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "func": "var p=msg.payload.trim().toLowerCase().replace(/\\n/g,\" \")+\" \";\nvar msg1=null; if (p.slice(0,10)==\"heizung an\") {msg1={}; msg1.payload=\"Heizung an\"};\nvar msg2=null; if (p.slice(0,11)==\"heizung aus\") {msg2={}; msg2.payload=\"Heizung aus\"};\nvar msg3=null; if (p.slice(0,6)==\"status\") {msg3={}; msg3.payload=\"Status\"};\n               if (p.slice(0,5)==\"viele\") {msg3={}; msg3.payload=\"Status\"};\nvar msg4=null; if (p.slice(0,6)==\"reboot\") {msg4={}; msg4.payload=\"Reboot\"};\nvar msg5=null; if (p.slice(0,18)==\"heizung temperatur\") {msg5={}; msg5.payload=p.slice(19,p.indexOf(\" \",19)).replace(\",\",\".\")*1.0};\nreturn [msg1,msg2,msg3,msg4,msg5];\n",
+        "func": "var p=msg.payload.trim().toLowerCase().replace(/\\n/g,\" \")+\" \";\nvar msg1=null; if (p.slice(0,10)==\"heizung an\") {msg1={}; msg1.payload=\"Heizung an\"};\nvar msg2=null; if (p.slice(0,11)==\"heizung aus\") {msg2={}; msg2.payload=\"Heizung aus\"};\nvar msg3=null; if (p.slice(0,6)==\"status\") {msg3={}; msg3.payload=\"Status\"};\n               if (p.slice(0,5)==\"viele\") {msg3={}; msg3.payload=\"Status\"};\nvar msg4=null; if (p.slice(0,6)==\"reboot\") {msg4={}; msg4.payload=\"Reboot\"};\nvar msg5=null; if (p.slice(0,18)==\"heizung temperatur\") {msg5={}; msg5.payload=p.slice(19,p.indexOf(\" \",19))};\nreturn [msg1,msg2,msg3,msg4,msg5];\n",
         "outputs": 5,
         "noerr": 0,
         "x": 2990,
