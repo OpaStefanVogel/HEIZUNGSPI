@@ -389,7 +389,7 @@
         "port": "993",
         "box": "INBOX",
         "disposition": "None",
-        "repeat": "60",
+        "repeat": "300",
         "x": 180,
         "y": 100,
         "wires": [

@@ -413,3 +413,12 @@ screen -r
 git commit -a -m "aktuellen Schluessel holen als Subflow für Test-Email"
 git push
 screen -r
+git commit -a -m "connect mit Abfrage [0;94m[""
+git commit -a -m "connect mit Abfrage [0;94m["
+git push
+git pull
+git push
+git commit -a -m "noch einen STATUS Tab mit Button Temperatur nur auslesen"
+git push
+git commit -a -m "diverse dashboards"
+screen -r
