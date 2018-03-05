@@ -422,3 +422,12 @@ git commit -a -m "noch einen STATUS Tab mit Button Temperatur nur auslesen"
 git push
 git commit -a -m "diverse dashboards"
 screen -r
+gitk --all &
+sudo reboot
+git commit -a -m "Schaltprogramm Heizung Temperatur 22 °C geht"
+git commit -a -m "Schaltprogramm Heizung Temperatur 22 °C an Email angeschlossen"
+git commit -a -m "Schaltprogramm Heizung Temperatur 22 °C an Email angeschlossen und getestet"
+git commit -a -m "Email-Abfrage wieder alle 5 min"
+git push
+gitk &
+cat Notifications.txt 

@@ -389,7 +389,7 @@
         "port": "993",
         "box": "INBOX",
         "disposition": "None",
-        "repeat": "300",
+        "repeat": "400",
         "x": 180,
         "y": 100,
         "wires": [
@@ -1545,7 +1545,7 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "func": "var t=msg.payload;\nvar notifications=global.get(\"notifications\")||[];\nvar d=new Date();\nvar ind=t.indexOf(\"Notification\");\nvar tneu=d.toString()+\"  \"+t.slice(ind,ind+53);\nif (ind>-1) notifications.push(tneu);\nwhile (notifications.length>8) notifications.shift(t);\nglobal.set(\"notifications\",notifications);\nif (ind>-1) {\n  msg.payload=tneu;\n  return msg;\n  }",
+        "func": "var t=msg.payload;\nvar notifications=global.get(\"notifications\")||[];\nvar d=new Date();\nvar ind=t.indexOf(\"Notification\");\nvar tneu=d.toString()+\"  \"+t.slice(ind,ind+53);\nif (ind>-1) notifications.push(tneu);\nwhile (notifications.length>8) notifications.shift();\nglobal.set(\"notifications\",notifications);\nif (ind>-1) {\n  msg.payload=tneu;\n  return msg;\n  }",
         "outputs": 1,
         "noerr": 0,
         "x": 590,
@@ -3449,6 +3449,40 @@
         ],
         "x": 400,
         "y": 1980,
+        "wires": []
+    },
+    {
+        "id": "54bd134c.c0568c",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "topic": "",
+        "payload": "notifications",
+        "payloadType": "global",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 830,
+        "y": 1080,
+        "wires": [
+            [
+                "99044fd.118b6b"
+            ]
+        ]
+    },
+    {
+        "id": "99044fd.118b6b",
+        "type": "debug",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1030,
+        "y": 1080,
         "wires": []
     }
 ]
