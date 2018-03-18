@@ -239,6 +239,16 @@
         "collapse": false
     },
     {
+        "id": "98f96add.4c0b28",
+        "type": "ui_group",
+        "z": "",
+        "name": "ganze Woche umprogrammieren",
+        "tab": "e7e54e49.20fde",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
         "id": "e3afe0ef.4923f",
         "type": "debug",
         "z": "b4be1bf1.59bee8",
@@ -249,7 +259,7 @@
         "tostatus": false,
         "complete": "payload",
         "x": 1100,
-        "y": 1180,
+        "y": 1560,
         "wires": []
     },
     {
@@ -263,7 +273,7 @@
         "op": "string",
         "name": "gatttool -I",
         "x": 400,
-        "y": 1180,
+        "y": 1560,
         "wires": [
             [
                 "2f7cfd7b.d33812",
@@ -291,7 +301,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 480,
-        "y": 840,
+        "y": 1140,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -311,7 +321,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 510,
-        "y": 1080,
+        "y": 1380,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -331,7 +341,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 960,
+        "y": 1260,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -351,7 +361,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 920,
+        "y": 1220,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -371,7 +381,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 510,
-        "y": 1040,
+        "y": 1340,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -496,10 +506,16 @@
             "e96c87d8.d17c58",
             "ee399061.c5dc9",
             "15048293.c5635d",
-            "dfab2eeb.b0ad3"
+            "dfab2eeb.b0ad3",
+            "1ef8bf8c.60f33",
+            "e2ba8799.f9d278",
+            "c10e712f.00662",
+            "296d79b0.a2c556",
+            "a82e6468.a50188",
+            "42c6ab64.1ab064"
         ],
         "x": 115,
-        "y": 1180,
+        "y": 1560,
         "wires": [
             [
                 "279c854f.2ba20a"
@@ -525,7 +541,7 @@
         "name": "Testeingaben laut https://github.com/Heckie75/eQ-3-radiador-thermostat/blob/master/eQ-3-radiator-thermostat-api.m",
         "info": "",
         "x": 400,
-        "y": 760,
+        "y": 1060,
         "wires": []
     },
     {
@@ -537,7 +553,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 788.333330154419,
-        "y": 900,
+        "y": 1200,
         "wires": []
     },
     {
@@ -547,7 +563,7 @@
         "name": "hier wird das \"gatttool -I\" ausgeführt",
         "info": "",
         "x": 140,
-        "y": 1120,
+        "y": 1500,
         "wires": []
     },
     {
@@ -557,7 +573,7 @@
         "name": "verbinden (dauert ca. 3s)",
         "info": "",
         "x": 170,
-        "y": 800,
+        "y": 1100,
         "wires": []
     },
     {
@@ -567,7 +583,7 @@
         "name": "Status abfragen",
         "info": "",
         "x": 140,
-        "y": 840,
+        "y": 1140,
         "wires": []
     },
     {
@@ -577,7 +593,7 @@
         "name": "Solltemperatur 14,5° einstellen",
         "info": "",
         "x": 190,
-        "y": 960,
+        "y": 1260,
         "wires": []
     },
     {
@@ -587,7 +603,7 @@
         "name": "Mode \"manu\"",
         "info": "",
         "x": 130,
-        "y": 920,
+        "y": 1220,
         "wires": []
     },
     {
@@ -597,7 +613,7 @@
         "name": "(zurück zu Mode \"auto\")",
         "info": "",
         "x": 190,
-        "y": 1040,
+        "y": 1340,
         "wires": []
     },
     {
@@ -607,7 +623,7 @@
         "name": "disconnect",
         "info": "",
         "x": 120,
-        "y": 1080,
+        "y": 1380,
         "wires": []
     },
     {
@@ -617,7 +633,7 @@
         "name": "Programm von Dienstag",
         "info": "",
         "x": 170,
-        "y": 880,
+        "y": 1180,
         "wires": []
     },
     {
@@ -633,7 +649,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 880,
+        "y": 1180,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -653,7 +669,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 180,
-        "y": 1240,
+        "y": 1620,
         "wires": [
             [
                 "4524fd24.ac28e4"
@@ -669,7 +685,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 410,
-        "y": 1240,
+        "y": 1620,
         "wires": [
             [
                 "2beb4749.77c788"
@@ -685,7 +701,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 575,
-        "y": 1240,
+        "y": 1620,
         "wires": []
     },
     {
@@ -695,7 +711,7 @@
         "name": "Möglichkeit, alles über Websocket zu steuern",
         "info": "",
         "x": 170,
-        "y": 1340,
+        "y": 1720,
         "wires": []
     },
     {
@@ -706,7 +722,7 @@
         "server": "fd622c93.69a77",
         "client": "",
         "x": 160,
-        "y": 1380,
+        "y": 1760,
         "wires": [
             [
                 "8d8cb496.89cd18"
@@ -721,7 +737,7 @@
         "server": "fd622c93.69a77",
         "client": "",
         "x": 520,
-        "y": 1380,
+        "y": 1760,
         "wires": []
     },
     {
@@ -733,7 +749,7 @@
             "1fd93aab.4ddaa5"
         ],
         "x": 295,
-        "y": 1380,
+        "y": 1760,
         "wires": []
     },
     {
@@ -745,7 +761,7 @@
             "d671fd42.3caae"
         ],
         "x": 375,
-        "y": 1380,
+        "y": 1760,
         "wires": [
             [
                 "9a346897.bb2248"
@@ -761,7 +777,7 @@
             "13e47c28.8e6cc4"
         ],
         "x": 1315,
-        "y": 1120,
+        "y": 1500,
         "wires": []
     },
     {
@@ -777,7 +793,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 500,
-        "y": 800,
+        "y": 1100,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -794,7 +810,7 @@
         "createDir": false,
         "overwriteFile": "false",
         "x": 720,
-        "y": 1160,
+        "y": 1540,
         "wires": []
     },
     {
@@ -803,7 +819,7 @@
         "z": "b4be1bf1.59bee8",
         "eq3device": "00:1A:22:0B:F9:D1 geht nicht",
         "x": 410,
-        "y": 1480,
+        "y": 1860,
         "wires": [
             [
                 "491e4354.a6951c"
@@ -823,7 +839,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 160,
-        "y": 1480,
+        "y": 1860,
         "wires": [
             [
                 "5194d21d.eeebfc"
@@ -841,7 +857,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 670,
-        "y": 1480,
+        "y": 1860,
         "wires": []
     },
     {
@@ -851,7 +867,7 @@
         "name": "es gibt auch einen fertigen EQ3-Node, habe ich nicht zum Laufen gebracht",
         "info": "",
         "x": 270,
-        "y": 1440,
+        "y": 1820,
         "wires": []
     },
     {
@@ -877,7 +893,7 @@
         "officon": "",
         "offcolor": "",
         "x": 290,
-        "y": 1580,
+        "y": 2040,
         "wires": [
             [
                 "dd055b72.14ef58",
@@ -897,7 +913,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 500,
-        "y": 1580,
+        "y": 2040,
         "wires": []
     },
     {
@@ -906,8 +922,8 @@
         "z": "b4be1bf1.59bee8",
         "name": "dashboard-Grafik-Oberfläche, aufzurufen als http://....:1880/ui/",
         "info": "",
-        "x": 220,
-        "y": 1540,
+        "x": 230,
+        "y": 2000,
         "wires": []
     },
     {
@@ -933,7 +949,7 @@
         "repair": false,
         "outputs": 2,
         "x": 520,
-        "y": 1660,
+        "y": 2120,
         "wires": [
             [
                 "c829009c.aa7f9",
@@ -1012,7 +1028,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 760,
-        "y": 1660,
+        "y": 2120,
         "wires": []
     },
     {
@@ -1028,7 +1044,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 300,
-        "y": 1660,
+        "y": 2120,
         "wires": [
             [
                 "cba64e78.021aa"
@@ -1048,7 +1064,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 300,
-        "y": 1700,
+        "y": 2160,
         "wires": [
             [
                 "cba64e78.021aa"
@@ -1225,7 +1241,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 390,
-        "y": 1620,
+        "y": 2080,
         "wires": [
             [
                 "cba64e78.021aa"
@@ -1245,7 +1261,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-left",
         "x": 540,
-        "y": 1740,
+        "y": 2200,
         "wires": []
     },
     {
@@ -1274,7 +1290,7 @@
             "99bf6a33.675b68"
         ],
         "x": 665,
-        "y": 1680,
+        "y": 2140,
         "wires": []
     },
     {
@@ -1327,7 +1343,7 @@
             "84ff3fc9.6fe5f"
         ],
         "x": 665,
-        "y": 1640,
+        "y": 2100,
         "wires": []
     },
     {
@@ -1367,7 +1383,7 @@
         "name": "https://github.com/OpaStefanVogel/HEIZUNGSPI.git",
         "info": "",
         "x": 190,
-        "y": 2060,
+        "y": 2560,
         "wires": []
     },
     {
@@ -1401,7 +1417,7 @@
         "name": "Restart wenn gatttool sich verheddert hat",
         "info": "",
         "x": 780,
-        "y": 1240,
+        "y": 1620,
         "wires": []
     },
     {
@@ -1411,7 +1427,7 @@
         "name": "← diese oder irgendeine andere Eingabe verhunzt das Datum am Thermostat",
         "info": "",
         "x": 880,
-        "y": 840,
+        "y": 1140,
         "wires": []
     },
     {
@@ -1423,7 +1439,7 @@
         "split": true,
         "filename": "logfile.txt",
         "x": 250,
-        "y": 1300,
+        "y": 1680,
         "wires": [
             [
                 "124ab371.d2378d"
@@ -1441,7 +1457,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 470,
-        "y": 1300,
+        "y": 1680,
         "wires": []
     },
     {
@@ -1468,7 +1484,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 150,
-        "y": 1580,
+        "y": 2040,
         "wires": [
             [
                 "4acbaae3.13eda4"
@@ -1488,7 +1504,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 150,
-        "y": 1620,
+        "y": 2080,
         "wires": [
             [
                 "4acbaae3.13eda4"
@@ -1549,7 +1565,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 590,
-        "y": 1120,
+        "y": 1500,
         "wires": [
             [
                 "1f10c6ac.a03779"
@@ -1569,7 +1585,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 410,
-        "y": 1120,
+        "y": 1500,
         "wires": [
             [
                 "ade4342e.019f58"
@@ -1695,7 +1711,7 @@
         "createDir": false,
         "overwriteFile": "false",
         "x": 740,
-        "y": 1120,
+        "y": 1500,
         "wires": []
     },
     {
@@ -1756,7 +1772,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 490,
-        "y": 1000,
+        "y": 1300,
         "wires": [
             [
                 "4993d777.8aa9e8"
@@ -1895,8 +1911,8 @@
         "payloadType": "date",
         "repeat": "",
         "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
+        "once": true,
+        "onceDelay": "1",
         "x": 270,
         "y": 540,
         "wires": [
@@ -2070,7 +2086,7 @@
         "name": "Solltemperatur 22,5° einstellen",
         "info": "",
         "x": 190,
-        "y": 1000,
+        "y": 1300,
         "wires": []
     },
     {
@@ -2437,7 +2453,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 240,
-        "y": 1180,
+        "y": 1560,
         "wires": [
             [
                 "97d3725d.6888b",
@@ -2466,7 +2482,7 @@
         "reduceInitType": "",
         "reduceFixup": "",
         "x": 900,
-        "y": 1140,
+        "y": 1520,
         "wires": [
             [
                 "e3afe0ef.4923f",
@@ -2485,7 +2501,7 @@
         "tostatus": false,
         "complete": "payload",
         "x": 410,
-        "y": 1140,
+        "y": 1520,
         "wires": []
     },
     {
@@ -3100,7 +3116,7 @@
         "payloadType": "bool",
         "topic": "",
         "x": 170,
-        "y": 1780,
+        "y": 2240,
         "wires": [
             [
                 "4acbaae3.13eda4"
@@ -3125,7 +3141,7 @@
         "payloadType": "bool",
         "topic": "",
         "x": 170,
-        "y": 1820,
+        "y": 2280,
         "wires": [
             [
                 "4acbaae3.13eda4"
@@ -3147,7 +3163,7 @@
         "delay": "0",
         "topic": "",
         "x": 220,
-        "y": 1880,
+        "y": 2340,
         "wires": [
             [
                 "5a00b9ea.27a338",
@@ -3164,7 +3180,7 @@
             "c9fbf2ae.7bf44"
         ],
         "x": 635,
-        "y": 1880,
+        "y": 2340,
         "wires": []
     },
     {
@@ -3180,7 +3196,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "x": 610,
-        "y": 1920,
+        "y": 2380,
         "wires": []
     },
     {
@@ -3199,7 +3215,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 460,
-        "y": 1880,
+        "y": 2340,
         "wires": [
             [
                 "678922d4.759b8c"
@@ -3215,7 +3231,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 1140,
-        "y": 1120,
+        "y": 1500,
         "wires": [
             [
                 "d671fd42.3caae"
@@ -3265,7 +3281,7 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "func": "msg.payload=\"<div style='font-size:50%; font-color:green; border:solid'>\";\nvar notifications=global.get(\"notifications\");\nfor (var i=0;i<notifications.length;i++) {\n  var nt=notifications[i];\n  msg.payload+=\" um \"+nt.slice(15,21)+\" Uhr \";\n  msg.payload+=eval(\"0x\"+nt.slice(-2))/2+\" °C \";\n  if (nt.slice(-10,-9)==\"0\") msg.payload+=\"Automatik\";\n  if (nt.slice(-10,-9)==\"1\") msg.payload+=\"manuell\";\n  msg.payload+=\"<br/>\";\n  }\nmsg.payload+=\"</div>\";\nreturn msg;",
+        "func": "msg.payload=\"<div style='font-size:50%; font-color:green; border:solid'>\";\nvar notifications=global.get(\"notifications\");\nfor (var i=0;i<notifications.length;i++) {\n  var nt=notifications[i];\n  msg.payload+=\" um \"+nt.slice(15,21)+\" Uhr \";\n  if (nt.slice(-1)!=\"m\") {\n    msg.payload+=eval(\"0x\"+nt.slice(-2))/2+\" °C \";\n    if (nt.slice(-10,-9)==\"0\") msg.payload+=\"Automatik\";\n    if (nt.slice(-10,-9)==\"1\") msg.payload+=\"manuell\";\n    } else { msg.payload+=\" Wtag umprog.\" }\n  msg.payload+=\"<br/>\";\n  }\nmsg.payload+=\"</div>\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1450,
@@ -3336,7 +3352,7 @@
             "4c724491.fc64ec"
         ],
         "x": 355,
-        "y": 1780,
+        "y": 2240,
         "wires": [
             [
                 "c8454594.ee0748"
@@ -3356,7 +3372,7 @@
         "format": "{{msg.payload}}",
         "layout": "col-center",
         "x": 470,
-        "y": 1800,
+        "y": 2260,
         "wires": []
     },
     {
@@ -3371,7 +3387,7 @@
         "template": "Die Temperatur soll auf {{payload}} °C gestellt werden.",
         "output": "str",
         "x": 380,
-        "y": 1840,
+        "y": 2300,
         "wires": [
             [
                 "c8454594.ee0748"
@@ -3387,7 +3403,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 330,
-        "y": 1800,
+        "y": 2260,
         "wires": [
             [
                 "c8454594.ee0748"
@@ -3412,7 +3428,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 160,
-        "y": 1940,
+        "y": 2400,
         "wires": [
             [
                 "ea2a2823.231728",
@@ -3432,7 +3448,7 @@
         "template": "Nur die aktuelle Temperatur auslesen.",
         "output": "str",
         "x": 250,
-        "y": 1960,
+        "y": 2440,
         "wires": [
             [
                 "c8454594.ee0748"
@@ -3448,7 +3464,7 @@
             "c5008e81.a5d15"
         ],
         "x": 400,
-        "y": 1980,
+        "y": 2440,
         "wires": []
     },
     {
@@ -3459,12 +3475,12 @@
         "topic": "",
         "payload": "notifications",
         "payloadType": "global",
-        "repeat": "",
+        "repeat": "3600",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 830,
-        "y": 1080,
+        "x": 840,
+        "y": 1380,
         "wires": [
             [
                 "99044fd.118b6b"
@@ -3475,14 +3491,398 @@
         "id": "99044fd.118b6b",
         "type": "debug",
         "z": "b4be1bf1.59bee8",
+        "name": "global.notifications",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1060,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "7788dfe7.afb32",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "char-write-req 0411 1002...",
+        "topic": "",
+        "payload": "char-write-req 0411 1002222428842290",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 650,
+        "y": 1280,
+        "wires": [
+            [
+                "4993d777.8aa9e8"
+            ]
+        ]
+    },
+    {
+        "id": "1bfefac3.bd7225",
+        "type": "subflow:f4669750.411278",
+        "z": "b4be1bf1.59bee8",
+        "name": "connect",
+        "x": 440,
+        "y": 720,
+        "wires": [
+            [
+                "90c07b8a.05c628"
+            ],
+            [
+                "1ef8bf8c.60f33"
+            ]
+        ]
+    },
+    {
+        "id": "8425ac42.ff9a7",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "21",
+        "topic": "",
+        "payload": "21",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 270,
+        "y": 800,
+        "wires": [
+            [
+                "1bfefac3.bd7225"
+            ]
+        ]
+    },
+    {
+        "id": "90c07b8a.05c628",
+        "type": "function",
+        "z": "b4be1bf1.59bee8",
+        "name": "hex",
+        "func": "msg.payload=Math.floor(0.5+msg.payload.replace(\",\",\".\")*2).toString(16);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 630,
+        "y": 720,
+        "wires": [
+            [
+                "bc3cc0da.a9861",
+                "72657b97.bd9374"
+            ]
+        ]
+    },
+    {
+        "id": "1ef8bf8c.60f33",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "zu gatttool schicken",
+        "links": [
+            "1fd93aab.4ddaa5"
+        ],
+        "x": 595,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "a8d905c6.29af68",
+        "type": "link in",
+        "z": "b4be1bf1.59bee8",
+        "name": "ganze Woche umprogrammieren",
+        "links": [
+            "4c478841.5e3a68"
+        ],
+        "x": 315,
+        "y": 720,
+        "wires": [
+            [
+                "1bfefac3.bd7225"
+            ]
+        ]
+    },
+    {
+        "id": "f8d4389e.07cdc8",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "22",
+        "topic": "",
+        "payload": "22",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 270,
+        "y": 840,
+        "wires": [
+            [
+                "1bfefac3.bd7225"
+            ]
+        ]
+    },
+    {
+        "id": "bc3cc0da.a9861",
+        "type": "template",
+        "z": "b4be1bf1.59bee8",
+        "name": "Temperatur",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "char-write-req 0411 10012224{{payload}}842290\nchar-write-req 0411 10022224{{payload}}842290\nchar-write-req 0411 10032224{{payload}}842290\nchar-write-req 0411 10042224{{payload}}842290\nchar-write-req 0411 10052224{{payload}}842290\nchar-write-req 0411 10062224{{payload}}842290\nchar-write-req 0411 10072224{{payload}}842290\n",
+        "output": "str",
+        "x": 850,
+        "y": 720,
+        "wires": [
+            [
+                "e2ba8799.f9d278",
+                "b8d8e792.d1fb58"
+            ]
+        ]
+    },
+    {
+        "id": "72657b97.bd9374",
+        "type": "template",
+        "z": "b4be1bf1.59bee8",
+        "name": "umgerechnet in",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Input {{value}} umgerechnet in {{payload}} !",
+        "output": "str",
+        "x": 860,
+        "y": 780,
+        "wires": [
+            [
+                "cc86b5f1.e6c498"
+            ]
+        ]
+    },
+    {
+        "id": "e2ba8799.f9d278",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "zu gatttool schicken",
+        "links": [
+            "1fd93aab.4ddaa5"
+        ],
+        "x": 995,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "b8d8e792.d1fb58",
+        "type": "delay",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 1060,
+        "y": 720,
+        "wires": [
+            [
+                "1fa5a01b.841f1"
+            ]
+        ]
+    },
+    {
+        "id": "cc86b5f1.e6c498",
+        "type": "debug",
+        "z": "b4be1bf1.59bee8",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
         "x": 1030,
-        "y": 1080,
+        "y": 800,
         "wires": []
+    },
+    {
+        "id": "1fa5a01b.841f1",
+        "type": "template",
+        "z": "b4be1bf1.59bee8",
+        "name": "disconnect",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "disconnect 00:1A:22:0B:F9:D1",
+        "output": "str",
+        "x": 1270,
+        "y": 720,
+        "wires": [
+            [
+                "c10e712f.00662",
+                "2e9739ea.0e3ea6"
+            ]
+        ]
+    },
+    {
+        "id": "c10e712f.00662",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "zu gatttool schicken",
+        "links": [
+            "1fd93aab.4ddaa5"
+        ],
+        "x": 1215,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "31039589.359b8a",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "20",
+        "topic": "",
+        "payload": "20",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 270,
+        "y": 760,
+        "wires": [
+            [
+                "1bfefac3.bd7225"
+            ]
+        ]
+    },
+    {
+        "id": "a51058b5.673e28",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "ganze Woche umprogrammieren",
+        "info": "",
+        "x": 130,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "bc1cbbe5.d56ea8",
+        "type": "ui_text_input",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "label": "Wochentemperatur eingeben (dann Enter):",
+        "group": "98f96add.4c0b28",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 230,
+        "y": 2480,
+        "wires": [
+            [
+                "e2087bbf.1b8ea8",
+                "67fb131.907b5ec"
+            ]
+        ]
+    },
+    {
+        "id": "4c478841.5e3a68",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "links": [
+            "a8d905c6.29af68"
+        ],
+        "x": 655,
+        "y": 2480,
+        "wires": []
+    },
+    {
+        "id": "e2087bbf.1b8ea8",
+        "type": "delay",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "60",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 520,
+        "y": 2480,
+        "wires": [
+            [
+                "4c478841.5e3a68"
+            ]
+        ]
+    },
+    {
+        "id": "408b7f.fb96048",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 1440,
+        "y": 660,
+        "wires": [
+            [
+                "46bed413.0dc89c"
+            ]
+        ]
+    },
+    {
+        "id": "73d83bec.5cb0d4",
+        "type": "ui_text",
+        "z": "b4be1bf1.59bee8",
+        "group": "98f96add.4c0b28",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Nachttemperatur einstellen geht noch nicht, müsste gleichzeitig mit Tagtemperatur eingegeben werden, z.B. als [17,21], wäre das ok?",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 540,
+        "y": 2520,
+        "wires": []
+    },
+    {
+        "id": "67fb131.907b5ec",
+        "type": "template",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Die Wochentemperatur soll auf {{payload}} °C gestellt werden.",
+        "output": "str",
+        "x": 530,
+        "y": 2440,
+        "wires": [
+            [
+                "c8454594.ee0748"
+            ]
+        ]
     }
 ]

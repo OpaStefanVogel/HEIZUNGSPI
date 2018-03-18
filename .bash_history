@@ -431,3 +431,25 @@ git commit -a -m "Email-Abfrage wieder alle 5 min"
 git push
 gitk &
 cat Notifications.txt 
+git commit -a -m ".shift() anstatt .shift(t)"
+git push
+cat Notifications.txt 
+screen -r
+cat Notifications.txt 
+cat logfile.txt 
+screen -r
+exit
+ls
+ifconfig
+ls
+cat Notifications.txt 
+ls
+cat Notifications.txt 
+ls
+rm 2018*
+ls
+cat Notifications.txt 
+ifconfig
+ls
+ifconfig
+screen -r
