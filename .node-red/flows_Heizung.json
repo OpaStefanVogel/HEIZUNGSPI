@@ -3281,7 +3281,7 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "func": "msg.payload=\"<div style='font-size:50%; font-color:green; border:solid'>\";\nvar notifications=global.get(\"notifications\");\nfor (var i=0;i<notifications.length;i++) {\n  var nt=notifications[i];\n  msg.payload+=\" um \"+nt.slice(15,21)+\" Uhr \";\n  if (nt.slice(-1)!=\"m\") {\n    msg.payload+=eval(\"0x\"+nt.slice(-2))/2+\" °C \";\n    if (nt.slice(-10,-9)==\"0\") msg.payload+=\"Automatik\";\n    if (nt.slice(-10,-9)==\"1\") msg.payload+=\"manuell\";\n    } else { msg.payload+=\" Wtag umprog.\" }\n  msg.payload+=\"<br/>\";\n  }\nmsg.payload+=\"</div>\";\nreturn msg;",
+        "func": "msg.payload=\"<div style='font-size:50%; font-color:green; border:solid'>\";\nvar notifications=global.get(\"notifications\");\nfor (var i=0;i<notifications.length;i++) {\n  var nt=notifications[i];\n  msg.payload+=nt.slice(0,2)+\" um \"+nt.slice(15,21)+\" Uhr \";\n  if (nt.slice(-1)!=\"m\") {\n    msg.payload+=eval(\"0x\"+nt.slice(-2))/2+\" °C \";\n    if (nt.slice(-10,-9)==\"0\") msg.payload+=\"Automatik\";\n    if (nt.slice(-10,-9)==\"1\") msg.payload+=\"manuell\";\n    } else { msg.payload+=\" Wtag umprog.\" }\n  msg.payload+=\"<br/>\";\n  }\nmsg.payload+=\"</div>\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1450,

@@ -453,3 +453,5 @@ ifconfig
 ls
 ifconfig
 screen -r
+git commit -a -m "Wochentemperatur programmieren"
+git push
