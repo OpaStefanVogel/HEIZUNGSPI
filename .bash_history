@@ -455,3 +455,5 @@ ifconfig
 screen -r
 git commit -a -m "Wochentemperatur programmieren"
 git push
+git commit -a -m "Statusausgabe mit Wochentag"
+git push
