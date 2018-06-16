@@ -4031,7 +4031,8 @@
         "y": 340,
         "wires": [
             [
-                "3b12bcf.61c6844"
+                "3b12bcf.61c6844",
+                "5ab6668e.27f4f8"
             ]
         ]
     },
@@ -4063,5 +4064,34 @@
                 "4a48a70b.1ac828"
             ]
         ]
+    },
+    {
+        "id": "5ab6668e.27f4f8",
+        "type": "function",
+        "z": "b4be1bf1.59bee8",
+        "name": "? help",
+        "func": "var m=msg.payload;\nif (m==\"?\") {\n  msg.payload=\"==>Heizung ?\";\n  return msg;\n  }\nif (m==\"Heizung ?\") {\n  msg.payload=\"==>(Schluessel) Heizung an\\n==>(Schluessel) Heizung aus\\n==>(Schluessel) Heizung Temperatur 12\";\n  return msg;\n  }\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 2150,
+        "y": 400,
+        "wires": [
+            [
+                "6e52852d.17abbc"
+            ]
+        ]
+    },
+    {
+        "id": "6e52852d.17abbc",
+        "type": "mqtt out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "e52b2907.2ceb98",
+        "x": 2360,
+        "y": 400,
+        "wires": []
     }
 ]

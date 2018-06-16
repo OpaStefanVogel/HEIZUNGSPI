@@ -457,3 +457,12 @@ git commit -a -m "Wochentemperatur programmieren"
 git push
 git commit -a -m "Statusausgabe mit Wochentag"
 git push
+git commit -a -m "mqtt-node angeschlossen"
+git push --all
+git log
+screen -r
+df
+du -d 1
+df
+ls -al
+screen -r
