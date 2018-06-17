@@ -466,3 +466,6 @@ du -d 1
 df
 ls -al
 screen -r
+git commit -a -m "? help"
+git push --all
+exit
