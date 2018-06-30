@@ -469,3 +469,8 @@ screen -r
 git commit -a -m "? help"
 git push --all
 exit
+git commit -a -m "nur ? als help"
+git push --all
+exit
+df
+exit

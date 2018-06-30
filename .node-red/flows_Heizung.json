@@ -790,9 +790,10 @@
         "id": "d671fd42.3caae",
         "type": "link out",
         "z": "b4be1bf1.59bee8",
-        "name": "stdout von gatttool -I",
+        "name": "stdout von gatttool -I0",
         "links": [
-            "13e47c28.8e6cc4"
+            "13e47c28.8e6cc4",
+            "e7686e1.93de09"
         ],
         "x": 1315,
         "y": 1620,
@@ -1810,23 +1811,23 @@
         "wires": [
             [
                 "4d2540eb.95b27",
-                "7ebaf6a8.95b2b8"
+                "6804bed4.f19e9"
             ],
             [
-                "7ebaf6a8.95b2b8",
-                "541fd22c.97427c"
+                "541fd22c.97427c",
+                "6804bed4.f19e9"
             ],
             [
-                "7ebaf6a8.95b2b8",
-                "c15d35b3.ab5b58"
+                "c15d35b3.ab5b58",
+                "6804bed4.f19e9"
             ],
             [
-                "7ebaf6a8.95b2b8",
-                "8bbc7a28.c85628"
+                "8bbc7a28.c85628",
+                "6804bed4.f19e9"
             ],
             [
                 "1d72db97.79b7f4",
-                "7ebaf6a8.95b2b8"
+                "6804bed4.f19e9"
             ]
         ]
     },
@@ -1840,7 +1841,7 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 3250,
+        "x": 3330,
         "y": 320,
         "wires": []
     },
@@ -4086,12 +4087,58 @@
         "type": "mqtt out",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "topic": "",
+        "topic": "Testheini78x11/psswd_ha72z",
         "qos": "",
         "retain": "",
         "broker": "e52b2907.2ceb98",
-        "x": 2360,
+        "x": 3550,
         "y": 400,
+        "wires": []
+    },
+    {
+        "id": "6804bed4.f19e9",
+        "type": "template",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Heizung hat zum Ausführen entschlüsselt: {{payload}}",
+        "output": "str",
+        "x": 3150,
+        "y": 320,
+        "wires": [
+            [
+                "7ebaf6a8.95b2b8",
+                "6e52852d.17abbc"
+            ]
+        ]
+    },
+    {
+        "id": "e7686e1.93de09",
+        "type": "link in",
+        "z": "b4be1bf1.59bee8",
+        "name": "mqtt out",
+        "links": [
+            "d671fd42.3caae"
+        ],
+        "x": 3380,
+        "y": 520,
+        "wires": [
+            [
+                "6e52852d.17abbc"
+            ]
+        ]
+    },
+    {
+        "id": "29ce1cf2.ff22d4",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/master/eq-3-radiator-thermostat-api.md",
+        "info": "",
+        "x": 380,
+        "y": 100,
         "wires": []
     }
 ]
