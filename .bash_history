@@ -474,3 +474,9 @@ git push --all
 exit
 df
 exit
+cat .xsessionrc 
+git log
+git pull
+git commit -a -m "was da iat"
+git commit -a -m "nur aktualisieren" --amend
+git push --all

@@ -268,6 +268,44 @@
         "birthPayload": ""
     },
     {
+        "id": "8aea155f.7515e8",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
+        "id": "bbbaa49d.444558",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
         "id": "e3afe0ef.4923f",
         "type": "debug",
         "z": "b4be1bf1.59bee8",
@@ -4033,7 +4071,8 @@
         "wires": [
             [
                 "3b12bcf.61c6844",
-                "5ab6668e.27f4f8"
+                "5ab6668e.27f4f8",
+                "bf2fa21.f40d06"
             ]
         ]
     },
@@ -4121,7 +4160,8 @@
         "z": "b4be1bf1.59bee8",
         "name": "mqtt out",
         "links": [
-            "d671fd42.3caae"
+            "d671fd42.3caae",
+            "3922d47c.c6dd2c"
         ],
         "x": 3380,
         "y": 520,
@@ -4139,6 +4179,235 @@
         "info": "",
         "x": 380,
         "y": 100,
+        "wires": []
+    },
+    {
+        "id": "bf2fa21.f40d06",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "was von mqtt empfangen wurde",
+        "links": [
+            "52631cc3.ad9ce4"
+        ],
+        "x": 2140,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "c7ae5f9b.3851a",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "Chat",
+        "info": "",
+        "x": 150,
+        "y": 3260,
+        "wires": []
+    },
+    {
+        "id": "e2d33f0d.1d2cc",
+        "type": "debug",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "x": 460,
+        "y": 3340,
+        "wires": []
+    },
+    {
+        "id": "8aaa5a3a.7555a8",
+        "type": "function",
+        "z": "b4be1bf1.59bee8",
+        "name": "? help",
+        "func": "var m=msg.payload;\nif (m==\"?\") {\n  msg.payload=\"Antwort von <a href='https://github.com/OpaStefanVogel/HEIZUNGSPI'>Chat</a>:<div style='border:solid; border-color: orange'><code>Chat</code> <i>irgendwelcher Text zur Modelleisenbahn</i></div>\";\n  return msg;\n  }\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 450,
+        "y": 3380,
+        "wires": [
+            [
+                "3922d47c.c6dd2c"
+            ]
+        ]
+    },
+    {
+        "id": "30815c4b.cf7ea4",
+        "type": "function",
+        "z": "b4be1bf1.59bee8",
+        "name": "Chat",
+        "func": "var m=msg.payload;\nif (m.slice(0,4)==\"Chat\") {\n  var Chat=global.get(\"Chat\")||[];\n  var msg2={};\n  m=m.slice(5);\n  if (m.length>0) {\n    Chat.push(m);\n    global.set(\"Chat\",Chat);\n    msg2={\"payload\":m};\n    }\n  msg.payload=\"Antwort vom Chat (die letzten 4):<div style='background-color:grey'>\"+Chat.slice(-4).join(\"<br/>\")+\"</div>\";\n  return [msg2,msg];\n  }\n",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 410,
+        "y": 3560,
+        "wires": [
+            [
+                "97c2e163.683d2"
+            ],
+            [
+                "ccdc38f7.3323c8",
+                "3922d47c.c6dd2c"
+            ]
+        ]
+    },
+    {
+        "id": "2191440d.de6ebc",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "topic": "",
+        "payload": "Chat Test1",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "x": 210,
+        "y": 3560,
+        "wires": [
+            [
+                "30815c4b.cf7ea4"
+            ]
+        ]
+    },
+    {
+        "id": "97c2e163.683d2",
+        "type": "file",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "filename": "/home/pi/Chat.txt",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "x": 650,
+        "y": 3500,
+        "wires": []
+    },
+    {
+        "id": "ccdc38f7.3323c8",
+        "type": "debug",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "true",
+        "x": 640,
+        "y": 3460,
+        "wires": []
+    },
+    {
+        "id": "50aa7280.af558c",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "topic": "",
+        "payload": "Chat ",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 190,
+        "y": 3740,
+        "wires": [
+            [
+                "30815c4b.cf7ea4"
+            ]
+        ]
+    },
+    {
+        "id": "6ccc445e.9333bc",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "topic": "",
+        "payload": "Chat Test2",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "6",
+        "x": 210,
+        "y": 3600,
+        "wires": [
+            [
+                "30815c4b.cf7ea4"
+            ]
+        ]
+    },
+    {
+        "id": "ab76a4de.548958",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "topic": "",
+        "payload": "Chat Test3",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "7",
+        "x": 210,
+        "y": 3640,
+        "wires": [
+            [
+                "30815c4b.cf7ea4"
+            ]
+        ]
+    },
+    {
+        "id": "b76d8866.489278",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "topic": "",
+        "payload": "Chat Test4",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "8",
+        "x": 210,
+        "y": 3680,
+        "wires": [
+            [
+                "30815c4b.cf7ea4"
+            ]
+        ]
+    },
+    {
+        "id": "52631cc3.ad9ce4",
+        "type": "link in",
+        "z": "b4be1bf1.59bee8",
+        "name": "was zum Chat gehen soll",
+        "links": [
+            "bf2fa21.f40d06"
+        ],
+        "x": 200,
+        "y": 3440,
+        "wires": [
+            [
+                "e2d33f0d.1d2cc",
+                "8aaa5a3a.7555a8",
+                "30815c4b.cf7ea4"
+            ]
+        ]
+    },
+    {
+        "id": "3922d47c.c6dd2c",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "was vom Chat zurückgeschickt wird",
+        "links": [
+            "e7686e1.93de09"
+        ],
+        "x": 655,
+        "y": 3380,
         "wires": []
     }
 ]
