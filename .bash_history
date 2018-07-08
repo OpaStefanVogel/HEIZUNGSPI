@@ -480,3 +480,6 @@ git pull
 git commit -a -m "was da iat"
 git commit -a -m "nur aktualisieren" --amend
 git push --all
+git commit -a -m "Chat"
+git push --all
+screen -r
