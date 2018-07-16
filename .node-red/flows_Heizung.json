@@ -3669,7 +3669,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "char-write-req 0411 10012224{{payload}}842290\nchar-write-req 0411 10022224{{payload}}842290\nchar-write-req 0411 10032224{{payload}}842290\nchar-write-req 0411 10042224{{payload}}842290\nchar-write-req 0411 10052224{{payload}}842290\nchar-write-req 0411 10062224{{payload}}842290\nchar-write-req 0411 10072224{{payload}}842290\n",
+        "template": "char-write-req 0411 10011024{{payload}}841090\nchar-write-req 0411 10021024{{payload}}841090\nchar-write-req 0411 10031024{{payload}}841090\nchar-write-req 0411 10041024{{payload}}841090\nchar-write-req 0411 10051024{{payload}}841090\nchar-write-req 0411 10061024{{payload}}841090\nchar-write-req 0411 10071024{{payload}}841090\n",
         "output": "str",
         "x": 850,
         "y": 840,
