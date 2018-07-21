@@ -493,3 +493,5 @@ screen -r
 git commit -a -m "Wochentagundnachttemperatur"
 git pull
 git push --all
+git commit -a -m "Wochentemperatur auch über mosquitto"
+git push --all

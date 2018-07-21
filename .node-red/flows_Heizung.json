@@ -4096,7 +4096,7 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "? help",
-        "func": "var m=msg.payload;\nif (m==\"?\") {\n  msg.payload=\"Antwort von <a href='https://github.com/OpaStefanVogel/HEIZUNGSPI'>Heizung</a>:<div style='border:solid; border-color: red'><code>(Schluessel) Heizung an</code><br/><code>(Schluessel) Heizung aus</code><br/><code>(Schluessel) Heizung Temperatur 12</code></div>\";\n  return msg;\n  }\n",
+        "func": "var m=msg.payload;\nif (m==\"?\") {\n  msg.payload=\"Antwort von <a href='https://github.com/OpaStefanVogel/HEIZUNGSPI'>Heizung</a>:<div style='border:solid; border-color: red'><code>(Schluessel) Heizung an</code><br/><code>(Schluessel) Heizung aus</code><br/><code>(Schluessel) Heizung Status</code><br/><code>(Schluessel) Heizung reboot</code><br/><code>(Schluessel) Heizung Temperatur 12</code><br/><code>(Schluessel) Heizung Wochentemperatur 20 17</code> <i>Tagestemperatur Nachttemperatur</i></div>\";\n  return msg;\n  }\n",
         "outputs": 1,
         "noerr": 0,
         "x": 2150,
