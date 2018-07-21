@@ -3600,15 +3600,15 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "hex",
-        "func": "msg.payload=Math.floor(0.5+msg.payload.replace(\",\",\".\")*2).toString(16);\nreturn msg;",
+        "func": "var m=msg.payload.trim().split(\" \");\nif (m.length==1) m[1]=\"8\";\nmsg.payload=\n  Math.floor(0.5+m[1].replace(\",\",\".\")*2).toString(16)+\"24\"+\n  Math.floor(0.5+m[0].replace(\",\",\".\")*2).toString(16)+\"84\"+\n  Math.floor(0.5+m[1].replace(\",\",\".\")*2).toString(16)+\"90\"\n  ;\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 630,
         "y": 840,
         "wires": [
             [
-                "bc3cc0da.a9861",
-                "72657b97.bd9374"
+                "72657b97.bd9374",
+                "bc3cc0da.a9861"
             ]
         ]
     },
@@ -3669,14 +3669,14 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "char-write-req 0411 10011024{{payload}}841090\nchar-write-req 0411 10021024{{payload}}841090\nchar-write-req 0411 10031024{{payload}}841090\nchar-write-req 0411 10041024{{payload}}841090\nchar-write-req 0411 10051024{{payload}}841090\nchar-write-req 0411 10061024{{payload}}841090\nchar-write-req 0411 10071024{{payload}}841090\n",
+        "template": "char-write-req 0411 1001{{payload}}\nchar-write-req 0411 1002{{payload}}\nchar-write-req 0411 1003{{payload}}\nchar-write-req 0411 1004{{payload}}\nchar-write-req 0411 1005{{payload}}\nchar-write-req 0411 1006{{payload}}\nchar-write-req 0411 1007{{payload}}\n",
         "output": "str",
         "x": 850,
         "y": 840,
         "wires": [
             [
-                "e2ba8799.f9d278",
-                "b8d8e792.d1fb58"
+                "b8d8e792.d1fb58",
+                "e2ba8799.f9d278"
             ]
         ]
     },
@@ -4390,5 +4390,25 @@
         "x": 655,
         "y": 3380,
         "wires": []
+    },
+    {
+        "id": "44ce2bb8.47ccf4",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "topic": "",
+        "payload": "9",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 270,
+        "y": 1000,
+        "wires": [
+            [
+                "1bfefac3.bd7225"
+            ]
+        ]
     }
 ]

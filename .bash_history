@@ -485,3 +485,8 @@ git push --all
 screen -r
 git commit -a -m "Re_Heizung"
 git push --all
+git commit -a -m "Nachttemperatur fest auf 8 eingestellt"
+git push --all
+sudo reboot
+cat .xsessionrc 
+screen -r
