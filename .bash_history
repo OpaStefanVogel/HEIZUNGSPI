@@ -490,3 +490,6 @@ git push --all
 sudo reboot
 cat .xsessionrc 
 screen -r
+git commit -a -m "Wochentagundnachttemperatur"
+git pull
+git push --all

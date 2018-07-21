@@ -1822,8 +1822,8 @@
         "type": "function",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "func": "var p=msg.payload.trim().toLowerCase().replace(/\\n/g,\" \")+\" \";\nvar msg1=null; if (p.slice(0,10)==\"heizung an\") {msg1={}; msg1.payload=\"Heizung an\"};\nvar msg2=null; if (p.slice(0,11)==\"heizung aus\") {msg2={}; msg2.payload=\"Heizung aus\"};\nvar msg3=null; if (p.slice(0,6)==\"status\") {msg3={}; msg3.payload=\"Status\"};\n               if (p.slice(0,5)==\"viele\") {msg3={}; msg3.payload=\"Status\"};\nvar msg4=null; if (p.slice(0,6)==\"reboot\") {msg4={}; msg4.payload=\"Reboot\"};\nvar msg5=null; if (p.slice(0,18)==\"heizung temperatur\") {msg5={}; msg5.payload=p.slice(19,p.indexOf(\" \",19))};\nreturn [msg1,msg2,msg3,msg4,msg5];\n",
-        "outputs": 5,
+        "func": "var p=msg.payload.trim().toLowerCase().replace(/\\n/g,\" \")+\" \";\nvar msg1=null; if (p.slice(0,10)==\"heizung an\") {msg1={}; msg1.payload=\"Heizung an\"}\nvar msg2=null; if (p.slice(0,11)==\"heizung aus\") {msg2={}; msg2.payload=\"Heizung aus\"}\nvar msg3=null; if (p.slice(0,14)==\"heizung status\") {msg3={}; msg3.payload=\"Status\"}\n               if (p.slice(0,13)==\"heizung viele\") {msg3={}; msg3.payload=\"Status\"}\nvar msg4=null; if (p.slice(0,14)==\"heizung reboot\") {msg4={}; msg4.payload=\"Reboot\"}\nvar msg5=null; if (p.slice(0,18)==\"heizung temperatur\") {msg5={}; msg5.payload=p.slice(19,p.indexOf(\" \",19))}\nvar msg6=null; if (p.slice(0,24)==\"heizung wochentemperatur\") {msg6={}; msg6.payload=p.slice(24)}\nreturn [msg1,msg2,msg3,msg4,msg5,msg6];\n",
+        "outputs": 6,
         "noerr": 0,
         "x": 2990,
         "y": 340,
@@ -1846,6 +1846,10 @@
             ],
             [
                 "1d72db97.79b7f4",
+                "6804bed4.f19e9"
+            ],
+            [
+                "bc965546.d1bc48",
                 "6804bed4.f19e9"
             ]
         ]
@@ -3630,7 +3634,8 @@
         "z": "b4be1bf1.59bee8",
         "name": "ganze Woche umprogrammieren",
         "links": [
-            "4c478841.5e3a68"
+            "4c478841.5e3a68",
+            "bc965546.d1bc48"
         ],
         "x": 315,
         "y": 840,
@@ -4124,7 +4129,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "Re_Heizung: Zum Ausführen entschlüsselt: {{payload}}",
+        "template": "Re_Heizung: Zum Ausführen entschlüsselt: {{payload}} .",
         "output": "str",
         "x": 3150,
         "y": 320,
@@ -4410,5 +4415,17 @@
                 "1bfefac3.bd7225"
             ]
         ]
+    },
+    {
+        "id": "bc965546.d1bc48",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "links": [
+            "a8d905c6.29af68"
+        ],
+        "x": 3195,
+        "y": 620,
+        "wires": []
     }
 ]
