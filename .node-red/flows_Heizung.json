@@ -287,6 +287,14 @@
         "birthPayload": ""
     },
     {
+        "id": "d994f6f5.fe6d58",
+        "type": "websocket-client",
+        "z": "",
+        "path": "ws://radio:1880/ws/mqtt_ersatz",
+        "tls": "",
+        "wholemsg": "false"
+    },
+    {
         "id": "e3afe0ef.4923f",
         "type": "debug",
         "z": "b4be1bf1.59bee8",
@@ -4058,7 +4066,8 @@
             [
                 "3b12bcf.61c6844",
                 "5ab6668e.27f4f8",
-                "bf2fa21.f40d06"
+                "bf2fa21.f40d06",
+                "8818ba6e.fb2458"
             ]
         ]
     },
@@ -4427,5 +4436,31 @@
         "x": 3195,
         "y": 620,
         "wires": []
+    },
+    {
+        "id": "8818ba6e.fb2458",
+        "type": "websocket out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "server": "",
+        "client": "d994f6f5.fe6d58",
+        "x": 2250,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "fe0e125b.788d9",
+        "type": "websocket in",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "server": "",
+        "client": "d994f6f5.fe6d58",
+        "x": 3480,
+        "y": 580,
+        "wires": [
+            [
+                "6e52852d.17abbc"
+            ]
+        ]
     }
 ]

@@ -495,3 +495,5 @@ git pull
 git push --all
 git commit -a -m "Wochentemperatur auch über mosquitto"
 git push --all
+git commit -a -m "help jetzt auch mit Wochentemperatur"
+git push --all
