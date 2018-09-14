@@ -2799,7 +2799,7 @@
         "z": "f4669750.411278",
         "name": "",
         "pauseType": "delay",
-        "timeout": "10",
+        "timeout": "3",
         "timeoutUnits": "seconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -2822,7 +2822,7 @@
         "z": "f4669750.411278",
         "name": "",
         "pauseType": "delay",
-        "timeout": "10",
+        "timeout": "3",
         "timeoutUnits": "seconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -2845,7 +2845,7 @@
         "z": "f4669750.411278",
         "name": "",
         "pauseType": "delay",
-        "timeout": "10",
+        "timeout": "3",
         "timeoutUnits": "seconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -3902,22 +3902,6 @@
         ]
     },
     {
-        "id": "73d83bec.5cb0d4",
-        "type": "ui_text",
-        "z": "b4be1bf1.59bee8",
-        "group": "98f96add.4c0b28",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Nachttemperatur einstellen geht noch nicht, müsste gleichzeitig mit Tagtemperatur eingegeben werden, z.B. als [17,21], wäre das ok?",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "x": 540,
-        "y": 2640,
-        "wires": []
-    },
-    {
         "id": "67fb131.907b5ec",
         "type": "template",
         "z": "b4be1bf1.59bee8",
@@ -4411,7 +4395,7 @@
         "z": "b4be1bf1.59bee8",
         "name": "",
         "topic": "",
-        "payload": "9",
+        "payload": "9 9",
         "payloadType": "str",
         "repeat": "",
         "crontab": "",
@@ -4460,6 +4444,26 @@
         "wires": [
             [
                 "6e52852d.17abbc"
+            ]
+        ]
+    },
+    {
+        "id": "63c1367.a29d7c8",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "topic": "",
+        "payload": "10 10",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 270,
+        "y": 1040,
+        "wires": [
+            [
+                "1bfefac3.bd7225"
             ]
         ]
     }

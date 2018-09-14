@@ -497,3 +497,8 @@ git commit -a -m "Wochentemperatur auch über mosquitto"
 git push --all
 git commit -a -m "help jetzt auch mit Wochentemperatur"
 git push --all
+git commit -a -m "ws://radio:1880/ws/mqtt_ersatz"
+git push -all
+git push --all
+git pull
+screen -r
