@@ -3828,7 +3828,7 @@
         "type": "ui_text_input",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "label": "Wochentemperatur eingeben (dann Enter):",
+        "label": "<i>T<sub>Tag</sub> Leerzeichen T<sub>Nacht</sub> Enter</i>",
         "group": "98f96add.4c0b28",
         "order": 1,
         "width": 0,
@@ -3837,7 +3837,7 @@
         "mode": "text",
         "delay": "0",
         "topic": "",
-        "x": 230,
+        "x": 210,
         "y": 2600,
         "wires": [
             [
@@ -4187,7 +4187,7 @@
         "type": "debug",
         "z": "b4be1bf1.59bee8",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": true,
         "tostatus": false,

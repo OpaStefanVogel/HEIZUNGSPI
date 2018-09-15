@@ -502,3 +502,6 @@ git push -all
 git push --all
 git pull
 screen -r
+git commit -a -m "subflow alle delay von 10 auf 3"
+git push --all
+git pull
