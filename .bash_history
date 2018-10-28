@@ -505,3 +505,6 @@ screen -r
 git commit -a -m "subflow alle delay von 10 auf 3"
 git push --all
 git pull
+git commit -a -m "Beschriftung <i>T<sub>Tag</sub>..."
+git push --all
+screen -r

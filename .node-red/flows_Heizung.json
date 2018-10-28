@@ -295,6 +295,13 @@
         "wholemsg": "false"
     },
     {
+        "id": "2bd98ac7.7835b6",
+        "type": "websocket-listener",
+        "z": "",
+        "path": "/ws/gatttool2",
+        "wholemsg": "false"
+    },
+    {
         "id": "e3afe0ef.4923f",
         "type": "debug",
         "z": "b4be1bf1.59bee8",
@@ -324,13 +331,16 @@
             [
                 "2f7cfd7b.d33812",
                 "ade4342e.019f58",
-                "2fe96195.2ebc5e"
+                "2fe96195.2ebc5e",
+                "f55c7339.16e8a"
             ],
             [
-                "e3afe0ef.4923f"
+                "e3afe0ef.4923f",
+                "f55c7339.16e8a"
             ],
             [
-                "e3afe0ef.4923f"
+                "e3afe0ef.4923f",
+                "f55c7339.16e8a"
             ]
         ]
     },
@@ -431,27 +441,6 @@
         "wires": [
             [
                 "4993d777.8aa9e8"
-            ]
-        ]
-    },
-    {
-        "id": "116759e4.aa4fa6",
-        "type": "e-mail in",
-        "z": "b4be1bf1.59bee8",
-        "name": "ungelesene Emails abfragen",
-        "protocol": "IMAP",
-        "server": "imap.gmail.com",
-        "useSSL": true,
-        "port": "993",
-        "box": "INBOX",
-        "disposition": "None",
-        "repeat": "400",
-        "x": 180,
-        "y": 220,
-        "wires": [
-            [
-                "44ecd0fb.0396b",
-                "5efdc9ba.edab58"
             ]
         ]
     },
@@ -2496,7 +2485,7 @@
         "timeout": "5",
         "timeoutUnits": "seconds",
         "rate": "1",
-        "nbRateUnits": "8",
+        "nbRateUnits": "4",
         "rateUnits": "second",
         "randomFirst": "1",
         "randomLast": "5",
@@ -4464,6 +4453,110 @@
         "wires": [
             [
                 "1bfefac3.bd7225"
+            ]
+        ]
+    },
+    {
+        "id": "3062a743.452c88",
+        "type": "e-mail in",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "protocol": "IMAP",
+        "server": "imap.gmail.com",
+        "useSSL": true,
+        "port": "993",
+        "box": "INBOX",
+        "disposition": "None",
+        "repeat": "300",
+        "x": 110,
+        "y": 260,
+        "wires": [
+            [
+                "5efdc9ba.edab58",
+                "44ecd0fb.0396b"
+            ]
+        ]
+    },
+    {
+        "id": "3edeb5f.d43164a",
+        "type": "websocket in",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "server": "2bd98ac7.7835b6",
+        "client": "",
+        "x": 170,
+        "y": 1920,
+        "wires": [
+            [
+                "13e31969.f64ff7"
+            ]
+        ]
+    },
+    {
+        "id": "13e31969.f64ff7",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "links": [
+            "12275bd7.e1ead4"
+        ],
+        "x": 315,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "12275bd7.e1ead4",
+        "type": "link in",
+        "z": "b4be1bf1.59bee8",
+        "name": "gatttool ohne delay",
+        "links": [
+            "13e31969.f64ff7"
+        ],
+        "x": 215,
+        "y": 1720,
+        "wires": [
+            [
+                "e0e65fc1.d1819",
+                "97d3725d.6888b"
+            ]
+        ]
+    },
+    {
+        "id": "f5783b10.6b3918",
+        "type": "websocket out",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "server": "2bd98ac7.7835b6",
+        "client": "",
+        "x": 530,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "f55c7339.16e8a",
+        "type": "link out",
+        "z": "b4be1bf1.59bee8",
+        "name": "gatttool output ohne join",
+        "links": [
+            "9b199230.d71c9"
+        ],
+        "x": 535,
+        "y": 1720,
+        "wires": []
+    },
+    {
+        "id": "9b199230.d71c9",
+        "type": "link in",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "links": [
+            "f55c7339.16e8a"
+        ],
+        "x": 375,
+        "y": 1920,
+        "wires": [
+            [
+                "f5783b10.6b3918"
             ]
         ]
     }
