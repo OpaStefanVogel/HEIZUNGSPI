@@ -3,9 +3,19 @@
 
 <style>
 button {font-size:130%}
+.nicht_verbunden {color:darkred}
+.versuche_zu_verbinden {color:yellow}
+.verbunden {color:green}
   </style>
 
 <script id="scr" type="application/ecmascript">
+var Attempting_to_connect=0;
+var Attempting_to_connect_mem=0;
+var No_route_to_host=0;
+var No_route_to_host_mem=0;
+
+
+
 var websocket=0;
 var wgesamt="";
 var CodeArray=[];
@@ -14,8 +24,7 @@ function websocket_verbinden() {
   var Adresse=document.getElementById("Websocket_Adresse").value;
   websocket = new WebSocket(Adresse,"fiktiv");
   websocket.onmessage = function(event) {
-    var w;
-    w=event.data;
+    var w=event.data;
     //alert(w+"####");
     var textarea=document.getElementById("Websocket-Antwort");
     textarea.value+=w; //firstChild.nodeValue+=w;
@@ -35,6 +44,23 @@ function websocket_verbinden() {
       } else {
         document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu rechnen "+noch_nicht_gesendet+" Zeilen, bisher "+textarea.value.length+" Zeichen empfangen.";
         }
+    
+    var Thermostat=document.getElementById("Thermostat");
+    
+    Attempting_to_connect=textarea.value.indexOf("Attempting to connect",Attempting_to_connect_mem);
+    if (Attempting_to_connect>Attempting_to_connect_mem) {
+      Thermostat.firstChild.nodeValue="Attempting to connect";
+      Thermostat.setAttribute("class","versuche_zu_verbinden");
+      Attempting_to_connect_mem=Attempting_to_connect+1;
+      }
+
+    No_route_to_host=textarea.value.indexOf("No route to host",No_route_to_host_mem);
+    if (No_route_to_host>No_route_to_host_mem) {
+      Thermostat.firstChild.nodeValue="No route to host";
+      Thermostat.setAttribute("class","nicht_verbunden");
+      No_route_to_host_mem=No_route_to_host+1;
+      }
+    
     };
   websocket.onopen = function() {
     websocket.send('disconnect');
@@ -49,6 +75,9 @@ function websocket_verbinden() {
 function websocket_verbunden() {
   if (websocket!=0) {
     document.getElementById("Websocket_Status").firstChild.nodeValue=(["CONNECTING","OPEN","CLOSING","CLOSED"])[websocket.readyState];
+    var elm=document.getElementById("Raspberry Pi")
+    elm.firstChild.nodeValue=(["wird verbunden","Verbindung ist hergestellt","Verbindung wird getrennt","nicht verbunden (Seite neu laden für neuen Versuch)"])[websocket.readyState];
+    elm.setAttribute("class",(["versuche_zu_verbinden","verbunden","Verbindung_wird_getrennt","nicht_verbunden"])[websocket.readyState]);
     }
   }
 setInterval(websocket_verbunden,1000);
@@ -181,15 +210,25 @@ function Stopp_Boost_mode() {
 
 <body onload="websocket_verbinden()">
 Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/master/eq-3-radiator-thermostat-api.md">https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/master/eq-3-radiator-thermostat-api.md<a>
+
 <ul>
-<li>Verbindung zum Raspberry Pi Heizung: <span id="Raspberry Pi">verbunden</span>.</li>
-<li>Von dort zum Thermostat: <span id="Thermostat">disconnected</span> (<span id="Verbindung">wird automatisch verbunden, sobald was eingegeben wird.</span>).</li>
-<li>Aktuellen Status <button onclick="Status_abfragen()">abfragen</button>: Temperatur <span id="Temperatur">20</span> °C, Modus <span id="Modus">auto</span>, Ventil <span id="Ventilstellung">50</span>% geöffnet, Batterie <span id="Batterie">ok</span>.</li>
+
+<li>Verbindung zum Raspberry Pi Heizung: <span id="Raspberry Pi" class="nicht_verbunden">nicht verbunden</span>.</li>
+
+<li>Von dort zum Thermostat: <span id="Thermostat" class="nicht_verbunden">disconnected</span> (<span id="Verbindung">wird automatisch verbunden, sobald was eingegeben wird.</span>).</li>
+
+<li>Aktuellen Status <button onclick="Status_abfragen()">abfragen</button>: Temperatur <span id="Temperatur" class="nicht_verbunden">??</span> °C, Modus <span id="Modus" class="nicht_verbunden">????</span>, Ventil <span id="Ventilstellung" class="nicht_verbunden">??</span>% geöffnet, Batterie <span id="Batterie" class="nicht_verbunden">??</span>.</li>
+
 <li>Aktuelle Solltemperatur auf <input id="aktuelle_Solltemperatur" size="2" value="23"/> °C <button onclick="Solltemperatur_einstellen(document.getElementById('aktuelle_Solltemperatur').value)">einstellen</button> (gilt bis zum nächsten Umschaltzeitpunkt).</li>
+
 <li>Wochentemperatur auf tagsüber <input id="Wochentemperatur_tagsueber" size="2" value="20"/> °C und nachts <input id="Wochentemperatur_nachts" size="2" value="17"/> °C <button onclick="Wochentemperatur_programmieren(document.getElementById('Wochentemperatur_tagsueber').value,document.getElementById('Wochentemperatur_nachts').value)">programmieren</button>.</li>
+
 <li>Modus einstellen: <button onclick="Modus_manu()">manu</button> oder <button onclick="Modus_auto()">auto</button>.</li>
+
 <li><button onclick="Datum_aktualisieren()">Aktualisiere</button> Datum und Uhrzeit.</li>
+
 <li>Modus "Fenster auf" für <input id="Fenster_auf_Dauer" size="2" value="30"/> min auf <input id="Fenster_auf_Temperatur" size="2" value="12"/> °C <button onclick="Fenstermodus_aktivieren(document.getElementById('Fenster_auf_Dauer').value,document.getElementById('Fenster_auf_Temperatur').value)">aktivieren</button>.</li>
+
 <li><button onclick="Start_Boost_mode()">Start</button>, <button onclick="Stopp_Boost_mode()">Stopp</button> Boost Mode (5 Minuten)</li>
 
 <!--
