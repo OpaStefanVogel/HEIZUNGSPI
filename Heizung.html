@@ -106,18 +106,92 @@ function Uhrzeit_aktualisieren() {
   }
 
 </script>
+<script id="scr" type="application/ecmascript">
+function number_to_hex(dauer) {
+  var thex=Math.round(dauer).toString(16);
+  if (thex.length==1) thex="0"+thex;
+  return thex;
+  }
+
+function temp_to_hex(temp) {
+  var thex=(temp*2).toString(16);
+  if (thex.length==1) thex="0"+thex;
+  return thex;
+  }
+
+function req(text) {
+  alert("connect\n"+text+"disconnect");
+  }
+</script>
+<script id="scr" type="application/ecmascript">
+function Status_abfragen() {
+  req("char-write-req 411 8000\n");//mit unlock
+  }
+
+function Modus_auto() {
+  req("char-write-req 411 4000\n");
+  }
+
+function Modus_manu() {
+  req("char-write-req 411 4040\n");
+  }
+
+function Solltemperatur_einstellen(temp) {
+  req("char-write-req 411 41"+temp_to_hex(temp)+"\n");
+  }
+
+function Wochentemperatur_programmieren(ttag,tnacht) {
+  var Code="";
+  for (i=0;i<7;i++) {
+    Code=Code+"char-write-req 411 100"+i
+      +temp_to_hex(tnacht)+"2A"
+      +temp_to_hex(ttag)+"84"
+      +temp_to_hex(tnacht)+"90\n";
+    }
+  req(Code);
+  }
+
+function Datum_aktualisieren() {
+  var jetzt=new Date();
+//  alert(jetzt);
+  req("char-write-req 411 03"
+    +number_to_hex(jetzt.getFullYear()%100)
+    +"02"
+    +number_to_hex(jetzt.getMonth())
+    +number_to_hex(jetzt.getDate())
+    +number_to_hex(jetzt.getHours())
+    +number_to_hex(jetzt.getMinutes())
+    +number_to_hex(jetzt.getSeconds())
+    +"\n");
+  }
+
+function Fenstermodus_aktivieren(dauer,temp) {
+  req("char-write-req 411 45"+number_to_hex(dauer/5)+temp_to_hex(temp)+"\n");
+  }
+
+function Start_Boost_mode() {
+  req("char-write-req 411 45FF\n");
+  }
+
+function Stopp_Boost_mode() {
+  req("char-write-req 411 4500\n");
+  }
+
+</script>
 
 <body onload="websocket_verbinden()">
-
+Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/master/eq-3-radiator-thermostat-api.md">https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/master/eq-3-radiator-thermostat-api.md<a>
 <ul>
 <li>Verbindung zum Raspberry Pi Heizung: <span id="Raspberry Pi">verbunden</span>.</li>
-<li>Von dort zum Thermostat: <span id="Thermostat">disconnected</span> (<span id="Verbindung">wird automatisch verbunden, wenn was eingegeben</span>).</li>
+<li>Von dort zum Thermostat: <span id="Thermostat">disconnected</span> (<span id="Verbindung">wird automatisch verbunden, sobald was eingegeben wird.</span>).</li>
 <li>Aktuellen Status <button onclick="Status_abfragen()">abfragen</button>: Temperatur <span id="Temperatur">20</span> °C, Modus <span id="Modus">auto</span>, Ventil <span id="Ventilstellung">50</span>% geöffnet, Batterie <span id="Batterie">ok</span>.</li>
-<li>Aktuelle Solltemperatur auf <input id="aktuelle_Solltemperatur" size="2" value="23"/> °C <button onclick="Solltemperatur_einstellen()">einstellen</button> (gilt bis zum nächsten Umschaltzeitpunkt).</li>
-<li>Wochentemperatur auf tagsüber <input id="Wochentemperatur_tagsueber" size="2" value="20"/> °C und nachts <input id="Wochentemperatur_nachts" size="2" value="17"/> °C <button onclick="Wochentemperatur_programmieren()">programmieren</button>.</li>
+<li>Aktuelle Solltemperatur auf <input id="aktuelle_Solltemperatur" size="2" value="23"/> °C <button onclick="Solltemperatur_einstellen(document.getElementById('aktuelle_Solltemperatur').value)">einstellen</button> (gilt bis zum nächsten Umschaltzeitpunkt).</li>
+<li>Wochentemperatur auf tagsüber <input id="Wochentemperatur_tagsueber" size="2" value="20"/> °C und nachts <input id="Wochentemperatur_nachts" size="2" value="17"/> °C <button onclick="Wochentemperatur_programmieren(document.getElementById('Wochentemperatur_tagsueber').value,document.getElementById('Wochentemperatur_nachts').value)">programmieren</button>.</li>
 <li>Modus einstellen: <button onclick="Modus_manu()">manu</button> oder <button onclick="Modus_auto()">auto</button>.</li>
 <li><button onclick="Datum_aktualisieren()">Aktualisiere</button> Datum und Uhrzeit.</li>
-<li>Modus "Fenster auf" für <input id="Fenster_auf_Dauer" size="2" value="30"/> min auf <input id="Fenster_auf_Temperatur" size="2" value="12"/> °C <button onclick="Fenstermodus_aktivieren()">aktivieren</button>.</li>
+<li>Modus "Fenster auf" für <input id="Fenster_auf_Dauer" size="2" value="30"/> min auf <input id="Fenster_auf_Temperatur" size="2" value="12"/> °C <button onclick="Fenstermodus_aktivieren(document.getElementById('Fenster_auf_Dauer').value,document.getElementById('Fenster_auf_Temperatur').value)">aktivieren</button>.</li>
+<li><button onclick="Start_Boost_mode()">Start</button>, <button onclick="Stopp_Boost_mode()">Stopp</button> Boost Mode (5 Minuten)</li>
+
 <!--
 <li></li>
 <li></li>
