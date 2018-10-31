@@ -5,8 +5,6 @@
 button {font-size:130%}
   </style>
 
-<body onload="">
-
 <script id="scr" type="application/ecmascript">
 var websocket=0;
 var wgesamt="";
@@ -108,6 +106,26 @@ function Uhrzeit_aktualisieren() {
   }
 
 </script>
+
+<body onload="websocket_verbinden()">
+
+<ul>
+<li>Verbindung zum Raspberry Pi Heizung: <span id="Raspberry Pi">verbunden</span>.</li>
+<li>Von dort zum Thermostat: <span id="Thermostat">disconnected</span> (<span id="Verbindung">wird automatisch verbunden, wenn was eingegeben</span>).</li>
+<li>Aktuellen Status <button onclick="Status_abfragen()">abfragen</button>: Temperatur <span id="Temperatur">20</span> °C, Modus <span id="Modus">auto</span>, Ventil <span id="Ventilstellung">50</span>% geöffnet, Batterie <span id="Batterie">ok</span>.</li>
+<li>Aktuelle Solltemperatur auf <input id="aktuelle_Solltemperatur" size="2" value="23"/> °C <button onclick="Solltemperatur_einstellen()">einstellen</button> (gilt bis zum nächsten Umschaltzeitpunkt).</li>
+<li>Wochentemperatur auf tagsüber <input id="Wochentemperatur_tagsueber" size="2" value="20"/> °C und nachts <input id="Wochentemperatur_nachts" size="2" value="17"/> °C <button onclick="Wochentemperatur_programmieren()">programmieren</button>.</li>
+<li>Modus einstellen: <button onclick="Modus_manu()">manu</button> oder <button onclick="Modus_auto()">auto</button>.</li>
+<li><button onclick="Datum_aktualisieren()">Aktualisiere</button> Datum und Uhrzeit.</li>
+<li>Modus "Fenster auf" für <input id="Fenster_auf_Dauer" size="2" value="30"/> min auf <input id="Fenster_auf_Temperatur" size="2" value="12"/> °C <button onclick="Fenstermodus_aktivieren()">aktivieren</button>.</li>
+<!--
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+-->
+
+  </ul>
 
 <div id="Websocket_Rahmen"><div style="outline:solid; outline-size: 5px; outline-color: beige;">
 <div>zu <input id="Websocket_Adresse" size="25" value="ws://modellbahnpult:1880/ws/gatttool"/> <button onclick="websocket_verbinden()">Verbindung herstellen</button> <a href="http://www.w3.org/TR/2012/CR-websockets-20120920/#the-websocket-interface" id="Websocket_Status">CLOSED</a> (falls nötig <button onclick="restart_GAP(event)">Restart GAP</button>)</div>
