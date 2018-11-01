@@ -53,22 +53,23 @@ function websocket_verbinden() {
     
     if (w.slice(-2)=="> ") {
       var Thermostat=document.getElementById("Thermostat");
+      var tav=textarea.value;
     
-      Attempting_to_connect=textarea.value.indexOf("Attempting to connect",Attempting_to_connect_mem);
+      Attempting_to_connect=tav.indexOf("Attempting to connect",Attempting_to_connect_mem);
       if (Attempting_to_connect>Attempting_to_connect_mem) {
         Thermostat.firstChild.nodeValue="Attempting to connect";
         Thermostat.setAttribute("class","versuche_zu_verbinden");
         Attempting_to_connect_mem=Attempting_to_connect+1;
         }
 
-      No_route_to_host=textarea.value.indexOf("No route to host",No_route_to_host_mem);
+      No_route_to_host=tav.indexOf("No route to host",No_route_to_host_mem);
       if (No_route_to_host>No_route_to_host_mem) {
         Thermostat.firstChild.nodeValue="No route to host";
         Thermostat.setAttribute("class","nicht_verbunden");
         No_route_to_host_mem=No_route_to_host+1;
         }
     
-      Connection_sucessfull=textarea.value.indexOf("Connection sucessfull",Connection_sucessfull_mem);
+      Connection_sucessfull=tav.indexOf("Connection sucessfull",Connection_sucessfull_mem);
       if (Connection_sucessfull>Connection_sucessfull_mem) {
         Thermostat.firstChild.nodeValue="Connection sucessfull";
         Thermostat.setAttribute("class","verbunden");
@@ -77,13 +78,25 @@ function websocket_verbinden() {
         CodeArray=document.getElementById("Ausgabe").lastChild.nodeValue.trim().split("\n");
         document.getElementById("Ausgabe").lastChild.nodeValue="";
         noch_nicht_gesendet=CodeArray.length-1;
-         document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu senden: "+noch_nicht_gesendet+" Zeilen";
-        websocket.send(CodeArray[0]);
+        document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu senden: "+noch_nicht_gesendet+" Zeilen";
+        if (CodeArray[0].length>0) websocket.send(CodeArray[0]);
         }
     
-      Notification_handle=textarea.value.indexOf("Notification handle",Notification_handle_mem);
+      Notification_handle=tav.indexOf("Notification handle",Notification_handle_mem);
       if (Notification_handle>Notification_handle_mem) {
-        document.getElementById("Temperatur").firstChild.nodeValue=textarea.value.slice(Notification_handle,Notification_handle+30);
+        var temp=tav.slice(Notification_handle+51,Notification_handle+53);
+        temp=eval("0x"+temp)/2;
+        document.getElementById("Temperatur").firstChild.nodeValue=temp;
+        var modus=tav.slice(Notification_handle+43,Notification_handle+44);
+        if (modus==0) modus="auto";
+        if (modus==1) modus="manu";
+        document.getElementById("Modus").firstChild.nodeValue=modus;
+        var ventil=tav.slice(Notification_handle+45,Notification_handle+47);
+        ventil=Math.round(eval("0x"+ventil)/256*100);
+        document.getElementById("Ventil").firstChild.nodeValue=ventil;
+        var batt=tav.slice(Notification_handle+42,Notification_handle+43);
+        if (batt>7) batt="low"; else batt="ok";
+        document.getElementById("Batterie").firstChild.nodeValue=batt;
         Notification_handle_mem=Notification_handle+1;
         }
     
@@ -266,7 +279,7 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 
 <li>Von dort zum Thermostat: <span id="Thermostat" class="nicht_verbunden">disconnected</span> (<span id="Verbindung">wird erst bei einer nachfolgenden Eingabe versucht</span>).</li>
 
-<li>Aktuellen Status <button onclick="Status_abfragen()">abfragen</button>: Temperatur <span id="Temperatur" class="nicht_verbunden">??</span> °C, Modus <span id="Modus" class="nicht_verbunden">????</span>, Ventil <span id="Ventilstellung" class="nicht_verbunden">??</span>% geöffnet, Batterie <span id="Batterie" class="nicht_verbunden">??</span>.</li>
+<li>Aktuellen Status <button onclick="Status_abfragen()">abfragen</button>: Temperatur <span id="Temperatur" class="nicht_verbunden">??</span> °C, Modus <span id="Modus" class="nicht_verbunden">????</span>, Ventil <span id="Ventil" class="nicht_verbunden">??</span>% geöffnet, Batterie <span id="Batterie" class="nicht_verbunden">??</span>.</li>
 
 <li>Aktuelle Solltemperatur auf <input id="aktuelle_Solltemperatur" size="2" value="23"/> °C <button onclick="Solltemperatur_einstellen(document.getElementById('aktuelle_Solltemperatur').value)">einstellen</button> (gilt bis zum nächsten Umschaltzeitpunkt).</li>
 
@@ -301,7 +314,7 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 </div>
 <div>2. mögliche Antworten:
 <button onclick="websocket.send('#Connection sucessfull')">Connection sucessfull</button>
-<button onclick="websocket.send('#Notification handle 8987655gii954fg')">Notification handle</button>
+<button onclick="websocket.send('#Notification handle = 0x0421 value: 02 01 00 10 04 26')">Notification handle</button>
 <button onclick="websocket.send('#Disconnected')">Disconnected</button>
 </div>
 <div><span style="vertical-align:top">3. Zusatztesteingabe:</span> <textarea id="Testinput1" cols="60" rows="5" style="font-size:100%; white-space:pre;">connect
