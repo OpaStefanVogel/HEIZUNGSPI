@@ -10,11 +10,16 @@ button {font-size:130%}
 
 <script id="scr" type="application/ecmascript">
 var Attempting_to_connect=0;
-var Attempting_to_connect_mem=0;
+var Attempting_to_connect_mem=-1;
 var No_route_to_host=0;
-var No_route_to_host_mem=0;
-
-
+var No_route_to_host_mem=-1;
+var Connection_sucessfull=0;
+var Connection_sucessfull_mem=-1;
+var Thermostat_connected=0;
+var Disconnected=0;
+var Disconnected_mem=-1;
+var Notification_handle=0;
+var Notification_handle_mem=-1;
 
 var websocket=0;
 var wgesamt="";
@@ -45,22 +50,45 @@ function websocket_verbinden() {
         document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu rechnen "+noch_nicht_gesendet+" Zeilen, bisher "+textarea.value.length+" Zeichen empfangen.";
         }
     
-    var Thermostat=document.getElementById("Thermostat");
+    if (w.slice(-2)=="> ") {
+      var Thermostat=document.getElementById("Thermostat");
     
-    Attempting_to_connect=textarea.value.indexOf("Attempting to connect",Attempting_to_connect_mem);
-    if (Attempting_to_connect>Attempting_to_connect_mem) {
-      Thermostat.firstChild.nodeValue="Attempting to connect";
-      Thermostat.setAttribute("class","versuche_zu_verbinden");
-      Attempting_to_connect_mem=Attempting_to_connect+1;
-      }
+      Attempting_to_connect=textarea.value.indexOf("Attempting to connect",Attempting_to_connect_mem);
+      if (Attempting_to_connect>Attempting_to_connect_mem) {
+        Thermostat.firstChild.nodeValue="Attempting to connect";
+        Thermostat.setAttribute("class","versuche_zu_verbinden");
+        Attempting_to_connect_mem=Attempting_to_connect+1;
+        }
 
-    No_route_to_host=textarea.value.indexOf("No route to host",No_route_to_host_mem);
-    if (No_route_to_host>No_route_to_host_mem) {
-      Thermostat.firstChild.nodeValue="No route to host";
-      Thermostat.setAttribute("class","nicht_verbunden");
-      No_route_to_host_mem=No_route_to_host+1;
-      }
+      No_route_to_host=textarea.value.indexOf("No route to host",No_route_to_host_mem);
+      if (No_route_to_host>No_route_to_host_mem) {
+        Thermostat.firstChild.nodeValue="No route to host";
+        Thermostat.setAttribute("class","nicht_verbunden");
+        No_route_to_host_mem=No_route_to_host+1;
+        }
     
+      Connection_sucessfull=textarea.value.indexOf("Connection sucessfull",Connection_sucessfull_mem);
+      if (Connection_sucessfull>Connection_sucessfull_mem) {
+        Thermostat.firstChild.nodeValue="Connection sucessfull";
+        Thermostat.setAttribute("class","verbunden");
+        Connection_sucessfull_mem=Connection_sucessfull+1;
+        Thermostat_connected=1;
+        }
+    
+      Notification_handle=textarea.value.indexOf("Notification handle",Notification_handle_mem);
+      if (Notification_handle>Notification_handle_mem) {
+        document.getElementById("Temperatur").firstChild.nodeValue=textarea.value.slice(Notification_handle,Notification_handle+30);
+        Notification_handle_mem=Notification_handle+1;
+        }
+    
+      Disconnected=textarea.value.indexOf("Disconnected",Disconnected_mem);
+      if (Disconnected>Disconnected_mem) {
+        Thermostat.firstChild.nodeValue="disconnected";
+        Thermostat.setAttribute("class","nicht_verbunden");
+        Disconnected_mem=Disconnected+1;
+        Thermostat_connected=0;
+        }
+      }
     };
   websocket.onopen = function() {
     websocket.send('disconnect');
@@ -246,11 +274,16 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 <span id="Beweglichkeit" style="color: darkred; font-style: bold;"> </span>
 <span id="Einsetzkanten" style="color: yellowgreen; font-style: bold;"> </span></div>
 <div><span id="Websocket_Display"><textarea id="Websocket-Antwort" cols="80" rows="15" style="font-size:100%; white-space:pre; background-color:Aliceblue" readonly="readonly"></textarea></span></div>
-<div>1. <button onclick='Script_heraussuchen(event,"Anfangsprogramm")'>Programmcode heraussuchen</button> und dann <button onclick="ueber_websocket_ausrechnen(event)">über websocket compilieren</button> (einmal im laufenden GAP reicht)</div>
-<div>2. <button onclick='Script_heraussuchen(event,"aktuellesProgrammstück")'>aktuell zu testendes Programmstück heraussuchen</button> und extra <button onclick="ueber_websocket_ausrechnen(event)">über websocket compilieren</button></div>
+<div>1. Direkt <button onclick="websocket.send('connect')">connect</button>
+<button onclick="websocket.send('char-write-req 411 8000')">char-write-req 411 8000</button>
+<button onclick="websocket.send('disconnect')">disconnect</button>
+</div>
+<div>2. <button onclick="websocket.send('#Notification handle 8987655gii954fg')">Notification handle</button></div>
 <div><span style="vertical-align:top">3. Zusatztesteingabe:</span> <textarea id="Testinput1" cols="60" rows="5" style="font-size:100%; white-space:pre;">connect
 </textarea><button onclick="ueber_websocket_testen(event,'Testinput1')" style="vertical-align:bottom">über websocket testen</button></div>
 <div>4. <button onclick="Uhrzeit_aktualisieren()">Uhrzeit aktualisieren</button></div>
+<div>5. <button onclick='Script_heraussuchen(event,"Anfangsprogramm")'>Programmcode heraussuchen</button> und dann <button onclick="ueber_websocket_ausrechnen(event)">über websocket compilieren</button> (einmal im laufenden GAP reicht)</div>
+<div>6. <button onclick='Script_heraussuchen(event,"aktuellesProgrammstück")'>aktuell zu testendes Programmstück heraussuchen</button> und extra <button onclick="ueber_websocket_ausrechnen(event)">über websocket compilieren</button></div>
 
 <!--div><i>Schließlich der zu kopierende und auszuführende Programmcode, wenn nicht über Websocket gerechnet wird:</i></div-->
 
