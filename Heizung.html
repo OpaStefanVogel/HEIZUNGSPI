@@ -74,6 +74,11 @@ function websocket_verbinden() {
         Thermostat.setAttribute("class","verbunden");
         Connection_sucessfull_mem=Connection_sucessfull+1;
         Thermostat_connected=1;
+        CodeArray=document.getElementById("Ausgabe").lastChild.nodeValue.trim().split("\n");
+        document.getElementById("Ausgabe").lastChild.nodeValue="";
+        noch_nicht_gesendet=CodeArray.length-1;
+         document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu senden: "+noch_nicht_gesendet+" Zeilen";
+        websocket.send(CodeArray[0]);
         }
     
       Notification_handle=textarea.value.indexOf("Notification handle",Notification_handle_mem);
@@ -129,7 +134,7 @@ function ueber_websocket_testen(event,Testinput) {
   //markiere_Button(event,zuletzt_GAP_angeklickt);
   CodeArray=document.getElementById(Testinput).value.split("\n");
   //alert(CodeArray);
-  var textarea=document.getElementById("Websocket-Antwort");
+  //var textarea=document.getElementById("Websocket-Antwort");
   //textarea.value+=CodeArray[0]+"\n";//PLOT1=0;PLOT2=0;
   //textarea.scrollTop = textarea.scrollHeight;
   noch_nicht_gesendet=CodeArray.length-1;
@@ -178,20 +183,21 @@ function temp_to_hex(temp) {
   }
 
 function req(text) {
+  document.getElementById("Ausgabe").lastChild.nodeValue=text;
   Thermostat_connected=-10;
   versuche_zu_verbinden();
-  alert("connect\n"+text+"disconnect");
+  //alert("connect\n"+text+"disconnect");
   }
 
 function versuche_zu_verbinden() {
   var tt=document.getElementById("Verbindung").firstChild;
   if (Thermostat_connected<0) {
-    tt.nodeValue="noch "+(-Thermostat_connected)+" Versuche, alle 3 s einer";
+    tt.nodeValue="noch "+(-Thermostat_connected)+" Versuche im 3 s Abstand";
     Thermostat_connected=Thermostat_connected+1;
     setTimeout(versuche_zu_verbinden,3000);
     websocket.send("connect");
-    } else if (Thermostat_connected==0) tt.nodeValue="keine Verbindung geschafft";
-      else tt.nodeValue="ok";
+    } else if (Thermostat_connected==0) tt.nodeValue="hab leider keine Verbindung geschafft";
+      else tt.nodeValue="ok"; 
   }
 
 </script>
