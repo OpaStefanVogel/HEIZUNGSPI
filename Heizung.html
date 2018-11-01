@@ -38,10 +38,11 @@ function websocket_verbinden() {
       if (noch_nicht_gesendet>0) {
         //alert(noch_nicht_gesendet);
         //alert(CodeArray[CodeArray.length-noch_nicht_gesendet]);
-        textarea.value+=CodeArray[CodeArray.length-noch_nicht_gesendet]+"\n";
-        textarea.scrollTop = textarea.scrollHeight;
+        //textarea.value+=CodeArray[CodeArray.length-noch_nicht_gesendet]+"\n";
+        //textarea.scrollTop = textarea.scrollHeight;
         document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu rechnen "+noch_nicht_gesendet+" Zeilen, bisher "+textarea.value.length+" Zeichen empfangen.";
-        websocket.send(CodeArray[CodeArray.length-noch_nicht_gesendet]);
+        if (CodeArray[CodeArray.length-noch_nicht_gesendet].length>0)
+          websocket.send(CodeArray[CodeArray.length-noch_nicht_gesendet]);
         noch_nicht_gesendet=noch_nicht_gesendet-1;
         } else {
           document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Fertig.";
@@ -117,8 +118,8 @@ function ueber_websocket_ausrechnen(event) {
   CodeArray=document.getElementById("Ausgabe").lastChild.nodeValue.split("\n");
   //alert(CodeArray);
   var textarea=document.getElementById("Websocket-Antwort");
-  textarea.value="gap> "+CodeArray[0]+"\n";PLOT1=0;PLOT2=0;
-  textarea.scrollTop = textarea.scrollHeight;
+  //textarea.value="gap> "+CodeArray[0]+"\n";PLOT1=0;PLOT2=0;
+  //textarea.scrollTop = textarea.scrollHeight;
   noch_nicht_gesendet=CodeArray.length-1;
   document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu rechnen "+noch_nicht_gesendet+" Zeilen.";
   websocket.send(CodeArray[0]);
@@ -129,8 +130,8 @@ function ueber_websocket_testen(event,Testinput) {
   CodeArray=document.getElementById(Testinput).value.split("\n");
   //alert(CodeArray);
   var textarea=document.getElementById("Websocket-Antwort");
-  textarea.value+=CodeArray[0]+"\n";//PLOT1=0;PLOT2=0;
-  textarea.scrollTop = textarea.scrollHeight;
+  //textarea.value+=CodeArray[0]+"\n";//PLOT1=0;PLOT2=0;
+  //textarea.scrollTop = textarea.scrollHeight;
   noch_nicht_gesendet=CodeArray.length-1;
   document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu rechnen: "+noch_nicht_gesendet+" Zeilen";
   websocket.send(CodeArray[0]);
@@ -243,7 +244,7 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 
 <li>Verbindung zum Raspberry Pi Heizung: <span id="Raspberry Pi" class="nicht_verbunden">nicht verbunden</span>.</li>
 
-<li>Von dort zum Thermostat: <span id="Thermostat" class="nicht_verbunden">disconnected</span> (<span id="Verbindung">wird automatisch verbunden, sobald was eingegeben wird.</span>).</li>
+<li>Von dort zum Thermostat: <span id="Thermostat" class="nicht_verbunden">disconnected</span> (<span id="Verbindung">wird erst bei einer nachfolgenden Eingabe verbunden.</span>).</li>
 
 <li>Aktuellen Status <button onclick="Status_abfragen()">abfragen</button>: Temperatur <span id="Temperatur" class="nicht_verbunden">??</span> °C, Modus <span id="Modus" class="nicht_verbunden">????</span>, Ventil <span id="Ventilstellung" class="nicht_verbunden">??</span>% geöffnet, Batterie <span id="Batterie" class="nicht_verbunden">??</span>.</li>
 
@@ -274,11 +275,15 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 <span id="Beweglichkeit" style="color: darkred; font-style: bold;"> </span>
 <span id="Einsetzkanten" style="color: yellowgreen; font-style: bold;"> </span></div>
 <div><span id="Websocket_Display"><textarea id="Websocket-Antwort" cols="80" rows="15" style="font-size:100%; white-space:pre; background-color:Aliceblue" readonly="readonly"></textarea></span></div>
-<div>1. Direkt <button onclick="websocket.send('connect')">connect</button>
+<div>1. Direkte Eingaben: <button onclick="websocket.send('connect')">connect</button>
 <button onclick="websocket.send('char-write-req 411 8000')">char-write-req 411 8000</button>
 <button onclick="websocket.send('disconnect')">disconnect</button>
 </div>
-<div>2. <button onclick="websocket.send('#Notification handle 8987655gii954fg')">Notification handle</button></div>
+<div>2. mögliche Antworten:
+<button onclick="websocket.send('#Connection sucessfull')">Connection sucessfull</button>
+<button onclick="websocket.send('#Notification handle 8987655gii954fg')">Notification handle</button>
+<button onclick="websocket.send('#Disconnected')">Disconnected</button>
+</div>
 <div><span style="vertical-align:top">3. Zusatztesteingabe:</span> <textarea id="Testinput1" cols="60" rows="5" style="font-size:100%; white-space:pre;">connect
 </textarea><button onclick="ueber_websocket_testen(event,'Testinput1')" style="vertical-align:bottom">über websocket testen</button></div>
 <div>4. <button onclick="Uhrzeit_aktualisieren()">Uhrzeit aktualisieren</button></div>
