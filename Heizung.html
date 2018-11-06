@@ -106,6 +106,7 @@ function websocket_verbinden() {
         noch_nicht_gesendet=noch_nicht_gesendet-1;
         } else {
           document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Fertig.";
+          websocket.send('disconnect');
           }
         }       
  
@@ -241,8 +242,10 @@ function versuche_zu_verbinden() {
   }
 
 function versuche_zu_uebertragen(text,num,stat) {
-  var tt=document.getElementById("Verbindung").firstChild;
+  var st=document.getElementById("Sendetext").firstChild;
+  var tt=document.getElementById("Übertragung").firstChild;
   //alert(Thermostat_connected+" "+stat);
+  st.nodeValue=text;
   if (Thermostat_connected==stat) {
     tt.nodeValue="noch "+num+" Versuche im 3 s Abstand";
     //Thermostat_connected=Thermostat_connected+1;
@@ -317,6 +320,8 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 <li>Verbindung zum (Heizungs-) Raspberry Pi: <span id="Raspberry Pi" class="nicht_verbunden">nicht verbunden</span>.</li>
 
 <li>Von dort zum Thermostat: <span id="Thermostat" class="nicht_verbunden">disconnected</span> (<span id="Verbindung">wird erst bei einer nachfolgenden Eingabe verbunden</span>).</li>
+
+<li>Im Thermostat: <span id="Sendetext" class="nicht_verbunden"> </span> (<span id="Übertragung"> </span>).</li>
 
 <li>Aktuellen Status <button onclick="Status_abfragen()">abfragen</button>: Temperatur <span id="Temperatur" class="nicht_verbunden">??</span> °C, Modus <span id="Modus" class="nicht_verbunden">????</span>, Ventil <span id="Ventil" class="nicht_verbunden">??</span>% geöffnet, Batterie <span id="Batterie" class="nicht_verbunden">??</span>.</li>
 
