@@ -83,7 +83,7 @@ function websocket_verbinden() {
         document.getElementById("Ausgabe").lastChild.nodeValue="";
         noch_nicht_gesendet=CodeArray.length-1;
         document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu senden: "+noch_nicht_gesendet+" Zeilen";
-        if (CodeArray[0].length>0) websocket.send(CodeArray[0]);
+        if (CodeArray[0].length>0) versuche_zu_uebertragen(CodeArray[0],10,1);
         }
 
       Characteristic_value_was_written_successful=tav.indexOf("Characteristic value was written successful",Characteristic_value_was_written_successful_mem);
@@ -91,15 +91,18 @@ function websocket_verbinden() {
         Thermostat.firstChild.nodeValue="Characteristic value was written successful";
         Thermostat.setAttribute("class","verbunden");
         Characteristic_value_was_written_successful_mem=Characteristic_value_was_written_successful+1;
-        Thermostat_connected=1;
+      Thermostat_connected=Thermostat_connected+1;
       if (noch_nicht_gesendet>0) {
         //alert(noch_nicht_gesendet);
         //alert(CodeArray[CodeArray.length-noch_nicht_gesendet]);
         //textarea.value+=CodeArray[CodeArray.length-noch_nicht_gesendet]+"\n";
         //textarea.scrollTop = textarea.scrollHeight;
         document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu rechnen "+noch_nicht_gesendet+" Zeilen, bisher "+textarea.value.length+" Zeichen empfangen.";
-        if (CodeArray[CodeArray.length-noch_nicht_gesendet].length>0)
-          websocket.send(CodeArray[CodeArray.length-noch_nicht_gesendet]);
+        if (CodeArray[CodeArray.length-noch_nicht_gesendet].length>0) {
+          //Thermostat_connected=Thermostat_connected+1;
+          versuche_zu_uebertragen(CodeArray[CodeArray.length-noch_nicht_gesendet],10,        Thermostat_connected);
+//          websocket.send(CodeArray[CodeArray.length-noch_nicht_gesendet]);
+          }
         noch_nicht_gesendet=noch_nicht_gesendet-1;
         } else {
           document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Fertig.";
@@ -234,6 +237,18 @@ function versuche_zu_verbinden() {
     setTimeout(versuche_zu_verbinden,3000);
     websocket.send("connect");
     } else if (Thermostat_connected==0) tt.nodeValue="hab leider keine Verbindung geschafft";
+      else tt.nodeValue="ok"; 
+  }
+
+function versuche_zu_uebertragen(text,num,stat) {
+  var tt=document.getElementById("Verbindung").firstChild;
+  //alert(Thermostat_connected+" "+stat);
+  if (Thermostat_connected==stat) {
+    tt.nodeValue="noch "+num+" Versuche im 3 s Abstand";
+    //Thermostat_connected=Thermostat_connected+1;
+    if (num>1) setTimeout(versuche_zu_uebertragen,3000,text,num-1,stat);
+    websocket.send("#"+text);
+    } else if (Thermostat_connected!=stat+1) tt.nodeValue="hab leider keine Übertragung geschafft";
       else tt.nodeValue="ok"; 
   }
 
