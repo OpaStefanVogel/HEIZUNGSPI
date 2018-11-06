@@ -13,13 +13,15 @@ var Attempting_to_connect=0;
 var Attempting_to_connect_mem=-1;
 var No_route_to_host=0;
 var No_route_to_host_mem=-1;
-var Connection_sucessfull=0;
-var Connection_sucessfull_mem=-1;
+var Connection_successful=0;
+var Connection_successful_mem=-1;
 var Thermostat_connected=0;//von -10 bis 1
 var Disconnected=0;
 var Disconnected_mem=-1;
 var Notification_handle=0;
 var Notification_handle_mem=-1;
+var Characteristic_value_was_written_successful=0;
+var Characteristic_value_was_written_successful_mem=0;
 
 var websocket=0;
 var wgesamt="";
@@ -35,7 +37,8 @@ function websocket_verbinden() {
     textarea.value+=w; //firstChild.nodeValue+=w;
     textarea.scrollTop = textarea.scrollHeight;
     if ((w.slice(-2)=="> ")||(w.slice(-4)=="gap>")) {
-      if (noch_nicht_gesendet>0) {
+//      if (noch_nicht_gesendet>0) {
+      if (false) {
         //alert(noch_nicht_gesendet);
         //alert(CodeArray[CodeArray.length-noch_nicht_gesendet]);
         //textarea.value+=CodeArray[CodeArray.length-noch_nicht_gesendet]+"\n";
@@ -51,7 +54,8 @@ function websocket_verbinden() {
         document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu rechnen "+noch_nicht_gesendet+" Zeilen, bisher "+textarea.value.length+" Zeichen empfangen.";
         }
     
-    if (w.slice(-2)=="> ") {
+//    if (w.slice(-2)=="> ") {
+    if (true) {
       var Thermostat=document.getElementById("Thermostat");
       var tav=textarea.value;
     
@@ -69,11 +73,11 @@ function websocket_verbinden() {
         No_route_to_host_mem=No_route_to_host+1;
         }
     
-      Connection_sucessfull=tav.indexOf("Connection sucessfull",Connection_sucessfull_mem);
-      if (Connection_sucessfull>Connection_sucessfull_mem) {
-        Thermostat.firstChild.nodeValue="Connection sucessfull";
+      Connection_successful=tav.indexOf("Connection successful",Connection_successful_mem);
+      if (Connection_successful>Connection_successful_mem) {
+        Thermostat.firstChild.nodeValue="Connection successful";
         Thermostat.setAttribute("class","verbunden");
-        Connection_sucessfull_mem=Connection_sucessfull+1;
+        Connection_successful_mem=Connection_successful+1;
         Thermostat_connected=1;
         CodeArray=document.getElementById("Ausgabe").lastChild.nodeValue.trim().split("\n");
         document.getElementById("Ausgabe").lastChild.nodeValue="";
@@ -81,7 +85,27 @@ function websocket_verbinden() {
         document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu senden: "+noch_nicht_gesendet+" Zeilen";
         if (CodeArray[0].length>0) websocket.send(CodeArray[0]);
         }
-    
+
+      Characteristic_value_was_written_successful=tav.indexOf("Characteristic value was written successful",Characteristic_value_was_written_successful_mem);
+      if (Characteristic_value_was_written_successful>Characteristic_value_was_written_successful_mem) {
+        Thermostat.firstChild.nodeValue="Characteristic value was written successful";
+        Thermostat.setAttribute("class","verbunden");
+        Characteristic_value_was_written_successful_mem=Characteristic_value_was_written_successful+1;
+        Thermostat_connected=1;
+      if (noch_nicht_gesendet>0) {
+        //alert(noch_nicht_gesendet);
+        //alert(CodeArray[CodeArray.length-noch_nicht_gesendet]);
+        //textarea.value+=CodeArray[CodeArray.length-noch_nicht_gesendet]+"\n";
+        //textarea.scrollTop = textarea.scrollHeight;
+        document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu rechnen "+noch_nicht_gesendet+" Zeilen, bisher "+textarea.value.length+" Zeichen empfangen.";
+        if (CodeArray[CodeArray.length-noch_nicht_gesendet].length>0)
+          websocket.send(CodeArray[CodeArray.length-noch_nicht_gesendet]);
+        noch_nicht_gesendet=noch_nicht_gesendet-1;
+        } else {
+          document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Fertig.";
+          }
+        }       
+ 
       Notification_handle=tav.indexOf("Notification handle",Notification_handle_mem);
       if (Notification_handle>Notification_handle_mem) {
         var temp=tav.slice(Notification_handle+51,Notification_handle+53);
@@ -256,8 +280,8 @@ function Datum_aktualisieren() {
     +"\n");
   }
 
-function Fenstermodus_aktivieren(dauer,temp) {
-  req("char-write-req 411 45"+number_to_hex(dauer/5)+temp_to_hex(temp)+"\n");
+function Fenstermodus_konfigurieren(dauer,temp) {
+  req("char-write-req 411 14"+number_to_hex(dauer/5)+temp_to_hex(temp)+"\n");
   }
 
 function Start_Boost_mode() {
@@ -275,13 +299,13 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 
 <ul>
 
-<li>Verbindung zum Raspberry Pi Heizung: <span id="Raspberry Pi" class="nicht_verbunden">nicht verbunden</span>.</li>
+<li>Verbindung zum (Heizungs-) Raspberry Pi: <span id="Raspberry Pi" class="nicht_verbunden">nicht verbunden</span>.</li>
 
-<li>Von dort zum Thermostat: <span id="Thermostat" class="nicht_verbunden">disconnected</span> (<span id="Verbindung">wird erst bei einer nachfolgenden Eingabe versucht</span>).</li>
+<li>Von dort zum Thermostat: <span id="Thermostat" class="nicht_verbunden">disconnected</span> (<span id="Verbindung">wird erst bei einer nachfolgenden Eingabe verbunden</span>).</li>
 
 <li>Aktuellen Status <button onclick="Status_abfragen()">abfragen</button>: Temperatur <span id="Temperatur" class="nicht_verbunden">??</span> °C, Modus <span id="Modus" class="nicht_verbunden">????</span>, Ventil <span id="Ventil" class="nicht_verbunden">??</span>% geöffnet, Batterie <span id="Batterie" class="nicht_verbunden">??</span>.</li>
 
-<li>Aktuelle Solltemperatur auf <input id="aktuelle_Solltemperatur" size="2" value="23"/> °C <button onclick="Solltemperatur_einstellen(document.getElementById('aktuelle_Solltemperatur').value)">einstellen</button> (gilt bis zum nächsten Umschaltzeitpunkt).</li>
+<li>Aktuelle Solltemperatur auf <input id="aktuelle_Solltemperatur" size="2" value="12"/> °C <button onclick="Solltemperatur_einstellen(document.getElementById('aktuelle_Solltemperatur').value)">einstellen</button> (gilt bis zum nächsten Umschaltzeitpunkt, oder <button onclick="Modus_auto()">auto</button>).</li>
 
 <li>Wochentemperatur auf tagsüber <input id="Wochentemperatur_tagsueber" size="2" value="20"/> °C und nachts <input id="Wochentemperatur_nachts" size="2" value="17"/> °C <button onclick="Wochentemperatur_programmieren(document.getElementById('Wochentemperatur_tagsueber').value,document.getElementById('Wochentemperatur_nachts').value)">programmieren</button>.</li>
 
@@ -289,7 +313,7 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 
 <li><button onclick="Datum_aktualisieren()">Aktualisiere</button> Datum und Uhrzeit.</li>
 
-<li>Modus "Fenster auf" für <input id="Fenster_auf_Dauer" size="2" value="30"/> min auf <input id="Fenster_auf_Temperatur" size="2" value="12"/> °C <button onclick="Fenstermodus_aktivieren(document.getElementById('Fenster_auf_Dauer').value,document.getElementById('Fenster_auf_Temperatur').value)">aktivieren</button>.</li>
+<li>Modus "Fenster auf" für <input id="Fenster_auf_Dauer" size="2" value="30"/> min auf <input id="Fenster_auf_Temperatur" size="2" value="12"/> °C <button onclick="Fenstermodus_konfigurieren(document.getElementById('Fenster_auf_Dauer').value,document.getElementById('Fenster_auf_Temperatur').value)">konfigurieren</button>.</li>
 
 <li><button onclick="Start_Boost_mode()">Start</button>, <button onclick="Stopp_Boost_mode()">Stopp</button> Boost Mode (5 Minuten)</li>
 
@@ -310,10 +334,13 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 <div><span id="Websocket_Display"><textarea id="Websocket-Antwort" cols="80" rows="15" style="font-size:100%; white-space:pre; background-color:Aliceblue" readonly="readonly"></textarea></span></div>
 <div>1. Direkte Eingaben: <button onclick="websocket.send('connect')">connect</button>
 <button onclick="websocket.send('char-write-req 411 8000')">char-write-req 411 8000</button>
+<button onclick="websocket.send('char-write-req 411 4118')">char-write-req 411 4118</button>
+<button onclick="websocket.send('char-write-req 411 450318')">char-write-req 411 450318</button>
 <button onclick="websocket.send('disconnect')">disconnect</button>
 </div>
 <div>2. mögliche Antworten:
-<button onclick="websocket.send('#Connection sucessfull')">Connection sucessfull</button>
+<button onclick="websocket.send('#Connection successful')">Connection successful</button>
+<button onclick="websocket.send('#Characteristic value was written successful')">Characteristic value was written successful</button>
 <button onclick="websocket.send('#Notification handle = 0x0421 value: 02 01 00 10 04 26')">Notification handle</button>
 <button onclick="websocket.send('#Disconnected')">Disconnected</button>
 </div>
