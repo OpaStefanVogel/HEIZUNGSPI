@@ -54,43 +54,48 @@ function websocket_verbinden() {
         document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu rechnen "+noch_nicht_gesendet+" Zeilen, bisher "+textarea.value.length+" Zeichen empfangen.";
         }
     
-//    if (w.slice(-2)=="> ") {
-    if (true) {
-      var Thermostat=document.getElementById("Thermostat");
-      var tav=textarea.value;
+    var Thermostat=document.getElementById("Thermostat");
+    var tav=textarea.value;
     
-      Attempting_to_connect=tav.indexOf("Attempting to connect",Attempting_to_connect_mem);
-      if (Attempting_to_connect>Attempting_to_connect_mem) {
-        Thermostat.firstChild.nodeValue="Attempting to connect";
-        Thermostat.setAttribute("class","versuche_zu_verbinden");
-        Attempting_to_connect_mem=Attempting_to_connect+1;
-        }
+    Attempting_to_connect=tav.indexOf("Attempting to connect",Attempting_to_connect_mem);
+    if (Attempting_to_connect>Attempting_to_connect_mem) {
+      Thermostat.firstChild.nodeValue="Attempting to connect";
+      Thermostat.setAttribute("class","versuche_zu_verbinden");
+      Attempting_to_connect_mem=Attempting_to_connect+1;
+      }
 
-      No_route_to_host=tav.indexOf("No route to host",No_route_to_host_mem);
-      if (No_route_to_host>No_route_to_host_mem) {
-        Thermostat.firstChild.nodeValue="No route to host";
-        Thermostat.setAttribute("class","nicht_verbunden");
-        No_route_to_host_mem=No_route_to_host+1;
-        }
+    No_route_to_host=tav.indexOf("No route to host",No_route_to_host_mem);
+    if (No_route_to_host>No_route_to_host_mem) {
+      Thermostat.firstChild.nodeValue="No route to host";
+      Thermostat.setAttribute("class","nicht_verbunden");
+      No_route_to_host_mem=No_route_to_host+1;
+      }
     
-      Connection_successful=tav.indexOf("Connection successful",Connection_successful_mem);
-      if (Connection_successful>Connection_successful_mem) {
-        Thermostat.firstChild.nodeValue="Connection successful";
-        Thermostat.setAttribute("class","verbunden");
-        Connection_successful_mem=Connection_successful+1;
-        Thermostat_connected=1;
-        CodeArray=document.getElementById("Ausgabe").lastChild.nodeValue.trim().split("\n");
-        document.getElementById("Ausgabe").lastChild.nodeValue="";
-        noch_nicht_gesendet=CodeArray.length-1;
-        document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu senden: "+noch_nicht_gesendet+" Zeilen";
-        if (CodeArray[0].length>0) versuche_zu_uebertragen(CodeArray[0],10,1);
-        }
+    Connection_successful=tav.indexOf("Connection successful",Connection_successful_mem);
+    if (Connection_successful>Connection_successful_mem) {
+      Thermostat.firstChild.nodeValue="Connection successful";
+      Thermostat.setAttribute("class","verbunden");
+      Connection_successful_mem=Connection_successful+1;
+      Thermostat_connected=1;
+      CodeArray=document.getElementById("Ausgabe").lastChild.nodeValue.trim().split("\n");
+      document.getElementById("Ausgabe").lastChild.nodeValue="";
+      noch_nicht_gesendet=CodeArray.length-1;
+      document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu senden: "+noch_nicht_gesendet+" Zeilen";
+      if (CodeArray[0].length>0) versuche_zu_uebertragen(CodeArray[0],10,1);
+      }
 
-      Characteristic_value_was_written_successful=tav.indexOf("Characteristic value was written successful",Characteristic_value_was_written_successful_mem);
-      if (Characteristic_value_was_written_successful>Characteristic_value_was_written_successful_mem) {
-        Thermostat.firstChild.nodeValue="Characteristic value was written successful";
-        Thermostat.setAttribute("class","verbunden");
-        Characteristic_value_was_written_successful_mem=Characteristic_value_was_written_successful+1;
+    Characteristic_value_was_written_successful=tav.indexOf(
+      "Characteristic value was written successful"
+      ,Characteristic_value_was_written_successful_mem);
+    if (Characteristic_value_was_written_successful>
+      Characteristic_value_was_written_successful_mem) {
+      Thermostat.firstChild.nodeValue="Characteristic value was written successful";
+      Thermostat.setAttribute("class","verbunden");
+//else if (Thermostat_connected!=stat+1) tt.nodeValue="hab leider keine Übertragung geschafft";
+//      else tt.nodeValue="ok"; 
+
+      Characteristic_value_was_written_successful_mem=
+        Characteristic_value_was_written_successful+1;
       Thermostat_connected=Thermostat_connected+1;
       if (noch_nicht_gesendet>0) {
         //alert(noch_nicht_gesendet);
@@ -108,35 +113,35 @@ function websocket_verbinden() {
           document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Fertig.";
           websocket.send('disconnect');
           }
-        }       
+      }       
  
-      Notification_handle=tav.indexOf("Notification handle",Notification_handle_mem);
-      if (Notification_handle>Notification_handle_mem) {
-        var temp=tav.slice(Notification_handle+51,Notification_handle+53);
-        temp=eval("0x"+temp)/2;
-        document.getElementById("Temperatur").firstChild.nodeValue=temp;
-        var modus=tav.slice(Notification_handle+43,Notification_handle+44);
-        if (modus==0) modus="auto";
-        if (modus==1) modus="manu";
-        document.getElementById("Modus").firstChild.nodeValue=modus;
-        var ventil=tav.slice(Notification_handle+45,Notification_handle+47);
-        ventil=Math.round(eval("0x"+ventil)/256*100);
-        document.getElementById("Ventil").firstChild.nodeValue=ventil;
-        var batt=tav.slice(Notification_handle+42,Notification_handle+43);
-        if (batt>7) batt="low"; else batt="ok";
-        document.getElementById("Batterie").firstChild.nodeValue=batt;
-        Notification_handle_mem=Notification_handle+1;
-        }
+    Notification_handle=tav.indexOf("Notification handle",Notification_handle_mem);
+    if (Notification_handle>Notification_handle_mem) {
+      var temp=tav.slice(Notification_handle+51,Notification_handle+53);
+      temp=eval("0x"+temp)/2;
+      document.getElementById("Temperatur").firstChild.nodeValue=temp;
+      var modus=tav.slice(Notification_handle+43,Notification_handle+44);
+      if (modus==0) modus="auto";
+      if (modus==1) modus="manu";
+      document.getElementById("Modus").firstChild.nodeValue=modus;
+      var ventil=tav.slice(Notification_handle+45,Notification_handle+47);
+      ventil=Math.round(eval("0x"+ventil)/256*100);
+      document.getElementById("Ventil").firstChild.nodeValue=ventil;
+      var batt=tav.slice(Notification_handle+42,Notification_handle+43);
+      if (batt>7) batt="low"; else batt="ok";
+      document.getElementById("Batterie").firstChild.nodeValue=batt;
+      Notification_handle_mem=Notification_handle+1;
+      }
     
-      Disconnected=textarea.value.indexOf("Disconnected",Disconnected_mem);
-      if (Disconnected>Disconnected_mem) {
-        Thermostat.firstChild.nodeValue="disconnected";
-        Thermostat.setAttribute("class","nicht_verbunden");
-        Disconnected_mem=Disconnected+1;
-        Thermostat_connected=0;
-        }
+    Disconnected=textarea.value.indexOf("Disconnected",Disconnected_mem);
+    if (Disconnected>Disconnected_mem) {
+      Thermostat.firstChild.nodeValue="disconnected";
+      Thermostat.setAttribute("class","nicht_verbunden");
+      Disconnected_mem=Disconnected+1;
+      Thermostat_connected=0;
       }
     };
+
   websocket.onopen = function() {
     websocket.send('disconnect');
     //restart_GAP();
@@ -251,8 +256,7 @@ function versuche_zu_uebertragen(text,num,stat) {
     //Thermostat_connected=Thermostat_connected+1;
     if (num>1) setTimeout(versuche_zu_uebertragen,3000,text,num-1,stat);
     websocket.send("#"+text);
-    } else if (Thermostat_connected!=stat+1) tt.nodeValue="hab leider keine Übertragung geschafft";
-      else tt.nodeValue="ok"; 
+    } 
   }
 
 </script>
