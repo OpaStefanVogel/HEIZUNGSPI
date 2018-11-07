@@ -77,7 +77,7 @@ function websocket_verbinden() {
       Thermostat.setAttribute("class","verbunden");
       Connection_successful_mem=Connection_successful+1;
       Thermostat_connected=1;
-      CodeArray=document.getElementById("Ausgabe").lastChild.nodeValue.trim().split("\n");
+//      CodeArray=document.getElementById("Ausgabe").lastChild.nodeValue.trim().split("\n");
       document.getElementById("Ausgabe").lastChild.nodeValue="";
       noch_nicht_gesendet=CodeArray.length-1;
       document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu senden: "+noch_nicht_gesendet+" Zeilen";
@@ -231,6 +231,7 @@ function temp_to_hex(temp) {
 
 function req(text) {
   document.getElementById("Ausgabe").lastChild.nodeValue=text;
+  CodeArray=text.trim().split("\n");
   Thermostat_connected=-10;
   versuche_zu_verbinden();
   //alert("connect\n"+text+"disconnect");
@@ -350,6 +351,19 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 -->
 
   </ul>
+  
+<table border="1" style="border-collapse:collapse; empty-cells:hide"><tbody>
+<tr><td id="t00">conn</td><td id="t01">succ</td><td id="t02">3 von 10</td></tr>
+<tr><td id="t10">conn</td><td id="t11">succ</td><td id="t12">3 von 10</td></tr>
+<tr><td id="t20">conn</td><td id="t21">succ</td><td id="t22">3 von 10</td></tr>
+<tr><td id="t30">conn</td><td id="t31">succ</td><td id="t32">3 von 10</td></tr>
+<tr><td id="t40">conn</td><td id="t41">succ</td><td id="t42">3 von 10</td></tr>
+<tr><td id="t50">conn</td><td id="t51">succ</td><td id="t52">3 von 10</td></tr>
+<tr><td id="t60">conn</td><td id="t61">succ</td><td id="t62">3 von 10</td></tr>
+<tr><td id="t70">conn</td><td id="t71">succ</td><td id="t72">3 von 10</td></tr>
+<tr><td id="t80">conn</td><td id="t81">succ</td><td id="t82">3 von 10</td></tr>
+<tr><td id="t90">conn</td><td id="t91">succ</td><td id="t92">3 von 10</td></tr>
+</tbody></table>
 
 <div id="Websocket_Rahmen"><div style="outline:solid; outline-size: 5px; outline-color: beige;">
 <div>zu <input id="Websocket_Adresse" size="25" value="ws://modellbahnpult:1880/ws/gatttool"/> <button onclick="websocket_verbinden()">Verbindung herstellen</button> <a href="http://www.w3.org/TR/2012/CR-websockets-20120920/#the-websocket-interface" id="Websocket_Status">CLOSED</a> (falls nötig <button onclick="restart_GAP(event)">Restart GAP</button>)</div>
