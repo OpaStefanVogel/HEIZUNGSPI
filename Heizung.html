@@ -88,12 +88,11 @@ function websocket_verbinden() {
       "Characteristic value was written successful"
       ,Characteristic_value_was_written_successful_mem);
     if (Characteristic_value_was_written_successful>
-      Characteristic_value_was_written_successful_mem) {
-      Thermostat.firstChild.nodeValue="Characteristic value was written successful";
-      Thermostat.setAttribute("class","verbunden");
-//else if (Thermostat_connected!=stat+1) tt.nodeValue="hab leider keine Übertragung geschafft";
-//      else tt.nodeValue="ok"; 
-
+      Characteristic_value_was_written_successful_mem&&Thermostat_connected>0) {
+      //Thermostat.firstChild.nodeValue="Characteristic value was written successful";
+      //Thermostat.setAttribute("class","verbunden");
+      document.getElementById("Sendetext").firstChild.nodeValue="Übertragung beendet"
+      document.getElementById("Übertragung").firstChild.nodeValue="ok";
       Characteristic_value_was_written_successful_mem=
         Characteristic_value_was_written_successful+1;
       Thermostat_connected=Thermostat_connected+1;
@@ -117,20 +116,23 @@ function websocket_verbinden() {
  
     Notification_handle=tav.indexOf("Notification handle",Notification_handle_mem);
     if (Notification_handle>Notification_handle_mem) {
+      var hand=tav.slice(Notification_handle+36,Notification_handle+41);
       var temp=tav.slice(Notification_handle+51,Notification_handle+53);
-      temp=eval("0x"+temp)/2;
-      document.getElementById("Temperatur").firstChild.nodeValue=temp;
-      var modus=tav.slice(Notification_handle+43,Notification_handle+44);
-      if (modus==0) modus="auto";
-      if (modus==1) modus="manu";
-      document.getElementById("Modus").firstChild.nodeValue=modus;
-      var ventil=tav.slice(Notification_handle+45,Notification_handle+47);
-      ventil=Math.round(eval("0x"+ventil)/256*100);
-      document.getElementById("Ventil").firstChild.nodeValue=ventil;
-      var batt=tav.slice(Notification_handle+42,Notification_handle+43);
-      if (batt>7) batt="low"; else batt="ok";
-      document.getElementById("Batterie").firstChild.nodeValue=batt;
-      Notification_handle_mem=Notification_handle+1;
+      if (hand=="02 01"&&temp.length==2) {
+        temp=eval("0x"+temp)/2;
+        document.getElementById("Temperatur").firstChild.nodeValue=temp;
+        var modus=tav.slice(Notification_handle+43,Notification_handle+44);
+        if (modus==0) modus="auto";
+        if (modus==1) modus="manu";
+        document.getElementById("Modus").firstChild.nodeValue=modus;
+        var ventil=tav.slice(Notification_handle+45,Notification_handle+47);
+        ventil=Math.round(eval("0x"+ventil)/256*100);
+        document.getElementById("Ventil").firstChild.nodeValue=ventil;
+        var batt=tav.slice(Notification_handle+42,Notification_handle+43);
+        if (batt>7) batt="low"; else batt="ok";
+        document.getElementById("Batterie").firstChild.nodeValue=batt;
+        Notification_handle_mem=Notification_handle+1;
+        }
       }
     
     Disconnected=textarea.value.indexOf("Disconnected",Disconnected_mem);
@@ -141,7 +143,6 @@ function websocket_verbinden() {
       Thermostat_connected=0;
       }
     };
-
   websocket.onopen = function() {
     websocket.send('disconnect');
     //restart_GAP();
@@ -250,9 +251,9 @@ function versuche_zu_uebertragen(text,num,stat) {
   var st=document.getElementById("Sendetext").firstChild;
   var tt=document.getElementById("Übertragung").firstChild;
   //alert(Thermostat_connected+" "+stat);
-  st.nodeValue=text;
   if (Thermostat_connected==stat) {
-    tt.nodeValue="noch "+num+" Versuche im 3 s Abstand";
+    st.nodeValue=text;
+    tt.nodeValue="noch "+num+" Versuche im Abstand 3 s";
     //Thermostat_connected=Thermostat_connected+1;
     if (num>1) setTimeout(versuche_zu_uebertragen,3000,text,num-1,stat);
     websocket.send("#"+text);
