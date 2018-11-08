@@ -6,6 +6,7 @@ button {font-size:130%}
 .nicht_verbunden {color:darkred}
 .versuche_zu_verbinden {color:orange}
 .verbunden {color:green}
+.c {text-align:center}
   </style>
 
 <script id="scr" type="application/ecmascript">
@@ -290,8 +291,7 @@ function versuche_zu_verbinden() {
   var tt=document.getElementById("Verbindung").firstChild;
   if (Thermostat_connected<0) {
     tt.nodeValue="noch "+(-Thermostat_connected)+" Versuche im 3 s Abstand";
-    document.getElementById("t02").firstChild.nodeValue=
-      "noch "+(-Thermostat_connected)+" Versuche im 3 s Abstand";
+    document.getElementById("t02").firstChild.nodeValue=11+Thermostat_connected;
     document.getElementById("t0").setAttribute("class","versuche_zu_verbinden");
     Thermostat_connected=Thermostat_connected+1;
     setTimeout(versuche_zu_verbinden,3000);
@@ -307,8 +307,7 @@ function versuche_zu_uebertragen(text,num,stat) {
   if (Thermostat_connected==stat) {
     st.nodeValue=text;
     tt.nodeValue="noch "+num+" Versuche im Abstand 3 s";
-    document.getElementById("t"+Thermostat_connected+"2").firstChild.nodeValue=
-      "noch "+num+" Versuche im Abstand 3 s";
+    document.getElementById("t"+Thermostat_connected+"2").firstChild.nodeValue=11-num;
     document.getElementById("t"+Thermostat_connected).setAttribute("class","versuche_zu_verbinden");
     //Thermostat_connected=Thermostat_connected+1;
     if (num>1) setTimeout(versuche_zu_uebertragen,3000,text,num-1,stat);
@@ -408,20 +407,19 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
   </ul>
   
 <table border="1" style="border-collapse:separate; empty-cells:hide; font-family:Courier monospace;">
-<thead><tr style="text-align:left
-" class="verbunden"><th>gesendet</th><th>empfangen</th><th>Versuche im Abstand von 3 s</th></tr>
+<thead><tr style="text-align:left" class="verbunden"><th>gesendet</th><th>empfangen</th><th>Versuche im Abstand von 3 s</th></tr>
   </thead>
 <tbody>
-<tr id="t0"><td id="t00"> </td><td id="t01"> </td><td id="t02"> </td></tr>
-<tr id="t1"><td id="t10"> </td><td id="t11"> </td><td id="t12"> </td></tr>
-<tr id="t2"><td id="t20"> </td><td id="t21"> </td><td id="t22"> </td></tr>
-<tr id="t3"><td id="t30"> </td><td id="t31"> </td><td id="t32"> </td></tr>
-<tr id="t4"><td id="t40"> </td><td id="t41"> </td><td id="t42"> </td></tr>
-<tr id="t5"><td id="t50"> </td><td id="t51"> </td><td id="t52"> </td></tr>
-<tr id="t6"><td id="t60"> </td><td id="t61"> </td><td id="t62"> </td></tr>
-<tr id="t7"><td id="t70"> </td><td id="t71"> </td><td id="t72"> </td></tr>
-<tr id="t8"><td id="t80"> </td><td id="t81"> </td><td id="t82"> </td></tr>
-<tr id="t9"><td id="t90"> </td><td id="t91"> </td><td id="t92"> </td></tr>
+<tr id="t0"><td id="t00"> </td><td id="t01"> </td><td id="t02" class="c"> </td></tr>
+<tr id="t1"><td id="t10"> </td><td id="t11"> </td><td id="t12" class="c"> </td></tr>
+<tr id="t2"><td id="t20"> </td><td id="t21"> </td><td id="t22" class="c"> </td></tr>
+<tr id="t3"><td id="t30"> </td><td id="t31"> </td><td id="t32" class="c"> </td></tr>
+<tr id="t4"><td id="t40"> </td><td id="t41"> </td><td id="t42" class="c"> </td></tr>
+<tr id="t5"><td id="t50"> </td><td id="t51"> </td><td id="t52" class="c"> </td></tr>
+<tr id="t6"><td id="t60"> </td><td id="t61"> </td><td id="t62" class="c"> </td></tr>
+<tr id="t7"><td id="t70"> </td><td id="t71"> </td><td id="t72" class="c"> </td></tr>
+<tr id="t8"><td id="t80"> </td><td id="t81"> </td><td id="t82" class="c"> </td></tr>
+<tr id="t9"><td id="t90"> </td><td id="t91"> </td><td id="t92" class="c"> </td></tr>
 </tbody></table>
 
 <div id="Websocket_Rahmen"><div style="outline:solid; outline-size: 5px; outline-color: beige;">
