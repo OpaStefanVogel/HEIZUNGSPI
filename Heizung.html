@@ -271,7 +271,9 @@ function versuche_zu_uebertragen(text,num,stat) {
       "noch "+num+" Versuche im Abstand 3 s";
     //Thermostat_connected=Thermostat_connected+1;
     if (num>1) setTimeout(versuche_zu_uebertragen,3000,text,num-1,stat);
-    websocket.send("#"+text);
+    var vors="";
+    if (document.getElementById("Websocket_Adresse").value.indexOf("modellbahnpult")>0) vors="#";
+    websocket.send(vors+text);
     } 
   }
 
