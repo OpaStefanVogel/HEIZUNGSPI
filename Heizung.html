@@ -22,6 +22,12 @@ var Notification_handle=0;
 var Notification_handle_mem=-1;
 var Characteristic_value_was_written_successful=0;
 var Characteristic_value_was_written_successful_mem=0;
+var connect=0;
+var connect_mem=-1;
+var char_write_req=0;
+var char_write_req_mem=-1;
+var disconnect=0;
+var disconnect_mem=-1;
 
 var websocket=0;
 var wgesamt="";
@@ -150,6 +156,25 @@ function websocket_verbinden() {
       Disconnected_mem=Disconnected+1;
       Thermostat_connected=0;
       }
+
+    connect=textarea.value.indexOf("> connect",connect_mem);
+    if (connect>connect_mem) {
+      document.getElementById("t00").setAttribute("class","verbunden");
+      connect_mem=connect+1;
+      }
+    
+    char_write_req=textarea.value.indexOf("> #char-write-req",char_write_req_mem);
+    if (char_write_req>char_write_req_mem) {
+      document.getElementById("t"+Thermostat_connected+"0").setAttribute("class","verbunden");
+      char_write_req_mem=char_write_req+1;
+      }
+
+    disconnect=textarea.value.indexOf("> #disconnect",disconnect_mem);
+    if (disconnect>disconnect_mem) {
+      document.getElementById("t"+Thermostat_connected+"0").setAttribute("class","verbunden");
+      disconnect_mem=disconnect+1;
+      }
+
     };
   websocket.onopen = function() {
     websocket.send('disconnect');
@@ -245,6 +270,7 @@ function req(text) {
     document.getElementById("t"+i+"1").firstChild.nodeValue=" ";
     document.getElementById("t"+i+"2").firstChild.nodeValue=" ";
     document.getElementById("t"+i).setAttribute("class","nicht_verbunden");
+    document.getElementById("t"+i+"0").removeAttribute("class");
     if (i<CodeArray.length) {
       document.getElementById("t"+i+"0").firstChild.nodeValue=CodeArray[i].trim(); 
       if (CodeArray[i]=="connect") document.getElementById("t"+i+"1").firstChild.nodeValue="Connection successful";
