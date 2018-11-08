@@ -4,7 +4,7 @@
 <style>
 button {font-size:130%}
 .nicht_verbunden {color:darkred}
-.versuche_zu_verbinden {color:yellow}
+.versuche_zu_verbinden {color:orange}
 .verbunden {color:green}
   </style>
 
@@ -76,6 +76,7 @@ function websocket_verbinden() {
       Thermostat.firstChild.nodeValue="Connection successful";
       Thermostat.setAttribute("class","verbunden");
       document.getElementById("t01").firstChild.nodeValue="Connection successful";
+      document.getElementById("t0").setAttribute("class","verbunden");
       Connection_successful_mem=Connection_successful+1;
       Thermostat_connected=1;
 //      CodeArray=document.getElementById("Ausgabe").lastChild.nodeValue.trim().split("\n");
@@ -96,6 +97,7 @@ function websocket_verbinden() {
       document.getElementById("Übertragung").firstChild.nodeValue="ok";
       document.getElementById("t"+Thermostat_connected+"1").firstChild.nodeValue=
         "Characteristic value was written successful";
+      document.getElementById("t"+Thermostat_connected).setAttribute("class","verbunden");
       Characteristic_value_was_written_successful_mem=
         Characteristic_value_was_written_successful+1;
       Thermostat_connected=Thermostat_connected+1;
@@ -144,6 +146,7 @@ function websocket_verbinden() {
       Thermostat.setAttribute("class","nicht_verbunden");
       document.getElementById("t"+Thermostat_connected+"1").firstChild.nodeValue=
         "Disconnected";
+      document.getElementById("t"+Thermostat_connected).setAttribute("class","verbunden");
       Disconnected_mem=Disconnected+1;
       Thermostat_connected=0;
       }
@@ -238,9 +241,17 @@ function req(text) {
   document.getElementById("Ausgabe").lastChild.nodeValue=text;
   CodeArray=("connect\n"+text.trim()+"\ndisconnect").split("\n");
   for (var i=0;i<10;i++) {
-    if (i<CodeArray.length) document.getElementById("t"+i+"0").firstChild.nodeValue=CodeArray[i].trim(); else document.getElementById("t"+i+"0").firstChild.nodeValue=" ";
+    document.getElementById("t"+i+"0").firstChild.nodeValue=" ";
     document.getElementById("t"+i+"1").firstChild.nodeValue=" ";
     document.getElementById("t"+i+"2").firstChild.nodeValue=" ";
+    document.getElementById("t"+i).setAttribute("class","nicht_verbunden");
+    if (i<CodeArray.length) {
+      document.getElementById("t"+i+"0").firstChild.nodeValue=CodeArray[i].trim(); 
+      if (CodeArray[i]=="connect") document.getElementById("t"+i+"1").firstChild.nodeValue="Connection successful";
+      if (CodeArray[i].slice(0,4)=="char") document.getElementById("t"+i+"1").firstChild.nodeValue="Characteristic value was written successful";
+      if (CodeArray[i]=="disconnect") document.getElementById("t"+i+"1").firstChild.nodeValue="Disconnected";
+      document.getElementById("t"+i+"2").firstChild.nodeValue="0";
+      }
     }
   Thermostat_connected=-10;
   versuche_zu_verbinden();
@@ -253,6 +264,7 @@ function versuche_zu_verbinden() {
     tt.nodeValue="noch "+(-Thermostat_connected)+" Versuche im 3 s Abstand";
     document.getElementById("t02").firstChild.nodeValue=
       "noch "+(-Thermostat_connected)+" Versuche im 3 s Abstand";
+    document.getElementById("t0").setAttribute("class","versuche_zu_verbinden");
     Thermostat_connected=Thermostat_connected+1;
     setTimeout(versuche_zu_verbinden,3000);
     websocket.send("connect");
@@ -269,6 +281,7 @@ function versuche_zu_uebertragen(text,num,stat) {
     tt.nodeValue="noch "+num+" Versuche im Abstand 3 s";
     document.getElementById("t"+Thermostat_connected+"2").firstChild.nodeValue=
       "noch "+num+" Versuche im Abstand 3 s";
+    document.getElementById("t"+Thermostat_connected).setAttribute("class","versuche_zu_verbinden");
     //Thermostat_connected=Thermostat_connected+1;
     if (num>1) setTimeout(versuche_zu_uebertragen,3000,text,num-1,stat);
     var vors="";
@@ -369,16 +382,16 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
   </ul>
   
 <table border="1" style="border-collapse:collapse; empty-cells:hide; font-family:Courier monospace;"><tbody>
-<tr><td id="t00">conn</td><td id="t01">succ</td><td id="t02">3 von 10</td></tr>
-<tr><td id="t10">conn</td><td id="t11">succ</td><td id="t12">3 von 10</td></tr>
-<tr><td id="t20">conn</td><td id="t21">succ</td><td id="t22">3 von 10</td></tr>
-<tr><td id="t30">conn</td><td id="t31">succ</td><td id="t32">3 von 10</td></tr>
-<tr><td id="t40">conn</td><td id="t41">succ</td><td id="t42">3 von 10</td></tr>
-<tr><td id="t50">conn</td><td id="t51">succ</td><td id="t52">3 von 10</td></tr>
-<tr><td id="t60">conn</td><td id="t61">succ</td><td id="t62">3 von 10</td></tr>
-<tr><td id="t70">conn</td><td id="t71">succ</td><td id="t72">3 von 10</td></tr>
-<tr><td id="t80">conn</td><td id="t81">succ</td><td id="t82">3 von 10</td></tr>
-<tr><td id="t90">conn</td><td id="t91">succ</td><td id="t92">3 von 10</td></tr>
+<tr id="t0"><td id="t00"> </td><td id="t01"> </td><td id="t02"> </td></tr>
+<tr id="t1"><td id="t10"> </td><td id="t11"> </td><td id="t12"> </td></tr>
+<tr id="t2"><td id="t20"> </td><td id="t21"> </td><td id="t22"> </td></tr>
+<tr id="t3"><td id="t30"> </td><td id="t31"> </td><td id="t32"> </td></tr>
+<tr id="t4"><td id="t40"> </td><td id="t41"> </td><td id="t42"> </td></tr>
+<tr id="t5"><td id="t50"> </td><td id="t51"> </td><td id="t52"> </td></tr>
+<tr id="t6"><td id="t60"> </td><td id="t61"> </td><td id="t62"> </td></tr>
+<tr id="t7"><td id="t70"> </td><td id="t71"> </td><td id="t72"> </td></tr>
+<tr id="t8"><td id="t80"> </td><td id="t81"> </td><td id="t82"> </td></tr>
+<tr id="t9"><td id="t90"> </td><td id="t91"> </td><td id="t92"> </td></tr>
 </tbody></table>
 
 <div id="Websocket_Rahmen"><div style="outline:solid; outline-size: 5px; outline-color: beige;">
