@@ -75,13 +75,14 @@ function websocket_verbinden() {
     if (Connection_successful>Connection_successful_mem) {
       Thermostat.firstChild.nodeValue="Connection successful";
       Thermostat.setAttribute("class","verbunden");
+      document.getElementById("t01").firstChild.nodeValue="Connection successful";
       Connection_successful_mem=Connection_successful+1;
       Thermostat_connected=1;
 //      CodeArray=document.getElementById("Ausgabe").lastChild.nodeValue.trim().split("\n");
       document.getElementById("Ausgabe").lastChild.nodeValue="";
-      noch_nicht_gesendet=CodeArray.length-1;
+      noch_nicht_gesendet=CodeArray.length-2;
       document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Noch zu senden: "+noch_nicht_gesendet+" Zeilen";
-      if (CodeArray[0].length>0) versuche_zu_uebertragen(CodeArray[0],10,1);
+      if (CodeArray[1].length>0) versuche_zu_uebertragen(CodeArray[1],10,1);
       }
 
     Characteristic_value_was_written_successful=tav.indexOf(
@@ -93,6 +94,8 @@ function websocket_verbinden() {
       //Thermostat.setAttribute("class","verbunden");
       document.getElementById("Sendetext").firstChild.nodeValue="Übertragung beendet"
       document.getElementById("Übertragung").firstChild.nodeValue="ok";
+      document.getElementById("t"+Thermostat_connected+"1").firstChild.nodeValue=
+        "Characteristic value was written successful";
       Characteristic_value_was_written_successful_mem=
         Characteristic_value_was_written_successful+1;
       Thermostat_connected=Thermostat_connected+1;
@@ -139,6 +142,8 @@ function websocket_verbinden() {
     if (Disconnected>Disconnected_mem) {
       Thermostat.firstChild.nodeValue="disconnected";
       Thermostat.setAttribute("class","nicht_verbunden");
+      document.getElementById("t"+Thermostat_connected+"1").firstChild.nodeValue=
+        "Disconnected";
       Disconnected_mem=Disconnected+1;
       Thermostat_connected=0;
       }
@@ -231,7 +236,12 @@ function temp_to_hex(temp) {
 
 function req(text) {
   document.getElementById("Ausgabe").lastChild.nodeValue=text;
-  CodeArray=text.trim().split("\n");
+  CodeArray=("connect\n"+text.trim()+"\ndisconnect").split("\n");
+  for (var i=0;i<10;i++) {
+    if (i<CodeArray.length) document.getElementById("t"+i+"0").firstChild.nodeValue=CodeArray[i].trim(); else document.getElementById("t"+i+"0").firstChild.nodeValue=" ";
+    document.getElementById("t"+i+"1").firstChild.nodeValue=" ";
+    document.getElementById("t"+i+"2").firstChild.nodeValue=" ";
+    }
   Thermostat_connected=-10;
   versuche_zu_verbinden();
   //alert("connect\n"+text+"disconnect");
@@ -241,6 +251,8 @@ function versuche_zu_verbinden() {
   var tt=document.getElementById("Verbindung").firstChild;
   if (Thermostat_connected<0) {
     tt.nodeValue="noch "+(-Thermostat_connected)+" Versuche im 3 s Abstand";
+    document.getElementById("t02").firstChild.nodeValue=
+      "noch "+(-Thermostat_connected)+" Versuche im 3 s Abstand";
     Thermostat_connected=Thermostat_connected+1;
     setTimeout(versuche_zu_verbinden,3000);
     websocket.send("connect");
@@ -255,6 +267,8 @@ function versuche_zu_uebertragen(text,num,stat) {
   if (Thermostat_connected==stat) {
     st.nodeValue=text;
     tt.nodeValue="noch "+num+" Versuche im Abstand 3 s";
+    document.getElementById("t"+Thermostat_connected+"2").firstChild.nodeValue=
+      "noch "+num+" Versuche im Abstand 3 s";
     //Thermostat_connected=Thermostat_connected+1;
     if (num>1) setTimeout(versuche_zu_uebertragen,3000,text,num-1,stat);
     websocket.send("#"+text);
@@ -352,7 +366,7 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 
   </ul>
   
-<table border="1" style="border-collapse:collapse; empty-cells:hide"><tbody>
+<table border="1" style="border-collapse:collapse; empty-cells:hide; font-family:Courier monospace;"><tbody>
 <tr><td id="t00">conn</td><td id="t01">succ</td><td id="t02">3 von 10</td></tr>
 <tr><td id="t10">conn</td><td id="t11">succ</td><td id="t12">3 von 10</td></tr>
 <tr><td id="t20">conn</td><td id="t21">succ</td><td id="t22">3 von 10</td></tr>
@@ -377,7 +391,7 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 <button onclick="websocket.send('char-write-req 411 450318')">char-write-req 411 450318</button>
 <button onclick="websocket.send('disconnect')">disconnect</button>
 </div>
-<div>2. mögliche Antworten:
+<div>2. erwartete Antworten:
 <button onclick="websocket.send('#Connection successful')">Connection successful</button>
 <button onclick="websocket.send('#Characteristic value was written successful')">Characteristic value was written successful</button>
 <button onclick="websocket.send('#Notification handle = 0x0421 value: 02 01 00 10 04 26')">Notification handle</button>
