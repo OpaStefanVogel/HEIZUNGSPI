@@ -377,11 +377,11 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 
 <ul>
 
-<li>Verbindung zum (Heizungs-) Raspberry Pi: <span id="Raspberry Pi" class="nicht_verbunden">nicht verbunden</span>.</li>
+<li>Verbindung zum (Heizungs-) Raspberry Pi: <span id="Raspberry Pi" class="nicht_verbunden">nicht verbunden (Seite nochmal laden)</span>.</li>
 
-<li>Von dort zum Thermostat: <span id="Thermostat" class="nicht_verbunden">disconnected</span> (<span id="Verbindung">wird erst bei einer nachfolgenden Eingabe verbunden</span>).</li>
+<li style="display:none">Von dort zum Thermostat: <span id="Thermostat" class="nicht_verbunden">disconnected</span> (<span id="Verbindung">wird erst bei einer nachfolgenden Eingabe verbunden</span>).</li>
 
-<li>Im Thermostat: <span id="Sendetext" class="nicht_verbunden"> </span> (<span id="Übertragung"> </span>).</li>
+<li style="display:none">Im Thermostat: <span id="Sendetext" class="nicht_verbunden"> </span> (<span id="Übertragung"> </span>).</li>
 
 <li>Aktuellen Status <button onclick="Status_abfragen()">abfragen</button>: Temperatur <span id="Temperatur" class="nicht_verbunden">??</span> °C, Modus <span id="Modus" class="nicht_verbunden">????</span>, Ventil <span id="Ventil" class="nicht_verbunden">??</span>% geöffnet, Batterie <span id="Batterie" class="nicht_verbunden">??</span>.</li>
 
@@ -406,7 +406,7 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 
   </ul>
   
-<table border="1" style="border-collapse:separate; empty-cells:hide; font-family:Courier monospace;">
+<table border="1" style="border-collapse:separate; empty-cells:hide; font-family:Courier monospace; min-width:800px">
 <thead><tr style="text-align:left" class="verbunden"><th>gesendet</th><th>empfangen</th><th>Versuche im Abstand von 3 s</th></tr>
   </thead>
 <tbody>
@@ -422,12 +422,15 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 <tr id="t9"><td id="t90"> </td><td id="t91"> </td><td id="t92" class="c"> </td></tr>
 </tbody></table>
 
-<div id="Websocket_Rahmen"><div style="outline:solid; outline-size: 5px; outline-color: beige;">
+<div>gatttool -I</div>
+<div><span id="Websocket_Display"><textarea id="Websocket-Antwort" cols="80" rows="15" style="font-size:100%; white-space:pre; background-color:Aliceblue" readonly="readonly"></textarea></span></div>
+
+<div id="Websocket_Rahmen"><div style="display:none; outline:solid; outline-size: 5px; outline-color: beige;">
 <div>zu <input id="Websocket_Adresse" size="25" value="ws://modellbahnpult:1880/ws/gatttool"/> <button onclick="websocket_verbinden()">Verbindung herstellen</button> <a href="http://www.w3.org/TR/2012/CR-websockets-20120920/#the-websocket-interface" id="Websocket_Status">CLOSED</a> (falls nötig <button onclick="restart_GAP(event)">Restart GAP</button>)</div>
 <div><button onclick="Websocket_Display_aus_ein()" style="vertical-align:top">Display aus/ein ("aus" rechnet schneller)</button> <span id="noch_zu_rechnen"> </span> 
 <span id="Beweglichkeit" style="color: darkred; font-style: bold;"> </span>
 <span id="Einsetzkanten" style="color: yellowgreen; font-style: bold;"> </span></div>
-<div><span id="Websocket_Display"><textarea id="Websocket-Antwort" cols="80" rows="15" style="font-size:100%; white-space:pre; background-color:Aliceblue" readonly="readonly"></textarea></span></div>
+
 <div>1. Direkte Eingaben: <button onclick="websocket.send('connect')">connect</button>
 <button onclick="websocket.send('char-write-req 411 8000')">char-write-req 411 8000</button>
 <button onclick="websocket.send('char-write-req 411 4118')">char-write-req 411 4118</button>
