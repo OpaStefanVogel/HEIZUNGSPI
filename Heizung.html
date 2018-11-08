@@ -28,6 +28,7 @@ var char_write_req=0;
 var char_write_req_mem=-1;
 var disconnect=0;
 var disconnect_mem=-1;
+var Test="";
 
 var websocket=0;
 var wgesamt="";
@@ -163,13 +164,13 @@ function websocket_verbinden() {
       connect_mem=connect+1;
       }
     
-    char_write_req=textarea.value.indexOf("> #char-write-req",char_write_req_mem);
+    char_write_req=textarea.value.indexOf("> "+Test+"char-write-req",char_write_req_mem);
     if (char_write_req>char_write_req_mem) {
       document.getElementById("t"+Thermostat_connected+"0").setAttribute("class","verbunden");
       char_write_req_mem=char_write_req+1;
       }
 
-    disconnect=textarea.value.indexOf("> #disconnect",disconnect_mem);
+    disconnect=textarea.value.indexOf("> "+Test+"disconnect",disconnect_mem);
     if (disconnect>disconnect_mem) {
       document.getElementById("t"+Thermostat_connected+"0").setAttribute("class","verbunden");
       disconnect_mem=disconnect+1;
@@ -263,6 +264,7 @@ function temp_to_hex(temp) {
   }
 
 function req(text) {
+  if (document.getElementById("Websocket_Adresse").value.indexOf("modellbahnpult")>0) Test="#"; else Test="";
   document.getElementById("Ausgabe").lastChild.nodeValue=text;
   CodeArray=("connect\n"+text.trim()+"\ndisconnect").split("\n");
   for (var i=0;i<10;i++) {
@@ -310,9 +312,7 @@ function versuche_zu_uebertragen(text,num,stat) {
     document.getElementById("t"+Thermostat_connected).setAttribute("class","versuche_zu_verbinden");
     //Thermostat_connected=Thermostat_connected+1;
     if (num>1) setTimeout(versuche_zu_uebertragen,3000,text,num-1,stat);
-    var vors="";
-    if (document.getElementById("Websocket_Adresse").value.indexOf("modellbahnpult")>0) vors="#";
-    websocket.send(vors+text);
+    websocket.send(Test+text);
     } 
   }
 
@@ -407,7 +407,11 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 
   </ul>
   
-<table border="1" style="border-collapse:collapse; empty-cells:hide; font-family:Courier monospace;"><tbody>
+<table border="1" style="border-collapse:separate; empty-cells:hide; font-family:Courier monospace;">
+<thead><tr style="text-align:left
+" class="verbunden"><th>gesendet</th><th>empfangen</th><th>Versuche im Abstand von 3 s</th></tr>
+  </thead>
+<tbody>
 <tr id="t0"><td id="t00"> </td><td id="t01"> </td><td id="t02"> </td></tr>
 <tr id="t1"><td id="t10"> </td><td id="t11"> </td><td id="t12"> </td></tr>
 <tr id="t2"><td id="t20"> </td><td id="t21"> </td><td id="t22"> </td></tr>
