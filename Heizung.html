@@ -134,16 +134,20 @@ function websocket_verbinden() {
       if (hand=="02 01"&&temp.length==2) {
         temp=eval("0x"+temp)/2;
         document.getElementById("Temperatur").firstChild.nodeValue=temp;
+        document.getElementById("Temperatur").setAttribute("class","verbunden");
         var modus=tav.slice(Notification_handle+43,Notification_handle+44);
         if (modus==0) modus="auto";
         if (modus==1) modus="manu";
         document.getElementById("Modus").firstChild.nodeValue=modus;
+        document.getElementById("Modus").setAttribute("class","verbunden");
         var ventil=tav.slice(Notification_handle+45,Notification_handle+47);
         ventil=Math.round(eval("0x"+ventil)/256*100);
         document.getElementById("Ventil").firstChild.nodeValue=ventil;
+        document.getElementById("Ventil").setAttribute("class","verbunden");
         var batt=tav.slice(Notification_handle+42,Notification_handle+43);
         if (batt>7) batt="low"; else batt="ok";
         document.getElementById("Batterie").firstChild.nodeValue=batt;
+        document.getElementById("Batterie").setAttribute("class","verbunden");
         Notification_handle_mem=Notification_handle+1;
         }
       }
@@ -155,6 +159,7 @@ function websocket_verbinden() {
       document.getElementById("t"+Thermostat_connected+"1").firstChild.nodeValue=
         "Disconnected";
       document.getElementById("t"+Thermostat_connected).setAttribute("class","verbunden");
+      document.getElementById('Testbutton').innerHTML="&nbsp;";
       Disconnected_mem=Disconnected+1;
       Thermostat_connected=0;
       }
@@ -283,6 +288,7 @@ function req(text) {
       }
     }
   Thermostat_connected=-10;
+  document.getElementById('Testbutton').firstChild.nodeValue="Connection successful";
   versuche_zu_verbinden();
   //alert("connect\n"+text+"disconnect");
   }
@@ -310,6 +316,7 @@ function versuche_zu_uebertragen(text,num,stat) {
     document.getElementById("t"+Thermostat_connected+"2").firstChild.nodeValue=11-num;
     document.getElementById("t"+Thermostat_connected).setAttribute("class","versuche_zu_verbinden");
     //Thermostat_connected=Thermostat_connected+1;
+    if (text=="disconnect") document.getElementById('Testbutton').firstChild.nodeValue="Disconnected"; else document.getElementById('Testbutton').firstChild.nodeValue="Characteristic value was written successful";
     if (num>1) setTimeout(versuche_zu_uebertragen,3000,text,num-1,stat);
     websocket.send(Test+text);
     } 
@@ -424,6 +431,11 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 
 <div>gatttool -I</div>
 <div><span id="Websocket_Display"><textarea id="Websocket-Antwort" cols="80" rows="15" style="font-size:100%; white-space:pre; background-color:Aliceblue" readonly="readonly"></textarea></span></div>
+
+<div>zum Testen:
+<button onclick="websocket.send('#Notification handle = 0x0421 value: 02 01 00 10 04 26')">Notification handle</button>
+<button id="Testbutton" style="color:orange" onclick="websocket.send('#'+document.getElementById('Testbutton').firstChild.nodeValue)">&nbsp;</button>
+</div>
 
 <div id="Websocket_Rahmen"><div style="display:none; outline:solid; outline-size: 5px; outline-color: beige;">
 <div>zu <input id="Websocket_Adresse" size="25" value="ws://modellbahnpult:1880/ws/gatttool"/> <button onclick="websocket_verbinden()">Verbindung herstellen</button> <a href="http://www.w3.org/TR/2012/CR-websockets-20120920/#the-websocket-interface" id="Websocket_Status">CLOSED</a> (falls nötig <button onclick="restart_GAP(event)">Restart GAP</button>)</div>
