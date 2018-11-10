@@ -508,3 +508,14 @@ git pull
 git commit -a -m "Beschriftung <i>T<sub>Tag</sub>..."
 git push --all
 screen -r
+git commit -a -m "/ws/gatttool2 für Heizung.htm"
+git push --all
+ls
+git pull
+ls Heizung.html 
+ls
+ls Heizung.html 
+git pull
+nano Heizung.html 
+gatttool -I
+nano Heizung.html 

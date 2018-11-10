@@ -4559,5 +4559,60 @@
                 "f5783b10.6b3918"
             ]
         ]
+    },
+    {
+        "id": "21e4081f.9782f8",
+        "type": "http in",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "url": "/Heizung.html",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 2720,
+        "wires": [
+            [
+                "bf206483.db20c8"
+            ]
+        ]
+    },
+    {
+        "id": "bf206483.db20c8",
+        "type": "file in",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "filename": "/home/pi/Heizung.html",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "x": 310,
+        "y": 2720,
+        "wires": [
+            [
+                "de411eb1.1e51a"
+            ]
+        ]
+    },
+    {
+        "id": "de411eb1.1e51a",
+        "type": "http response",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 530,
+        "y": 2720,
+        "wires": []
+    },
+    {
+        "id": "ea9005c7.430b78",
+        "type": "comment",
+        "z": "b4be1bf1.59bee8",
+        "name": "html",
+        "info": "",
+        "x": 60,
+        "y": 2680,
+        "wires": []
     }
 ]
