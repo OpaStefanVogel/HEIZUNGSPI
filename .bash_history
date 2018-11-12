@@ -519,3 +519,6 @@ git pull
 nano Heizung.html 
 gatttool -I
 nano Heizung.html 
+git commit -a -m "disconnect\n[ anstelle von Disconnected"
+git push --all
+screen -r
