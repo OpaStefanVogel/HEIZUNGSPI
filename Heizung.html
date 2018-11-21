@@ -34,10 +34,12 @@ var Test="";
 var websocket=0;
 var wgesamt="";
 var CodeArray=[];
-function websocket_verbinden() {
+function websocket_verbinden(URL) {
   if (websocket!=0) websocket.close();
-  var Adresse=document.getElementById("Websocket_Adresse").value;
+  var Adresse=URL;
+  if (Adresse==undefined) Adresse=document.getElementById("Websocket_Adresse").value;
   websocket = new WebSocket(Adresse,"fiktiv");
+  websocket.onerror=function(event) {websocket_verbinden("ws://modellbahnpult:1880/ws/gatttool")};
   websocket.onmessage = function(event) {
     var w=event.data;
     //alert(w+"####");
@@ -325,7 +327,15 @@ function versuche_zu_uebertragen(text,num,stat) {
 </script>
 <script id="scr" type="application/ecmascript">
 function Status_abfragen() {
-  req("char-write-req 411 8000\n");//mit unlock
+  document.getElementById("Temperatur").firstChild.nodeValue="??";
+  document.getElementById("Temperatur").setAttribute("class","nicht_verbunden");
+  document.getElementById("Modus").firstChild.nodeValue="????";
+  document.getElementById("Modus").setAttribute("class","nicht_verbunden");
+  document.getElementById("Ventil").firstChild.nodeValue="??";
+  document.getElementById("Ventil").setAttribute("class","nicht_verbunden");
+  document.getElementById("Batterie").firstChild.nodeValue="??";
+  document.getElementById("Batterie").setAttribute("class","nicht_verbunden");
+  req("char-write-req 411 8000\n");//Statusabfrage über unlock-Funktion
   }
 
 function Modus_auto() {
