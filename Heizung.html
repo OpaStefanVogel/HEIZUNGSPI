@@ -125,7 +125,7 @@ function websocket_verbinden(URL) {
         noch_nicht_gesendet=noch_nicht_gesendet-1;
         } else {
           document.getElementById("noch_zu_rechnen").firstChild.nodeValue="Fertig.";
-          websocket.send('disconnect');
+          //setTimeout(function () {websocket.send('disconnect')},3000);
           }
       }       
  
@@ -320,7 +320,8 @@ function versuche_zu_uebertragen(text,num,stat) {
     //Thermostat_connected=Thermostat_connected+1;
     if (text=="disconnect") document.getElementById('Testbutton').firstChild.nodeValue="Disconnected"; else document.getElementById('Testbutton').firstChild.nodeValue="Characteristic value was written successful";
     if (num>1) setTimeout(versuche_zu_uebertragen,3000,text,num-1,stat);
-    websocket.send(Test+text);
+    //alert(text);
+    websocket.send(Test+"    "+text);
     } 
   }
 
@@ -446,6 +447,13 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 <button onclick="websocket.send('#Notification handle = 0x0421 value: 02 01 00 10 04 26')">Notification handle</button>
 <button id="Testbutton" style="color:orange" onclick="websocket.send('#'+document.getElementById('Testbutton').firstChild.nodeValue)">&nbsp;</button>
 </div>
+<div style="white-space:pre-wrap">
+.. Notification handle kommt manchmal nicht zurück
+.. .html von außerhalb aus starten
+.. von außen dann auch Websocket
+.. Datum und Uhrzeit stimmen immerfort nicht
+.. die Buttons gehen in manchen Browser nicht größerzumachen
+  </div>
 
 <div id="Websocket_Rahmen"><div style="display:none; outline:solid; outline-size: 5px; outline-color: beige;">
 <div>zu <input id="Websocket_Adresse" size="25" value="ws://heizung:1880/ws/gatttool2"/> <button onclick="websocket_verbinden()">Verbindung herstellen</button> <a href="http://www.w3.org/TR/2012/CR-websockets-20120920/#the-websocket-interface" id="Websocket_Status">CLOSED</a> (falls nötig <button onclick="restart_GAP(event)">Restart GAP</button>)</div>
@@ -474,7 +482,7 @@ Quelle: <a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/maste
 <!--div><i>Schließlich der zu kopierende und auszuführende Programmcode, wenn nicht über Websocket gerechnet wird:</i></div-->
 
 <div id="AusgabeSVG" style="white-space:wrap;"></div>
-<div id="Ausgabe" style="white-space:pre-wrap; font-family:Courier,monospace; font-size:70%; color:black;"><!--div> <a id="download"> </a><small> (dieser Download erfolgt mit <a href="http://stackoverflow.com/questions/2897619/using-html5-javascript-to-generate-and-save-a-file">&lt;a href=... download=...&gt;</a>)</small></div-->
-  </div>
+<div id="Ausgabe" style="white-space:pre-wrap; font-family:Courier,monospace; font-size:70%; color:black;"><!--div> <a id="download"> </a><small> (dieser Download erfolgt mit <a href="http://stackoverflow.com/questions/2897619/using-html5-javascript-to-generate-and-save-a-file">&lt;a href=... download=...&gt;</a>)</small></div>
+  </div-->
   </body>
   </html>
