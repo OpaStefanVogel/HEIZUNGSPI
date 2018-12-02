@@ -36,6 +36,7 @@ var websocket=0;
 var wgesamt="";
 var CodeArray=[];
 function websocket_verbinden(URL) {
+  document.getElementById("baseURI").firstChild.nodeValue=document.baseURI;
   if (websocket!=0) websocket.close();
   var Adresse=URL;
   if (Adresse==undefined) Adresse=document.getElementById("Websocket_Adresse").value;
@@ -451,8 +452,8 @@ Quellen:
 <button onclick="websocket.send('#Notification handle = 0x0421 value: 02 01 00 10 04 26')">Notification handle</button>
 <button id="Testbutton" style="color:orange" onclick="websocket.send('#'+document.getElementById('Testbutton').firstChild.nodeValue)">&nbsp;</button>
 </div>
-<div style="white-space:pre-wrap">
-Was alles nicht funktioniert:
+document.baseURI=<span id="baseURI"> </span>
+<div style="white-space:pre-wrap">Was alles nicht funktioniert:
 .. Notification handle kommt manchmal nicht zurück
 .. .html von außerhalb aus starten
 .. von außen dann auch Websocket
