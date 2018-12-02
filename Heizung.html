@@ -327,7 +327,7 @@ function versuche_zu_uebertragen(text,num,stat) {
     if (text=="disconnect") document.getElementById('Testbutton').firstChild.nodeValue="Disconnected"; else document.getElementById('Testbutton').firstChild.nodeValue="Characteristic value was written successful";
     if (num>1) setTimeout(versuche_zu_uebertragen,3000,text,num-1,stat);
     //alert(text);
-    websocket.send(Test+"    "+text);
+    setTimeout(function(){websocket.send(Test+"    "+text)},1000);
     } 
   }
 
@@ -468,6 +468,7 @@ ok Hinweis, wie weiter, wenn kein Notification handle kommt
 .. jetzige Umschaltzeiten 7:00 Uhr und 22:00 Uhr (oder ähnlich) einstellbar machen.
 .. animiertes css während Sendeversuch.
 ok halbe °C auch mit Komma statt Dezimalpunkt eingeben.
+.. wenn schon connected, läuft connect ins Leere
   </div>
 
 <div id="Websocket_Rahmen"><div style="display:none; outline:solid; outline-size: 5px; outline-color: beige;">
