@@ -38,9 +38,8 @@ var CodeArray=[];
 function websocket_verbinden(URL) {
   var Basisadresse=document.baseURI;
   var Websocketadresse=URL;
-  document.getElementById("baseURI").firstChild.nodeValue=Basisadresse;
-  if (Basisadresse.indexOf(":188",0)>-1&&URL==undefined)
-    Websocketadresse="ws"+Basisadresse.splice(4,Basisadresse.indexOf(":188")+5)+"/ws/gatttool2";
+  if (Basisadresse.indexOf(":188")>-1&&URL==undefined)
+    Websocketadresse="ws"+Basisadresse.slice(4,Basisadresse.indexOf(":188")+5)+"/ws/gatttool2";
   document.getElementById("baseURI").firstChild.nodeValue=Basisadresse+" "+Websocketadresse;
   if (websocket!=0) websocket.close();
   var Adresse=URL;
