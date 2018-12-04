@@ -277,6 +277,13 @@ function temp_to_hex(temp) {
   return thex;
   }
 
+function time_to_hex(time) {
+  var tim=time.split(":");
+  tim=(tim[0]*6+Math.floor(tim[1]/10)).toString(16);
+  if (tim.length==1) tim="0"+tim;
+  return tim;
+  }
+
 function req(text) {
   if (document.getElementById("Websocket_Adresse").value.indexOf("modellbahnpult")>0) Test="#"; else Test="";
   document.getElementById("Ausgabe").lastChild.nodeValue=text;
@@ -357,12 +364,13 @@ function Solltemperatur_einstellen(temp) {
   req("char-write-req 411 41"+temp_to_hex(temp)+"\n");
   }
 
-function Wochentemperatur_programmieren(ttag,tnacht) {
+function Wochentemperatur_programmieren(tagzeit,ttag,nachtzeit,tnacht) {
+  alert(tagzeit+" "+ttag+" "+nachtzeit+" "+tnacht);
   var Code="";
   for (i=0;i<7;i++) {
     Code=Code+"char-write-req 411 100"+i
-      +temp_to_hex(tnacht)+"2A"
-      +temp_to_hex(ttag)+"84"
+      +temp_to_hex(tnacht)+time_to_hex(tagzeit)
+      +temp_to_hex(ttag)+time_to_hex(nachtzeit)
       +temp_to_hex(tnacht)+"90\n";
     }
   req(Code);
@@ -414,7 +422,7 @@ Quellen:
 <li>Aktuelle Solltemperatur auf <input id="aktuelle_Solltemperatur" size="2" value="12"/> °C <button onclick="Solltemperatur_einstellen(document.getElementById('aktuelle_Solltemperatur').value)">einstellen</button> (gilt bis zum nächsten Umschaltzeitpunkt, oder <button onclick="Modus_auto()">auto</button>).
 <div class="Hilfetext">Temperatur als ganze °C oder halbe °C mit Komma 12,5 oder Dezimalpunkt 12.5 eingeben.</div></li>
 
-<li>Wochentemperatur auf tagsüber <input id="Wochentemperatur_tagsueber" size="2" value="20"/> °C und nachts <input id="Wochentemperatur_nachts" size="2" value="17"/> °C <button onclick="Wochentemperatur_programmieren(document.getElementById('Wochentemperatur_tagsueber').value,document.getElementById('Wochentemperatur_nachts').value)">programmieren</button>.</li>
+<li>Wochentemperatur ab <input id="Wochentemperatur_tagzeit" size="3" value="7:00"/> Uhr auf <input id="Wochentemperatur_tagsueber" size="2" value="20"/> °C und ab <input id="Wochentemperatur_nachtzeit" size="3" value="22:00"/> Uhr auf <input id="Wochentemperatur_nachts" size="2" value="17"/> °C <button onclick="Wochentemperatur_programmieren(document.getElementById('Wochentemperatur_tagzeit').value,document.getElementById('Wochentemperatur_tagsueber').value,document.getElementById('Wochentemperatur_nachtzeit').value,document.getElementById('Wochentemperatur_nachts').value)">programmieren</button>.</li>
 
 <li>Modus einstellen: <button onclick="Modus_manu()">manu</button> oder <button onclick="Modus_auto()">auto</button>.</li>
 
@@ -456,11 +464,11 @@ Quellen:
 <button onclick="websocket.send('#Notification handle = 0x0421 value: 02 01 00 10 04 26')">Notification handle</button>
 <button id="Testbutton" style="color:orange" onclick="websocket.send('#'+document.getElementById('Testbutton').firstChild.nodeValue)">&nbsp;</button>
 </div>
-document.baseURI=<span id="baseURI"> </span>
-<div style="white-space:pre-wrap">Was alles nicht funktioniert:
-.. Notification handle kommt manchmal nicht zurück
-.. .html von außerhalb aus starten
-.. von außen dann auch Websocket
+<div style="display:none">document.baseURI=<span id="baseURI"> </span></div>
+<p style="white-space:pre-wrap; font-family:Courier,monospace">Was alles nicht funktioniert:
+o. Notification handle kommt manchmal nicht zurück
+ok Heizung.html von außerhalb aus starten über Portumleitung, ok
+ok von außen dann auch Websocket ok wird aus baseURI abgeleitet
 .. Datum und Uhrzeit stimmen immerfort nicht
 .. die Buttons gehen in manch Browser nicht größer zu machen
 .. nach Woche programmieren geht Status lesen nicht
@@ -469,7 +477,8 @@ ok Hinweis, wie weiter, wenn kein Notification handle kommt
 .. animiertes css während Sendeversuch.
 ok halbe °C auch mit Komma statt Dezimalpunkt eingeben.
 .. wenn schon connected, läuft connect ins Leere
-  </div>
+.. wenn Fehler weil gleichzeitig von verschiedenen Stellen geschaltet wird, geht nur wiederholen.
+  </p>
 
 <div id="Websocket_Rahmen"><div style="display:none; outline:solid; outline-size: 5px; outline-color: beige;">
 <div>zu <input id="Websocket_Adresse" size="25" value="ws://heizung:1880/ws/gatttool2"/> <button onclick="websocket_verbinden()">Verbindung herstellen</button> <a href="http://www.w3.org/TR/2012/CR-websockets-20120920/#the-websocket-interface" id="Websocket_Status">CLOSED</a> (falls nötig <button onclick="restart_GAP(event)">Restart GAP</button>)</div>
