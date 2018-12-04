@@ -334,7 +334,9 @@ function versuche_zu_uebertragen(text,num,stat) {
     if (text=="disconnect") document.getElementById('Testbutton').firstChild.nodeValue="Disconnected"; else document.getElementById('Testbutton').firstChild.nodeValue="Characteristic value was written successful";
     if (num>1) setTimeout(versuche_zu_uebertragen,3000,text,num-1,stat);
     //alert(text);
-    setTimeout(function(){websocket.send(Test+"    "+text)},1000);
+    if (text=="disconnect")
+      setTimeout(function(){websocket.send(Test+"    "+text)},2000);
+      else websocket.send(Test+"    "+text);
     } 
   }
 
@@ -365,7 +367,7 @@ function Solltemperatur_einstellen(temp) {
   }
 
 function Wochentemperatur_programmieren(tagzeit,ttag,nachtzeit,tnacht) {
-  alert(tagzeit+" "+ttag+" "+nachtzeit+" "+tnacht);
+  //alert(tagzeit+" "+ttag+" "+nachtzeit+" "+tnacht);
   var Code="";
   for (i=0;i<7;i++) {
     Code=Code+"char-write-req 411 100"+i
