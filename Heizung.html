@@ -4,10 +4,22 @@
 <style>
 button {font-size:1.3em}
 .nicht_verbunden {color:darkred}
-.versuche_zu_verbinden {color:orange}
+.versuche_zu_verbinden {
+  color:orange;
+  animation: textflimmern 500ms infinite alternate;
+  border-radius:15px;
+  padding:5px;
+  }
 .verbunden {color:green}
 .c {text-align:center}
 .Hilfetext{color:grey;font-style:italic;font-size:85%}
+
+@keyframes textflimmern {
+  0% {background-color:lightgreen}
+  50% {background-color:yellow}
+  100% {background-color:pink}
+  }
+
   </style>
 
 <script id="scr" type="application/ecmascript">
