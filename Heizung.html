@@ -170,6 +170,7 @@ function websocket_verbinden(URL) {
         document.getElementById("Batterie").setAttribute("class","verbunden");
         Notification_handle_mem=Notification_handle+1;
         }
+      if (tav.indexOf("\n",Notification_handle)>-1) Notification_handle_mem=Notification_handle+1;
       }
     
     Disconnected=textarea.value.indexOf("disconnect\n[",Disconnected_mem);
@@ -479,16 +480,16 @@ Quellen:
 <button id="Testbutton" style="color:orange" onclick="websocket.send('#'+document.getElementById('Testbutton').firstChild.nodeValue)">&nbsp;</button>
 </div>
 <div style="display:none">document.baseURI=<span id="baseURI"> </span></div>
-<p style="white-space:pre-wrap; font-family:Courier,monospace">Was alles nicht funktioniert:
-o. Notification handle kommt manchmal nicht zurück
+<p style="white-space:pre-wrap; font-family:Courier,monospace; font-size:80%">Was alles nicht funktioniert:
+ok Notification handle kommt manchmal nicht zurück ok disconnect erst nach paar Sek.
 ok Heizung.html von außerhalb aus starten über Portumleitung, ok
 ok von außen dann auch Websocket ok wird aus baseURI abgeleitet
-.. Datum und Uhrzeit stimmen immerfort nicht
+ok Datum und Uhrzeit stimmen immerfort nicht ok inzwischen doch
 .. die Buttons gehen in manch Browser nicht größer zu machen
-.. nach Woche programmieren geht Status lesen nicht
+ok nach Woche programmieren geht Status lesen nicht ok inzwischen ausgebessert
 ok Hinweis, wie weiter, wenn kein Notification handle kommt
-.. jetzige Umschaltzeiten 7:00 Uhr und 22:00 Uhr (oder ähnlich) einstellbar machen.
-.. animiertes css während Sendeversuch.
+ok jetzige Umschaltzeiten 7:00 Uhr und 22:00 Uhr (oder ähnlich) einstellbar machen.
+ok animiertes css während Sendeversuch.
 ok halbe °C auch mit Komma statt Dezimalpunkt eingeben.
 .. wenn schon connected, läuft connect ins Leere
 .. wenn Fehler weil gleichzeitig von verschiedenen Stellen geschaltet wird, geht nur wiederholen.
