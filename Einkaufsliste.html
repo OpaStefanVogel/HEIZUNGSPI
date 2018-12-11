@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"/><title>Heizung</title></head>
+<html><head><meta charset="utf-8"/><title>Einkaufsliste</title></head>
 
 <style>
 button {font-size:1.3em}
@@ -55,9 +55,9 @@ function websocket_verbinden(URL) {
   //document.getElementById("baseURI").firstChild.nodeValue=Basisadresse+" "+Websocketadresse;
   if (websocket!=0) websocket.close();
   var Adresse=Websocketadresse;
-  if (Adresse==undefined) Adresse="ws://modellbahnpult:1880/ws/gatttool";
+  if (Adresse==undefined) Adresse="ws://modellbahnpult:1880/ws/Einkaufsliste";
   websocket = new WebSocket(Adresse,"fiktiv");
-  websocket.onerror=function(event) {websocket_verbinden("ws://modellbahnpult:1880/ws/gatttool")};
+  websocket.onerror=function(event) {websocket_verbinden("ws://modellbahnpult:1880/ws/Einkaufsliste")};
   websocket.onmessage = function(event) {
     var w=event.data;
     //alert(w+"####");
