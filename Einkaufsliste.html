@@ -36,14 +36,19 @@ function websocket_verbinden(URL) {
   websocket = new WebSocket(Adresse,"fiktiv");
   websocket.onerror=function(event) {websocket_verbinden("ws://modellbahnpult:1880/ws/Einkaufsliste")};
   websocket.onmessage = function(event) {
-    var w=eval(event.data);
+    var w=eval(event.data).reverse();
     var wl=w.length;
     //alert(w+"####");
     var textarea=document.getElementById("Websocket-Antwort");
-    var LL=w[wl-1];
+    var LL=w[0].slice();
     textarea.value=LL[1]; //firstChild.nodeValue+=w;
     textarea.scrollTop = textarea.scrollHeight;
-    document.getElementById("bisherige Einkaufslisten").firstChild.nodeValue=w.toString();
+    w.forEach(function(x,i,z){
+      var d=(new Date(x[0]));
+      var Tag=(["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Sonnabend"])[d.getDay()];
+      z[i]="Einkaufsliste vom "+Tag+" "+d.toLocaleString()+" von msg._session.id="+x[2]+":<br/>"+x[1];
+      });
+    document.getElementById("bisherige Einkaufslisten").innerHTML=w.join("<hr/>");
     };
   websocket.onopen = function() {
     websocket.send('?');
@@ -76,15 +81,12 @@ function Uhrzeit_aktualisieren() {
 
 Verbindung zu websocket /ws/Einkaufsliste: <a href="http://www.w3.org/TR/2012/CR-websockets-20120920/#the-websocket-interface" id="Websocket_Status">CLOSED</a> <span id="Raspberry Pi" class="nicht_verbunden">nicht verbunden (Seite nochmal laden)</span>
 <div><span id="Websocket_Display"><textarea id="Websocket-Antwort" cols="80" rows="15" style="font-size:100%; white-space:pre; background-color:Aliceblue"></textarea></span></div>
-<button onclick="websocket.send(document.getElementById('Websocket-Antwort').value)">Speichern</button>
-<div id="bisherige Einkaufslisten"> </div>
-<div>zum Testen:
-<button onclick="websocket.send('#Notification handle = 0x0421 value: 02 01 00 10 04 26')">Notification handle</button>
-<button id="Testbutton" style="color:orange" onclick="websocket.send('#'+document.getElementById('Testbutton').firstChild.nodeValue)">&nbsp;</button>
-</div>
 <div style="display:none">document.baseURI=<span id="baseURI"> </span></div>
+<button onclick="websocket.send(document.getElementById('Websocket-Antwort').value)">Speichern</button>
+<hr/>
+<div id="bisherige Einkaufslisten" style="white-space:pre-wrap"> </div>
 <p style="white-space:pre-wrap; font-family:Courier,monospace; font-size:80%">Was alles nicht funktioniert:
-..
+.. noch kein Hinweis, wenn zwischendurch jemand von wo anders her was speichern tut.
   </p>
 
   </body>
