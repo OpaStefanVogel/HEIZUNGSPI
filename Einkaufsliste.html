@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><title>Heizung</title></head>
+
+<style>
+button {font-size:1.3em}
+.nicht_verbunden {color:darkred}
+.versuche_zu_verbinden {
+  color:orange;
+  animation: textflimmern 500ms infinite alternate;
+  border-radius:15px;
+  padding:5px;
+  }
+.verbunden {color:green}
+.c {text-align:center}
+.Hilfetext{color:grey;font-style:italic;font-size:85%}
+
+@keyframes textflimmern {
+  0% {background-color:lightgreen}
+  50% {background-color:yellow}
+  100% {background-color:pink}
+  }
+
+  </style>
+
+<script id="scr" type="application/ecmascript">
+var Attempting_to_connect=0;
+var Attempting_to_connect_mem=-1;
+var No_route_to_host=0;
+var No_route_to_host_mem=-1;
+var Connection_successful=0;
+var Connection_successful_mem=-1;
+var Thermostat_connected=0;//von -10 bis 1
+var Disconnected=0;
+var Disconnected_mem=-1;
+var Notification_handle=0;
+var Notification_handle_mem=-1;
+var Characteristic_value_was_written_successful=0;
+var Characteristic_value_was_written_successful_mem=0;
+var connect=0;
+var connect_mem=-1;
+var char_write_req=0;
+var char_write_req_mem=-1;
+var disconnect=0;
+var disconnect_mem=-1;
+var Test="";
+
+var websocket=0;
+var wgesamt="";
+var CodeArray=[];
+function websocket_verbinden(URL) {
+  var Basisadresse=document.baseURI;
+  var Websocketadresse=URL;
+  if (Basisadresse.indexOf(":188")>-1&&URL==undefined)
+    Websocketadresse="ws"+Basisadresse.slice(4,Basisadresse.indexOf(":188")+5)+"/ws/gatttool2";
+  //document.getElementById("baseURI").firstChild.nodeValue=Basisadresse+" "+Websocketadresse;
+  if (websocket!=0) websocket.close();
+  var Adresse=Websocketadresse;
+  if (Adresse==undefined) Adresse="ws://modellbahnpult:1880/ws/gatttool";
+  websocket = new WebSocket(Adresse,"fiktiv");
+  websocket.onerror=function(event) {websocket_verbinden("ws://modellbahnpult:1880/ws/gatttool")};
+  websocket.onmessage = function(event) {
+    var w=event.data;
+    //alert(w+"####");
+    var textarea=document.getElementById("Websocket-Antwort");
+    textarea.value+=w; //firstChild.nodeValue+=w;
+    textarea.scrollTop = textarea.scrollHeight;
+    };
+  websocket.onopen = function() {
+    websocket.send('disconnect');
+    //restart_GAP();
+    //alert("open");
+    }; 
+  websocket.onclose = function() {
+    //alert(77);
+    //websocket.send("close");
+    };
+  }
+function websocket_verbunden() {
+  if (websocket!=0) {
+    document.getElementById("Websocket_Status").firstChild.nodeValue=(["CONNECTING","OPEN","CLOSING","CLOSED"])[websocket.readyState];
+    var elm=document.getElementById("Raspberry Pi")
+    elm.firstChild.nodeValue=(["wird verbunden","Verbindung ist hergestellt","Verbindung wird getrennt","nicht verbunden (Seite neu laden für neuen Versuch)"])[websocket.readyState];
+    elm.setAttribute("class",(["versuche_zu_verbinden","verbunden","Verbindung_wird_getrennt","nicht_verbunden"])[websocket.readyState]);
+    }
+  }
+setInterval(websocket_verbunden,1000);
+
+function Uhrzeit_aktualisieren() {
+  websocket.send('Exec("date; sudo date -s @'+(Date.now()/1000)+'");');
+  }
+
+</script>
+
+<body onload="websocket_verbinden()">
+<div>Quelle: <a href="https://github.com/OpaStefanVogel/HEIZUNGSPI/blob/master/Einkaufsliste.html">https://github.com/OpaStefanVogel/HEIZUNGSPI/blob/master/Einkaufsliste.html</a></div>
+
+Verbindung zu websocket /ws/Einkaufsliste: <a href="http://www.w3.org/TR/2012/CR-websockets-20120920/#the-websocket-interface" id="Websocket_Status">CLOSED</a> <span id="Raspberry Pi" class="nicht_verbunden">nicht verbunden (Seite nochmal laden)</span>
+<div><span id="Websocket_Display"><textarea id="Websocket-Antwort" cols="80" rows="15" style="font-size:100%; white-space:pre; background-color:Aliceblue" readonly="readonly"></textarea></span></div>
+
+<div>zum Testen:
+<button onclick="websocket.send('#Notification handle = 0x0421 value: 02 01 00 10 04 26')">Notification handle</button>
+<button id="Testbutton" style="color:orange" onclick="websocket.send('#'+document.getElementById('Testbutton').firstChild.nodeValue)">&nbsp;</button>
+</div>
+<div style="display:none">document.baseURI=<span id="baseURI"> </span></div>
+<p style="white-space:pre-wrap; font-family:Courier,monospace; font-size:80%">Was alles nicht funktioniert:
+..
+  </p>
+
+  </body>
+  </html>
