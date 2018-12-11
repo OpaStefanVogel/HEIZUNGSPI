@@ -23,30 +23,7 @@ button {font-size:1.3em}
   </style>
 
 <script id="scr" type="application/ecmascript">
-var Attempting_to_connect=0;
-var Attempting_to_connect_mem=-1;
-var No_route_to_host=0;
-var No_route_to_host_mem=-1;
-var Connection_successful=0;
-var Connection_successful_mem=-1;
-var Thermostat_connected=0;//von -10 bis 1
-var Disconnected=0;
-var Disconnected_mem=-1;
-var Notification_handle=0;
-var Notification_handle_mem=-1;
-var Characteristic_value_was_written_successful=0;
-var Characteristic_value_was_written_successful_mem=0;
-var connect=0;
-var connect_mem=-1;
-var char_write_req=0;
-var char_write_req_mem=-1;
-var disconnect=0;
-var disconnect_mem=-1;
-var Test="";
-
 var websocket=0;
-var wgesamt="";
-var CodeArray=[];
 function websocket_verbinden(URL) {
   var Basisadresse=document.baseURI;
   var Websocketadresse=URL;
@@ -59,14 +36,17 @@ function websocket_verbinden(URL) {
   websocket = new WebSocket(Adresse,"fiktiv");
   websocket.onerror=function(event) {websocket_verbinden("ws://modellbahnpult:1880/ws/Einkaufsliste")};
   websocket.onmessage = function(event) {
-    var w=event.data;
+    var w=eval(event.data);
+    var wl=w.length;
     //alert(w+"####");
     var textarea=document.getElementById("Websocket-Antwort");
-    textarea.value+=w; //firstChild.nodeValue+=w;
+    var LL=w[wl-1];
+    textarea.value=LL[1]; //firstChild.nodeValue+=w;
     textarea.scrollTop = textarea.scrollHeight;
+    document.getElementById("bisherige Einkaufslisten").firstChild.nodeValue=w.toString();
     };
   websocket.onopen = function() {
-    websocket.send('disconnect');
+    websocket.send('?');
     //restart_GAP();
     //alert("open");
     }; 
@@ -95,8 +75,9 @@ function Uhrzeit_aktualisieren() {
 <div>Quelle: <a href="https://github.com/OpaStefanVogel/HEIZUNGSPI/blob/master/Einkaufsliste.html">https://github.com/OpaStefanVogel/HEIZUNGSPI/blob/master/Einkaufsliste.html</a></div>
 
 Verbindung zu websocket /ws/Einkaufsliste: <a href="http://www.w3.org/TR/2012/CR-websockets-20120920/#the-websocket-interface" id="Websocket_Status">CLOSED</a> <span id="Raspberry Pi" class="nicht_verbunden">nicht verbunden (Seite nochmal laden)</span>
-<div><span id="Websocket_Display"><textarea id="Websocket-Antwort" cols="80" rows="15" style="font-size:100%; white-space:pre; background-color:Aliceblue" readonly="readonly"></textarea></span></div>
-
+<div><span id="Websocket_Display"><textarea id="Websocket-Antwort" cols="80" rows="15" style="font-size:100%; white-space:pre; background-color:Aliceblue"></textarea></span></div>
+<button onclick="websocket.send(document.getElementById('Websocket-Antwort').value)">Speichern</button>
+<div id="bisherige Einkaufslisten"> </div>
 <div>zum Testen:
 <button onclick="websocket.send('#Notification handle = 0x0421 value: 02 01 00 10 04 26')">Notification handle</button>
 <button id="Testbutton" style="color:orange" onclick="websocket.send('#'+document.getElementById('Testbutton').firstChild.nodeValue)">&nbsp;</button>
