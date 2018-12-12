@@ -20,9 +20,33 @@ button {font-size:1.3em}
   100% {background-color:pink}
   }
 
+.Einkaufsliste {
+  display:inline-block;
+  border:solid;
+  border-size:1px;
+  border-color:grey;
+  padding:20px}
   </style>
 
 <script id="scr" type="application/ecmascript">
+var Zettelfarbe=[
+  "LightBlue",
+  "LightCoral",
+  "LightCyan",
+  "LightGoldenrodYellow",
+  "LightGreen",
+  "LightGray",
+  "LightPink",
+  "LightSalmon",
+  "LightSeaGreen",
+  "LightSkyBlue",
+  "LightSlateGray",
+  "LightSteelBlue"
+  ];
+
+
+
+
 var websocket=0;
 function websocket_verbinden(URL) {
   var Basisadresse=document.baseURI;
@@ -36,17 +60,19 @@ function websocket_verbinden(URL) {
   websocket = new WebSocket(Adresse,"fiktiv");
   websocket.onerror=function(event) {websocket_verbinden("ws://modellbahnpult:1880/ws/Einkaufsliste")};
   websocket.onmessage = function(event) {
-    var w=eval(event.data).reverse();
+    var w=eval(event.data);
     var wl=w.length;
     //alert(w+"####");
     var textarea=document.getElementById("Websocket-Antwort");
     var LL=w[0].slice();
     textarea.value=LL[1]; //firstChild.nodeValue+=w;
     textarea.scrollTop = textarea.scrollHeight;
+    var sessionids=[];
     w.forEach(function(x,i,z){
+      sessionids.push(x[2]);
       var d=(new Date(x[0]));
       var Tag=(["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Sonnabend"])[d.getDay()];
-      z[i]="Einkaufsliste vom "+Tag+" "+d.toLocaleString()+" von msg._session.id="+x[2]+":<br/>"+x[1];
+      z[i]="Einkaufsliste "+Tag+" "+d.toLocaleString()+", msg._session.id="+x[2]+" lfd.Nr.="+x[3]+" "+x[4]+":<br/><span class='Einkaufsliste'; style='background-color:"+Zettelfarbe[x[4]%10]+"'>"+x[1]+"</span>";
       });
     document.getElementById("bisherige Einkaufslisten").innerHTML=w.join("<hr/>");
     };
