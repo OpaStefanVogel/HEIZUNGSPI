@@ -29,6 +29,8 @@ button {font-size:1.3em}
   </style>
 
 <script id="scr" type="application/ecmascript">
+var session=0;
+var ZF=0;
 var Zettelfarbe=[
   "LightBlue",
   "LightCoral",
@@ -67,12 +69,18 @@ function websocket_verbinden(URL) {
     var LL=w[0].slice();
     textarea.value=LL[1]; //firstChild.nodeValue+=w;
     textarea.scrollTop = textarea.scrollHeight;
+    if (session=0) session=LL[2];
+    if (ZF==0) ZF=LL[3]+1; else if (session==LL[2]) ZF=LL[4];
+    document.getElementById("Websocket-Antwort").setAttribute("style","font-size:100%; white-space:pre; background-color:"+Zettelfarbe[ZF%10]);
     var sessionids=[];
     w.forEach(function(x,i,z){
       sessionids.push(x[2]);
       var d=(new Date(x[0]));
       var Tag=(["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Sonnabend"])[d.getDay()];
-      z[i]="Einkaufsliste "+Tag+" "+d.toLocaleString()+", msg._session.id="+x[2]+" lfd.Nr.="+x[3]+" "+x[4]+":<br/><span class='Einkaufsliste'; style='background-color:"+Zettelfarbe[x[4]%10]+"'>"+x[1]+"</span>";
+      z[i]="Einkaufsliste "+Tag+" "+d.toLocaleString()
+        //+", msg._session.id="+x[2]+" lfd.Nr.="+x[3]+" "+x[4]+" "+ZF
+        +"<br/><span class='Einkaufsliste'; style='background-color:"
+        +Zettelfarbe[x[4]%10]+"'>"+x[1]+"</span>";
       });
     document.getElementById("bisherige Einkaufslisten").innerHTML=w.join("<hr/>");
     };
@@ -112,7 +120,7 @@ Verbindung zu websocket /ws/Einkaufsliste: <a href="http://www.w3.org/TR/2012/CR
 <hr/>
 <div id="bisherige Einkaufslisten" style="white-space:pre-wrap"> </div>
 <p style="white-space:pre-wrap; font-family:Courier,monospace; font-size:80%">Was alles nicht funktioniert:
-.. noch kein Hinweis, wenn zwischendurch jemand von wo anders her was speichern tut.
+ok Hinweis durch Zettelfarbe, wenn zwischendurch jemand von wo anders her was speichern tut.
   </p>
 
   </body>
