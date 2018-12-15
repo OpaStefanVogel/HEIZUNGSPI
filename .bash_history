@@ -522,3 +522,17 @@ nano Heizung.html
 git commit -a -m "disconnect\n[ anstelle von Disconnected"
 git push --all
 screen -r
+git commit -a -m "http 301"
+git push --all
+git pull
+git log
+git pull
+git log
+git pull
+git l9g
+git log
+git pull
+git log
+git pull
+git log
+git pull

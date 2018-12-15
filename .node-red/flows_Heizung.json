@@ -5,6 +5,13 @@
         "label": "Flow 1"
     },
     {
+        "id": "d51b667b.b78188",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "f4669750.411278",
         "type": "subflow",
         "name": "Subflow 1",
@@ -299,6 +306,13 @@
         "type": "websocket-listener",
         "z": "",
         "path": "/ws/gatttool2",
+        "wholemsg": "false"
+    },
+    {
+        "id": "3459dff9.aee96",
+        "type": "websocket-listener",
+        "z": "",
+        "path": "/ws/Einkaufsliste",
         "wholemsg": "false"
     },
     {
@@ -4614,5 +4628,132 @@
         "x": 60,
         "y": 2680,
         "wires": []
+    },
+    {
+        "id": "f80a122b.d6da1",
+        "type": "inject",
+        "z": "b4be1bf1.59bee8",
+        "name": "",
+        "topic": "",
+        "payload": "disconnect",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 160,
+        "y": 2020,
+        "wires": [
+            [
+                "13e31969.f64ff7"
+            ]
+        ]
+    },
+    {
+        "id": "5115e3e3.ace9fc",
+        "type": "websocket in",
+        "z": "d51b667b.b78188",
+        "name": "",
+        "server": "3459dff9.aee96",
+        "client": "",
+        "x": 100,
+        "y": 60,
+        "wires": [
+            [
+                "da5c085b.46f3e8"
+            ]
+        ]
+    },
+    {
+        "id": "64c3b674.7b3fa8",
+        "type": "websocket out",
+        "z": "d51b667b.b78188",
+        "name": "",
+        "server": "3459dff9.aee96",
+        "client": "",
+        "x": 480,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "da5c085b.46f3e8",
+        "type": "function",
+        "z": "d51b667b.b78188",
+        "name": "",
+        "func": "node.status({text:0});\nvar EL=global.get(\"Einkaufsliste\")||[[0,\"Eis\\n\",\"\",1,1]];\nnode.status({text:EL});\nvar NL=msg.payload;\nnode.status({text:NL});\nvar TL=Date.now();\nnode.status({text:TL});\nvar MI=111111;\nif (msg._session) MI=msg._session.id;\nnode.status({text:MI});\nvar nr=EL[0][3]+1;\nnode.status({text:nr});\nif (NL!=\"?\") EL.unshift([TL,NL,MI,nr,nr]);\nfor (var i=0;i<EL.length;i++) if (MI==EL[i][2]) EL[0][4]=EL[i][4];\nwhile (EL.length>10) EL.pop();\nif (NL==\"delete\") EL=[[TL,\"\",\"\",1,1]];\nglobal.set(\"Einkaufsliste\",EL);\nmsg.payload=EL;\ndelete msg._session;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 290,
+        "y": 60,
+        "wires": [
+            [
+                "64c3b674.7b3fa8"
+            ]
+        ]
+    },
+    {
+        "id": "9bebdf30.2b5dd",
+        "type": "inject",
+        "z": "d51b667b.b78188",
+        "name": "",
+        "topic": "",
+        "payload": "?",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "da5c085b.46f3e8"
+            ]
+        ]
+    },
+    {
+        "id": "e0a61327.2ba41",
+        "type": "http in",
+        "z": "d51b667b.b78188",
+        "name": "",
+        "url": "/Einkaufsliste.html",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 220,
+        "wires": [
+            [
+                "749b0734.99a8a8"
+            ]
+        ]
+    },
+    {
+        "id": "f744d9f0.e6b488",
+        "type": "http response",
+        "z": "d51b667b.b78188",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 590,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "749b0734.99a8a8",
+        "type": "file in",
+        "z": "d51b667b.b78188",
+        "name": "",
+        "filename": "/home/pi/Einkaufsliste.html",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "x": 500,
+        "y": 220,
+        "wires": [
+            [
+                "f744d9f0.e6b488"
+            ]
+        ]
     }
 ]

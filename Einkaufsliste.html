@@ -54,11 +54,11 @@ function websocket_verbinden(URL) {
   var Basisadresse=document.baseURI;
   var Websocketadresse=URL;
   if (Basisadresse.indexOf(":188")>-1&&URL==undefined)
-    Websocketadresse="ws"+Basisadresse.slice(4,Basisadresse.indexOf(":188")+5)+"/ws/gatttool2";
+    Websocketadresse="ws"+Basisadresse.slice(4,Basisadresse.indexOf(":188")+5)+"/ws/Einkaufsliste";
   //document.getElementById("baseURI").firstChild.nodeValue=Basisadresse+" "+Websocketadresse;
   if (websocket!=0) websocket.close();
   var Adresse=Websocketadresse;
-  if (Adresse==undefined) Adresse="ws://modellbahnpult:1880/ws/Einkaufsliste";
+  if (Adresse==undefined) Adresse="ws://heizung:1880/ws/Einkaufsliste";
   websocket = new WebSocket(Adresse,"fiktiv");
   websocket.onerror=function(event) {websocket_verbinden("ws://modellbahnpult:1880/ws/Einkaufsliste")};
   websocket.onmessage = function(event) {
