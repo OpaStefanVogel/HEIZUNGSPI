@@ -77,7 +77,7 @@ function websocket_verbinden(URL) {
       sessionids.push(x[2]);
       var d=(new Date(x[0]));
       var Tag=(["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Sonnabend"])[d.getDay()];
-      z[i]="Einkaufsliste "+Tag+" "+d.toLocaleString()
+      z[i]=Tag+" "+d.toLocaleString()
         //+", msg._session.id="+x[2]+" lfd.Nr.="+x[3]+" "+x[4]+" "+ZF
         +"<br/><span class='Einkaufsliste'; style='background-color:"
         +Zettelfarbe[x[4]%10]+"'>"+x[1]+"</span>";
@@ -114,9 +114,9 @@ function Uhrzeit_aktualisieren() {
 <div>Quelle: <a href="https://github.com/OpaStefanVogel/HEIZUNGSPI/blob/master/Einkaufsliste.html">https://github.com/OpaStefanVogel/HEIZUNGSPI/blob/master/Einkaufsliste.html</a></div>
 
 Verbindung zu websocket /ws/Einkaufsliste: <a href="http://www.w3.org/TR/2012/CR-websockets-20120920/#the-websocket-interface" id="Websocket_Status">CLOSED</a> <span id="Raspberry Pi" class="nicht_verbunden">nicht verbunden (Seite nochmal laden)</span>
-<div><span id="Websocket_Display"><textarea id="Websocket-Antwort" cols="80" rows="15" style="font-size:100%; white-space:pre; background-color:Aliceblue"></textarea></span></div>
+<div><span id="Websocket_Display"><textarea id="Websocket-Antwort" cols="80" rows="15" style="font-size:100%; white-space:pre; background-color:Aliceblue"></textarea></span><button onclick="websocket.send(document.getElementById('Websocket-Antwort').value)">Speichern</button>
+</div>
 <div style="display:none">document.baseURI=<span id="baseURI"> </span></div>
-<button onclick="websocket.send(document.getElementById('Websocket-Antwort').value)">Speichern</button>
 <hr/>
 <div id="bisherige Einkaufslisten" style="white-space:pre-wrap"> </div>
 <p style="white-space:pre-wrap; font-family:Courier,monospace; font-size:80%">Was alles nicht funktioniert:
