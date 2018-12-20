@@ -536,3 +536,15 @@ git log
 git pull
 git log
 git pull
+nano Einkaufsliste.html 
+git commit -a -m "flow Einkaufsliste"
+git push --all
+git log
+git pull
+git log
+git branch
+git pull
+ls
+nano Einkaufsliste.txt
+ls
+nano Einkaufsliste.txt

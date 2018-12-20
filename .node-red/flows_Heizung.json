@@ -4660,7 +4660,8 @@
         "y": 60,
         "wires": [
             [
-                "da5c085b.46f3e8"
+                "da5c085b.46f3e8",
+                "36b56b30.7a6b64"
             ]
         ]
     },
@@ -4671,7 +4672,7 @@
         "name": "",
         "server": "3459dff9.aee96",
         "client": "",
-        "x": 480,
+        "x": 880,
         "y": 60,
         "wires": []
     },
@@ -4683,12 +4684,10 @@
         "func": "node.status({text:0});\nvar EL=global.get(\"Einkaufsliste\")||[[0,\"Eis\\n\",\"\",1,1]];\nnode.status({text:EL});\nvar NL=msg.payload;\nnode.status({text:NL});\nvar TL=Date.now();\nnode.status({text:TL});\nvar MI=111111;\nif (msg._session) MI=msg._session.id;\nnode.status({text:MI});\nvar nr=EL[0][3]+1;\nnode.status({text:nr});\nif (NL!=\"?\") EL.unshift([TL,NL,MI,nr,nr]);\nfor (var i=0;i<EL.length;i++) if (MI==EL[i][2]) EL[0][4]=EL[i][4];\nwhile (EL.length>10) EL.pop();\nif (NL==\"delete\") EL=[[TL,\"\",\"\",1,1]];\nglobal.set(\"Einkaufsliste\",EL);\nmsg.payload=EL;\ndelete msg._session;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 290,
+        "x": 310,
         "y": 60,
         "wires": [
-            [
-                "64c3b674.7b3fa8"
-            ]
+            []
         ]
     },
     {
@@ -4703,11 +4702,12 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 150,
-        "y": 140,
+        "x": 130,
+        "y": 120,
         "wires": [
             [
-                "da5c085b.46f3e8"
+                "da5c085b.46f3e8",
+                "36b56b30.7a6b64"
             ]
         ]
     },
@@ -4753,6 +4753,69 @@
         "wires": [
             [
                 "f744d9f0.e6b488"
+            ]
+        ]
+    },
+    {
+        "id": "36b56b30.7a6b64",
+        "type": "function",
+        "z": "d51b667b.b78188",
+        "name": "",
+        "func": "msg.payload2=msg.payload\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 120,
+        "wires": [
+            [
+                "cb594103.c67d3"
+            ]
+        ]
+    },
+    {
+        "id": "cb594103.c67d3",
+        "type": "file in",
+        "z": "d51b667b.b78188",
+        "name": "",
+        "filename": "Einkaufsliste.txt",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "x": 480,
+        "y": 120,
+        "wires": [
+            [
+                "5bf2e2cb.bc0dfc"
+            ]
+        ]
+    },
+    {
+        "id": "c2d191f2.15078",
+        "type": "file",
+        "z": "d51b667b.b78188",
+        "name": "",
+        "filename": "Einkaufsliste.txt",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "x": 860,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "5bf2e2cb.bc0dfc",
+        "type": "function",
+        "z": "d51b667b.b78188",
+        "name": "",
+        "func": "var EL=JSON.parse(msg.payload);\nnode.status({text:EL});\nvar NL=msg.payload2;\nnode.status({text:NL});\nvar TL=Date.now();\nnode.status({text:TL});\nvar MI=111111;\nif (msg._session) MI=msg._session.id;\nnode.status({text:MI});\nvar nr=EL[0][3]+1;\nnode.status({text:nr});\nif (NL!=\"?\") EL.unshift([TL,NL,MI,nr,nr]);\nfor (var i=0;i<EL.length;i++) if (MI==EL[i][2]) EL[0][4]=EL[i][4];\nwhile (EL.length>10) EL.pop();\nif (NL==\"delete\") EL=[[TL,\"\",\"\",1,1]];\nglobal.set(\"Einkaufsliste\",EL);\nmsg.payload=JSON.stringify(EL);\ndelete msg._session;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 650,
+        "y": 120,
+        "wires": [
+            [
+                "c2d191f2.15078",
+                "64c3b674.7b3fa8"
             ]
         ]
     }
