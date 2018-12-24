@@ -548,3 +548,6 @@ ls
 nano Einkaufsliste.txt
 ls
 nano Einkaufsliste.txt
+git commit -a -m "File Einkaufsliste.txt anstelle global.set"
+git push -all
+git push --all
