@@ -551,3 +551,6 @@ nano Einkaufsliste.txt
 git commit -a -m "File Einkaufsliste.txt anstelle global.set"
 git push -all
 git push --all
+nano Einkaufsliste.html 
+git commit -a -m ".. wenn zwischendurch jemand anderes was speichert, wird aktuelles gelöscht"
+git push --all
