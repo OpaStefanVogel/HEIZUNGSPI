@@ -300,7 +300,7 @@ function time_to_hex(time) {
 function req(text) {
   if (document.getElementById("Websocket_Adresse").value.indexOf("modellbahnpult")>0) Test="#"; else Test="";
   document.getElementById("Ausgabe").lastChild.nodeValue=text;
-  CodeArray=("connect\n"+text.trim()+"\ndisconnect").split("\n");
+  CodeArray=("connect "+document.getElementById("Thermostatadresse").value+"\n"+text.trim()+"\ndisconnect").split("\n");
   for (var i=0;i<10;i++) {
     document.getElementById("t"+i+"0").firstChild.nodeValue=" ";
     document.getElementById("t"+i+"1").firstChild.nodeValue=" ";
@@ -329,7 +329,7 @@ function versuche_zu_verbinden() {
     document.getElementById("t0").setAttribute("class","versuche_zu_verbinden");
     Thermostat_connected=Thermostat_connected+1;
     setTimeout(versuche_zu_verbinden,3000);
-    websocket.send("connect");
+    websocket.send("connect "+document.getElementById("Thermostatadresse").value);
     } else if (Thermostat_connected==0) tt.nodeValue="hab leider keine Verbindung geschafft";
       else tt.nodeValue="ok"; 
   }
@@ -428,7 +428,7 @@ Quellen:         <span style="float:right">→<a href="Einkaufsliste.html">Einka
 
 <li>Verbindung zum (Heizungs-) Raspberry Pi: <span id="Raspberry Pi" class="nicht_verbunden">nicht verbunden (Seite nochmal laden)</span>.</li>
 
-<li style="display:none">Von dort zum Thermostat: <span id="Thermostat" class="nicht_verbunden">disconnected</span> (<span id="Verbindung">wird erst bei einer nachfolgenden Eingabe verbunden</span>).</li>
+<li style="display:">Von dort zum Thermostat <input id="Thermostatadresse"  size="12" value="00:1A:22:11:07:08"/>: <span id="Thermostat" class="nicht_verbunden">disconnected</span> (<span id="Verbindung">wird erst bei einer nachfolgenden Eingabe verbunden</span>).</li>
 
 <li style="display:none">Im Thermostat: <span id="Sendetext" class="nicht_verbunden"> </span> (<span id="Übertragung"> </span>).</li>
 
