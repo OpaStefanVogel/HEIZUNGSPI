@@ -156,8 +156,8 @@ function websocket_verbinden(URL) {
         document.getElementById("Temperatur").firstChild.nodeValue=temp;
         document.getElementById("Temperatur").setAttribute("class","verbunden");
         var modus=tav.slice(Notification_handle+43,Notification_handle+44);
-        if (modus==0) modus="auto";
-        if (modus==1) modus="manu";
+        if (modus%8==0) modus="auto";
+        if (modus%8==1) modus="manu";
         document.getElementById("Modus").firstChild.nodeValue=modus;
         document.getElementById("Modus").setAttribute("class","verbunden");
         var ventil=tav.slice(Notification_handle+45,Notification_handle+47);
