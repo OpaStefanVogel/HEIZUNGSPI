@@ -554,3 +554,7 @@ git push --all
 nano Einkaufsliste.html 
 git commit -a -m ".. wenn zwischendurch jemand anderes was speichert, wird aktuelles gelöscht"
 git push --all
+nano Einkaufsliste.html 
+git commit -a -m ".. Button zum neu Verbinden"
+git push --all
+screen -r
