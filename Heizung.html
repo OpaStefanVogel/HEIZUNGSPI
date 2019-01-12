@@ -47,6 +47,7 @@ var Test="";
 var websocket=0;
 var wgesamt="";
 var CodeArray=[];
+var websocket2=0;
 function websocket_verbinden(URL) {
   var Basisadresse=document.baseURI;
   var Websocketadresse=URL;
@@ -210,6 +211,28 @@ function websocket_verbinden(URL) {
     //alert("open");
     }; 
   websocket.onclose = function() {
+    //alert(77);
+    //websocket.send("close");
+    };
+
+  //alert(Adresse);
+  if (Adresse=="ws://modellbahnpult:1880/ws/gatttool") {
+    websocket2 = new WebSocket("ws://modellbahnpult:1880/ws/Wetter","fiktiv");
+    } else {
+      websocket2 = new WebSocket(Adresse.replace("gatttool2","Wetter"),"fiktiv");
+      }
+  websocket2.onerror=function(event) {
+    };
+  websocket2.onmessage = function(event) {
+    var w=event.data;
+    document.getElementById("aktuelle_Chemnitz_Temperatur").firstChild.nodeValue=w;
+    };
+  websocket2.onopen = function() {
+    websocket2.send('Wetter');
+    //restart_GAP();
+    //alert("open");
+    }; 
+  websocket2.onclose = function() {
     //alert(77);
     //websocket.send("close");
     };
@@ -418,15 +441,19 @@ function Stopp_Boost_mode() {
   }
 
 </script>
+<script id="scr" type="application/ecmascript">
+
+</script>
+
 
 <body onload="websocket_verbinden()">
-Quellen:         <span style="float:right">→<a href="Einkaufsliste.html">Einkaufsliste.html</a></span>
+Quellen:         <span style="float:right">→<a href="http://biz.no-ip.org/jpg-wx.php">Wetterstation</a> →<a href="Einkaufsliste.html">Einkaufsliste</a></span>
 <div><a href="https://github.com/OpaStefanVogel/HEIZUNGSPI/blob/master/Heizung.html" target="_blank">https://github.com/OpaStefanVogel/HEIZUNGSPI/blob/master/Heizung.html</a></div>
 <div><a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/master/eq-3-radiator-thermostat-api.md" target="_blank">https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/master/eq-3-radiator-thermostat-api.md<a></div>
 
 <ul>
 
-<li>Verbindung zum (Heizungs-) Raspberry Pi: <span id="Raspberry Pi" class="nicht_verbunden">nicht verbunden (Seite nochmal laden)</span>.</li>
+<li>Verbindung zum (Heizungs-) Raspberry Pi: <span id="Raspberry Pi" class="nicht_verbunden">nicht verbunden (Seite nochmal laden)</span>. Aktuelle Chemnitz Temperatur: <a href="http://chzwetter.eu"><span id="aktuelle_Chemnitz_Temperatur">??</span></a> °C.</li>
 
 <li style="display:">Von dort zum Thermostat <input id="Thermostatadresse"  size="12" value="00:1A:22:11:07:08"/>: <span id="Thermostat" class="nicht_verbunden">disconnected</span> (<span id="Verbindung">wird erst bei einer nachfolgenden Eingabe verbunden</span>).</li>
 
@@ -493,6 +520,8 @@ ok animiertes css während Sendeversuch.
 ok halbe °C auch mit Komma statt Dezimalpunkt eingeben.
 .. wenn schon connected, läuft connect ins Leere
 .. wenn Fehler weil gleichzeitig von verschiedenen Stellen geschaltet wird, geht nur wiederholen.
+.. Sommerzeit ja/nein
+ok Außentemperatur und Link zur Wetterstation
   </p>
 
 <div id="Websocket_Rahmen"><div style="display:none; outline:solid; outline-size: 5px; outline-color: beige;">
