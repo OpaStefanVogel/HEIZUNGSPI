@@ -558,3 +558,13 @@ nano Einkaufsliste.html
 git commit -a -m ".. Button zum neu Verbinden"
 git push --all
 screen -r
+ls
+screen -r
+git pull
+screen -r
+git pull
+git log
+git pull
+screen -r
+cat Wetter.html 
+nano Wetter.html 

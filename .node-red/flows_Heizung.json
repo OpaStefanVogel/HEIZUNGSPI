@@ -2,12 +2,21 @@
     {
         "id": "b4be1bf1.59bee8",
         "type": "tab",
-        "label": "Flow 1"
+        "label": "Heizung",
+        "disabled": false,
+        "info": ""
     },
     {
         "id": "d51b667b.b78188",
         "type": "tab",
-        "label": "Flow 2",
+        "label": "Einkaufsliste",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "27a76a0d.a22a46",
+        "type": "tab",
+        "label": "Wetter",
         "disabled": false,
         "info": ""
     },
@@ -313,6 +322,13 @@
         "type": "websocket-listener",
         "z": "",
         "path": "/ws/Einkaufsliste",
+        "wholemsg": "false"
+    },
+    {
+        "id": "f40117db.11c4f8",
+        "type": "websocket-listener",
+        "z": "",
+        "path": "/ws/Wetter",
         "wholemsg": "false"
     },
     {
@@ -4816,6 +4832,131 @@
             [
                 "c2d191f2.15078",
                 "64c3b674.7b3fa8"
+            ]
+        ]
+    },
+    {
+        "id": "12c45a8d.01f455",
+        "type": "websocket in",
+        "z": "27a76a0d.a22a46",
+        "name": "",
+        "server": "f40117db.11c4f8",
+        "client": "",
+        "x": 160,
+        "y": 100,
+        "wires": [
+            [
+                "d319b90d.8c8a38"
+            ]
+        ]
+    },
+    {
+        "id": "260a3d43.866d22",
+        "type": "inject",
+        "z": "27a76a0d.a22a46",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 180,
+        "y": 160,
+        "wires": [
+            [
+                "d319b90d.8c8a38"
+            ]
+        ]
+    },
+    {
+        "id": "949b5115.92aaa",
+        "type": "websocket out",
+        "z": "27a76a0d.a22a46",
+        "name": "",
+        "server": "f40117db.11c4f8",
+        "client": "",
+        "x": 780,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "4c6d09bb.9b6018",
+        "type": "debug",
+        "z": "27a76a0d.a22a46",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 770,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d319b90d.8c8a38",
+        "type": "http request",
+        "z": "27a76a0d.a22a46",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "url": "https://api.opensensemap.org/boxes/5c30c8b22c80100019313cfa",
+        "tls": "",
+        "x": 370,
+        "y": 100,
+        "wires": [
+            [
+                "4c6d09bb.9b6018",
+                "a57b6045.ca302",
+                "3b61e636.02197a"
+            ]
+        ]
+    },
+    {
+        "id": "a57b6045.ca302",
+        "type": "file",
+        "z": "27a76a0d.a22a46",
+        "name": "",
+        "filename": "/home/pi/Wetter.html",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "x": 660,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "ea97436a.2b7d6",
+        "type": "function",
+        "z": "27a76a0d.a22a46",
+        "name": "",
+        "func": "var m=msg.payload;\nvar t=m.sensors[2].lastMeasurement.value;\nnode.status({text:t});\nmsg.payload=t;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 640,
+        "y": 220,
+        "wires": [
+            [
+                "949b5115.92aaa",
+                "4c6d09bb.9b6018"
+            ]
+        ]
+    },
+    {
+        "id": "3b61e636.02197a",
+        "type": "json",
+        "z": "27a76a0d.a22a46",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "ea97436a.2b7d6"
             ]
         ]
     }
