@@ -48,6 +48,7 @@ var websocket=0;
 var wgesamt="";
 var CodeArray=[];
 var websocket2=0;
+var websocket3=0;
 function websocket_verbinden(URL) {
   var Basisadresse=document.baseURI;
   var Websocketadresse=URL;
@@ -235,8 +236,31 @@ function websocket_verbinden(URL) {
   websocket2.onclose = function() {
     //alert(77);
     //websocket.send("close");
+    }
+
+  if (Adresse=="ws://modellbahnpult:1880/ws/gatttool") {
+    websocket3 = new WebSocket("ws://modellbahnpult:1880/ws/Ferien","fiktiv");
+    } else {
+      websocket3 = new WebSocket(Adresse.replace("gatttool2","Ferien"),"fiktiv");
+      }
+  websocket3.onerror=function(event) {
+    };
+  websocket3.onmessage = function(event) {
+    var w=event.data;
+    //alert(w);
+    document.getElementById("Ferien").firstChild.nodeValue=w;
+    };
+  websocket3.onopen = function() {
+    websocket3.send('Wetter');
+    //restart_GAP();
+    //alert("open");
+    }; 
+  websocket3.onclose = function() {
+    //alert(77);
+    //websocket.send("close");
     };
   }
+
 function websocket_verbunden() {
   if (websocket!=0) {
     document.getElementById("Websocket_Status").firstChild.nodeValue=(["CONNECTING","OPEN","CLOSING","CLOSED"])[websocket.readyState];
@@ -448,7 +472,7 @@ function Stopp_Boost_mode() {
 
 <body onload="websocket_verbinden()">
 Quellen:         <span style="float:right">→<a href="http://biz.no-ip.org/jpg-wx.php">Wetterstation</a> →<a href="Einkaufsliste.html">Einkaufsliste</a></span>
-<div><a href="https://github.com/OpaStefanVogel/HEIZUNGSPI/blob/master/Heizung.html" target="_blank">https://github.com/OpaStefanVogel/HEIZUNGSPI/blob/master/Heizung.html</a></div>
+<div><a href="https://github.com/OpaStefanVogel/HEIZUNGSPI/blob/master/Heizung.html" target="_blank">https://github.com/OpaStefanVogel/HEIZUNGSPI/blob/master/Heizung.html</a>         <span style="float:right; color violet">→<a href="https://www.schulferien.org/Sachsen/sachsen.html"><span id="Ferien" style="color:darkviolet">Ferien</span></a></span></div>
 <div><a href="https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/master/eq-3-radiator-thermostat-api.md" target="_blank">https://github.com/Heckie75/eQ-3-radiator-thermostat/blob/master/eq-3-radiator-thermostat-api.md<a></div>
 
 <ul>
